@@ -9,7 +9,7 @@
 	}
 </script>
 
-<div class="border-2 max-w-sm mx-auto p-4 m-4">
+<div class="border-2 max-w-sm mx-auto p-4 m-4 h-fit">
 	<div class="flex justify-between items-center mt-1 ml-4 mr-4 mb-2">
 		<p>pH</p>
 		<span id="phValue">7.0</span>

@@ -1,11 +1,9 @@
 <script>
-  import Console from '../lib/pH-console.svelte'
+  import Console from '$lib/pH-console.svelte'
+  import RadioBox from '$lib/radio-box.svelte'
 </script>
 
-<div class="flex">
-  <div class="border p-8 m-8 ">
-    <h1 class="text-xl">Welcome to pH simmulator</h1>
-    <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-    <Console />
-  </div>
+<div class="grid grid-cols-3 size-full p-10">
+  <RadioBox />
+  <Console />
 </div>
