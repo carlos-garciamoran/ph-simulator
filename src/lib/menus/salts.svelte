@@ -7,13 +7,11 @@
 <div class="border p-4">
   <h1 class="text-lg mb-1">Acids / Bases</h1>
   <RadioGroup.Root bind:value={value}>
-    <RadioItem value="Ba(OH)2" title="Salt 1" />
-    <RadioItem value="Ca(OH)2" title="Calcium Hydroxide" />
-    <RadioItem value="NaOH" title="Sodium Hydroxide" />
-    <RadioItem value="NH4OH" title="Ammonium Hydroxide (NH3/H2O)" />
-    <RadioItem value="HCl" title="Hydrochloric Acid" />
-    <RadioItem value="HNO3" title="Nitric Acid" />
-    <RadioItem value="HC2H3O2" title="Acetic Acid" />
-    <RadioItem value="H2CO3" title="Carbonic Acid" />
+    <RadioItem value="NaCl" title="NaCl / Sodium Chloride" />
+    <RadioItem value="NH4Cl" title="NH4Cl / Ammonium Chloride" />
+    <RadioItem value="NaC2H3O2" title="NaC2H3O2 / Sodium Acetate" />
+    <RadioItem value="NaHCO3" title="NaHCO3 / Sodium Bicarbonate" />
+    <RadioItem value="Na2CO3" title="Na2CO3 / Sodium Carbonate" />
+    <RadioItem value="NaHSO4" title="NaHSO4 / Sodium Bisulfate" />
   </RadioGroup.Root>
 </div>

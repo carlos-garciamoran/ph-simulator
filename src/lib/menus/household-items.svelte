@@ -7,13 +7,18 @@
 <div class="border p-4">
   <h1 class="text-lg mb-1">Acids / Bases</h1>
   <RadioGroup.Root bind:value={value}>
-    <RadioItem value="Ba(OH)2" title="Barium Hydroxide" />
-    <RadioItem value="Ca(OH)2" title="Calcium Hydroxide" />
-    <RadioItem value="NaOH" title="Sodium Hydroxide" />
-    <RadioItem value="NH4OH" title="Ammonium Hydroxide (NH3/H2O)" />
-    <RadioItem value="HCl" title="Hydrochloric Acid" />
-    <RadioItem value="HNO3" title="Nitric Acid" />
-    <RadioItem value="HC2H3O2" title="Acetic Acid" />
-    <RadioItem value="H2CO3" title="Carbonic Acid" />
+    <RadioItem value="Table Salt" title="Table Salt / Sodium Chloride" />
+    <RadioItem value="Baking Soda" title="Baking Soda / Sodium Bicarbonate" />
+    <RadioItem value="Hydrogen Peroxide" title="Hydrogen Peroxide, 3% H2O2" />
+    <RadioItem value="Drano" title="Drano, containing Sodium Hydroxide" />
+    <RadioItem value="Liquid Plumber" title="Liquid Plumber, containing Sulfuric Acid" />
+    <RadioItem value="Soft Drink" title="Soft Drink, containing Citric and Carbonic Acids" />
+    <RadioItem value="Orange Juice" title="Orange Juice, containing Citric and Ascorbic Acids" />
+    <RadioItem value="Milk" title="Milk" />
+    <RadioItem value="Dish Soap" title="Dish Soap" />
+    <RadioItem value="Blood" title="Blood" />
+    <RadioItem value="Battery Acid" title="Battery Acid, containing Sulfuric Acid" />
+    <RadioItem value="Ammonia Cleaner" title="Ammonia Cleaner, 2% Ammonium Hydroxide" />
+    <RadioItem value="Vinegar" title="Vinegar, 5% Acetic Acid" />
   </RadioGroup.Root>
 </div>
