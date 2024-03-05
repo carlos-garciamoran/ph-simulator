@@ -3,7 +3,10 @@
   import RadioBox from '$lib/radio-box.svelte'
 </script>
 
-<div class="grid grid-cols-3 size-full p-10">
+<div class="grid grid-cols-3 gap-4 lg:gap-8 size-full p-6 lg:p-10">
   <RadioBox />
+  <div class="border p-8 flex justify-center items-center">
+    <h1 class="text-xl">DROPPER AND STUFF GOES HERE</h1>
+  </div>
   <Console />
 </div>
