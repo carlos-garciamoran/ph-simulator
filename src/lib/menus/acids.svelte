@@ -1,11 +1,11 @@
 <script lang="ts">
   import * as RadioGroup from "$lib/components/ui/radio-group";
 	import RadioItem from "../helpers/radio-item.svelte";
+	import MenuCard from "./menu-card.svelte";
   export let value: string;
 </script>
 
-<div class="border p-4">
-  <h1 class="text-lg mb-1">Acids / Bases</h1>
+<MenuCard title="Acids / Bases">
   <RadioGroup.Root bind:value={value}>
     <RadioItem value="Ba(OH)2" title="Ba(OH)2 / Barium Hydroxide" />
     <RadioItem value="Ca(OH)2" title="Ca(OH)2 / Calcium Hydroxide" />
@@ -16,4 +16,4 @@
     <RadioItem value="HC2H3O2" title="HC2H3O2 / Acetic Acid" />
     <RadioItem value="H2CO3" title="H2CO3 / Carbonic Acid" />
   </RadioGroup.Root>
-</div>
+</MenuCard>

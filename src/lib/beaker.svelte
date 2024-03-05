@@ -23,7 +23,7 @@
     let color = getPHColor(pHValue);
     
     // Update the CSS variable with the calculated color
-    document.documentElement.style.setProperty('--liquid-color', color);
+    // document.documentElement.style.setProperty('--liquid-color', color);
     </script>
 
 <div id="container">

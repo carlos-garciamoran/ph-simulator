@@ -1,11 +1,11 @@
 <script lang="ts">
   import * as RadioGroup from "$lib/components/ui/radio-group";
 	import RadioItem from "../helpers/radio-item.svelte";
+	import MenuCard from "./menu-card.svelte";
   export let value: string;
 </script>
 
-<div class="border p-4">
-  <h1 class="text-lg mb-1">Acids / Bases</h1>
+<MenuCard title="Household Items">
   <RadioGroup.Root bind:value={value}>
     <RadioItem value="Table Salt" title="Table Salt / Sodium Chloride" />
     <RadioItem value="Baking Soda" title="Baking Soda / Sodium Bicarbonate" />
@@ -21,4 +21,4 @@
     <RadioItem value="Ammonia Cleaner" title="Ammonia Cleaner, 2% Ammonium Hydroxide" />
     <RadioItem value="Vinegar" title="Vinegar, 5% Acetic Acid" />
   </RadioGroup.Root>
-</div>
+</MenuCard>

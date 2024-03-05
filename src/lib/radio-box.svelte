@@ -4,7 +4,6 @@
 	import SaltsMenu from "./menus/salts.svelte";
 	import HouseholdItemsMenu from "./menus/household-items.svelte";
   import MainMenu from "./menus/main.svelte";
-  import WaterMenu from "./menus/water.svelte";
 
   let value = 'acids/bases';
   let subValue = 'Ba(OH)2';
@@ -25,8 +24,6 @@
     <HouseholdItemsMenu bind:value={subValue} />
   {/if}
   {#if value === 'water'}
-    <WaterMenu bind:value={subValue} />
-    <!-- <p>Water is a unique substance because it can act as both an acid and a base. Water     -->
+    <h1>huh</h1>
   {/if}
-  <!-- <h1 class="mt-2">Current option: {selectedValue}</h1> -->
 </div>
