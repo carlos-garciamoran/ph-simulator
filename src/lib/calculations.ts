@@ -1,4 +1,4 @@
-import * as constants from "$lib/constants"
+import * as constants from "@/constants"
 // READ ME
 // Calling variables as arguments is likely redundant as they are global variables
 // Keeping them just to be safe tho
