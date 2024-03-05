@@ -1,6 +1,30 @@
-<script>
-    let color = 'green'
-</script>
+<script lang="ts">
+    function getPHColor(pHValue: number) {
+        if (pHValue < 0 || pHValue > 14) {
+            return "Invalid pH value. Please enter a value between 0 to 14.";
+        }
+        if (pHValue < 3) {
+            return "#FF0000"; // Red
+        } else if (pHValue < 6) {
+            return "#FFA500"; // Orange
+        } else if (pHValue < 7) {
+            return "#FFFF00"; // Yellow
+        } else if (pHValue === 7) {
+            return "#008000"; // Green
+        } else if (pHValue < 9) {
+            return "#0000FF"; // Blue
+        } else {
+            return "#800080"; // Purple
+        }
+    }
+    
+    // Example usage
+    let pHValue = 7; // Example pH value, dynamically set this based on your application's requirements
+    let color = getPHColor(pHValue);
+    
+    // Update the CSS variable with the calculated color
+    document.documentElement.style.setProperty('--liquid-color', color);
+    </script>
 
 <div id="container">
     <div id="beaker">
@@ -38,7 +62,11 @@
 <div style='--color:{color};'></div>
 
 <style>
-    #container {
+:root {
+  --liquid-color: #008000; /* Default color, e.g., green for neutral pH */
+}
+
+#container {
   height: 270px;
   margin: 50px auto;
   overflow: hidden;
@@ -75,7 +103,7 @@
 #beaker:after { right: -50px; }
 
 #liquid {
-  background-color: var(--color);
+  background-color: var(--liquid-color);
   border: 10px solid #000;
   border-radius: 0 0 20px 20px;
   bottom: 0;
