@@ -16,7 +16,7 @@
 	}
 </script>
 
-<div class="border w-full mx-auto p-6 h-fit flex flex-col gap-3">
+<div class="border rounded-lg w-full mx-auto p-6 h-fit flex flex-col gap-3">
 	<div class="flex justify-between items-center">
 		<p>Current pH</p>
 		<span id="phValue" class="bg-secondary rounded-md px-3 py-2 font-semibold">7.0</span>
