@@ -51,10 +51,6 @@
         }
     }
     
-    // // Example usage
-    // let pHValue = 7; // Example pH value, dynamically set this based on your application's requirements
-    // let color = getPHColor(pHValue);
-    
     // // Update the CSS variable with the calculated color
     // // document.documentElement.style.setProperty('--liquid-color', color);
     </script>
@@ -103,7 +99,7 @@
 <div style="--liquid-color: {color};"></div>
 
 
-<style lang="ts">
+<style lang="css">
 :root {
   --liquid-color: #008000; /* Default color, e.g., green for neutral pH */
 }
