@@ -1,5 +1,3 @@
-<!-- HTML -->
-<html>
 <div class="ink">
     <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
     <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
@@ -95,7 +93,6 @@
   });
   
   </script>
-  </html>
 <!-- CSS -->
 <style>
     :root {
