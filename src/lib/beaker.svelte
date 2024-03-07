@@ -1,8 +1,24 @@
 <script lang="ts">
     import { onMount } from 'svelte';
+	import Label from './components/ui/label/label.svelte';
 
-    let pHValue: number = 7; // Example initial value
-    let color: string;
+    const borderWidth = 10;
+
+    // Assuming the beaker height is known or dynamically determined
+    let beakerHeight = 400; // Example, adjust based on your actual dynamic value
+    let beakerWidth = 400;
+    
+    let liquidHeight: number = (2/3) * beakerHeight;
+    let liquidWidth: number = beakerWidth - (borderWidth * 2);
+
+    // Define your measurements relative to the beaker's height
+    let measurements = [
+        { position: beakerHeight / 6, label: '' }, // 1st line (bottom-most)
+        { position: (beakerHeight / 6) * 2, label: '10 mL' }, // 2nd line
+        { position: (beakerHeight / 6) * 3, label: '' }, // 3rd line
+        { position: (beakerHeight / 6) * 4, label: '20 mL' }, // 4th line
+        { position: (beakerHeight / 6) * 5, label: '' }, // 5th line (top-most, adjust if it goes out of beaker)
+    ]; 
 
     interface Bubble {
         left: number;
@@ -17,11 +33,6 @@
         bubbles = generateBubbles();
     });
 
-    onMount(() => {
-        color = getPHColor(pHValue);
-        document.documentElement.style.setProperty('--liquid-color', color);
-    });
-
     function generateBubbles(): Bubble[] {
         return Array.from({ length: 7 }, (): Bubble => ({
         left: Math.random() * 180, // Keep as a number, don't append 'px'
@@ -31,6 +42,13 @@
         }));
     }
 
+    let pHValue: number = 7; // Example initial value
+    let color: string;
+
+    onMount(() => {
+        color = getPHColor(pHValue);
+        document.documentElement.style.setProperty('--liquid-color', color);
+    });
 
     function getPHColor(pHValue: number): string {
         if (pHValue < 0 || pHValue > 14) {
@@ -50,10 +68,7 @@
             return "#800080"; // Purple
         }
     }
-    
-    // // Update the CSS variable with the calculated color
-    // // document.documentElement.style.setProperty('--liquid-color', color);
-    </script>
+</script>
 
 <div id="container">
     <div id="beaker">
@@ -66,34 +81,17 @@
                         transform: scale({scale});">
             </div>
         {/each}
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
       </div>
-      <div class="measurement-container" style="bottom: -25px">
-          <div class="measurement-line"></div>
+    {#each measurements as {position, label}}
+        <div class="measurement-container" 
+             style="bottom: {position}px;">
+            <div class="measurement-line"></div>
+            {#if label}
+            <div class="measurement-label">{label}</div>
+            {/if}
         </div>
-        <div class="measurement-container" style="bottom: 0px; right">
-          <div class="measurement-line"></div>
-          <div class="measurement-label" style="bottom: 45px; right: -110px; font-family: Arial, sans-serif; font-size: 18px;">
-            10 mL</div>
-        </div>
-        <div class="measurement-container" style="bottom: 25px">
-          <div class="measurement-line"></div>
-        </div>
-        <div class="measurement-container" style="bottom: 50px">
-          <div class="measurement-line"></div>
-          <div class="measurement-label" style="bottom: 45px; right: -110px; font-family: Arial, sans-serif; font-size: 18px;">
-            20 mL</div>
-        </div>
-        <div class="measurement-container" style="bottom: 75px">
-          <div class="measurement-line"></div>
+    {/each}
     </div>
-  </div>
 </div>
 
 <div style="--liquid-color: {color};"></div>
@@ -105,11 +103,11 @@
 }
 
 #container {
-  height: 270px;
+  height: 600px;
   margin: 50px auto;
   overflow: hidden;
   position: relative;
-  width: 248px;
+  width: 400px;
 }
 
 #container div { position: absolute; }
@@ -118,10 +116,10 @@
   border: 10px solid #FFF;
   border-top: 0;
   border-radius: 0 0 30px 30px;
-  height: 200px;
+  height: 400px;
   left: 14px;
   bottom: 0;
-  width: 200px;
+  width: 400px;
   position: relative;
 }
 
@@ -133,7 +131,7 @@
   content: '';
   height: 30px;
   position: absolute;
-  top: -8000px;
+  top: -40px;
   width: 30px;
 }
 
@@ -145,9 +143,9 @@
   border: 10px solid #000;
   border-radius: 0 0 20px 20px;
   bottom: 0;
-  height: 170px;
+  height: calc(2/3 * 600px);
   overflow: hidden;
-  width: 180px;
+  width: calc(100% - 20px);
 }
 
 #liquid:after {
@@ -193,25 +191,24 @@
   }
 
 .measurement-line {
-  position: absolute;
-  bottom: 50px; /* Adjust as needed */
-  left: 0; /* Adjust to position the line on the left side */
-  width: 50px; /* Line width */
-  height: 5px; /* Line thickness */
+  width: 100px; /* Line width */
+  height: 7.5px; /* Line thickness */
   background-color: #000; /* Line color, assuming white */
+  position: absolute;
 }
 
 .measurement-container {
-  position: absolute;
+  position: relative;
   left: 0;
-  display: flex;
-  align-items: center;
 }
 
 .measurement-label {
   position: absolute;
-  margin-left: 5px; /* Space between line and text */
-  color: #000; /* Text color */
-  font-size: 12px; /* Adjust size as needed */
+  width: 150px;
+  left: 110px;
+  top: -15px;
+  color: #000;
+  font-size: 24px;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 </style>
