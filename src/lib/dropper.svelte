@@ -1,99 +1,101 @@
-<div class="ink">
-    <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
-    <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
-    <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
-    <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
-    <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
-    <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
-    <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
-</div>
-<div class="eyedropper" tabindex="1">
-    <div class="droplet" style="--i: 0;"></div>
-    <div class="eyedropper-loader"></div><svg class="eyedropper-svg" viewBox="0 0 44.42 100"><polyline class="eyedropper-fill" id="pipette-shape" style="stroke-width:3.6299" points="12.29,40.84 12.29,86.73 19.01,89.51 19.01,98.19 25.41,98.19 25.41,89.51 32.12,86.73 32.12,40.84"></polyline><line class="eyedropper-cap" style="stroke-width:18.1496;" x1="0" y1="31.76" x2="44.42" y2="31.76"></line><line class="eyedropper-cap" style="stroke-width:22.687;stroke-linecap:round;" x1="22.21" y1="11.34" x2="22.21" y2="27.83"></line></svg></div>
-<div
-    class="bubbles">
+<div>
+  <div class="ink">
+      <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
+      <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
+      <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
+      <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
+      <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
+      <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
+      <div class="ripple"><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg><svg class="ripple-ridge" viewBox="0 0 100 10"><path d="M 0 10 C 35 10 35 0 50 0 C 65 0 65 10 100 10"></path></svg></div>
+  </div>
+  <div class="eyedropper" tabindex="1">
+      <div class="droplet" style="--i: 0;"></div>
+      <div class="eyedropper-loader"></div><svg class="eyedropper-svg" viewBox="0 0 44.42 100"><polyline class="eyedropper-fill" id="pipette-shape" style="stroke-width:3.6299" points="12.29,40.84 12.29,86.73 19.01,89.51 19.01,98.19 25.41,98.19 25.41,89.51 32.12,86.73 32.12,40.84"></polyline><line class="eyedropper-cap" style="stroke-width:18.1496;" x1="0" y1="31.76" x2="44.42" y2="31.76"></line><line class="eyedropper-cap" style="stroke-width:22.687;stroke-linecap:round;" x1="22.21" y1="11.34" x2="22.21" y2="27.83"></line></svg></div>
+  <div class="bubbles">
     <div class="bubble" style="--color: hsl(210 90% 54%)"></div>
-    </div>
-    <div class="intro">
-        <div class="intro-content">Click on the dropper <span class="emoji">👆</span>, to activate it</div>
-    </div>
-    <div class="no-support">Eyedropper API is not supported in your browser</div>
-    <script lang="ts">
-      document.addEventListener('DOMContentLoaded', function () {
-      if (window.EyeDropper) {
-          const eyeDropper = new EyeDropper();
-          const openEyeDropper = async () => {
-              const introElement = document.querySelector('.intro') as HTMLElement | null;
-              introElement?.remove();
-              document.body.classList.remove('filled');
-              document.body.classList.add('loading');
-              try {
-                  const { sRGBHex: color } = await eyeDropper.open();
-                  document.body.style.setProperty('--color', color);
-                  document.body.classList.add('filled');
-              } catch (err) {
-                  // Canceled
-              } finally {
-                  document.body.classList.remove('loading');
-              }
-          };
-  
-          const eyeDropperEl = document.querySelector('.eyedropper') as HTMLElement | null;
-          if (eyeDropperEl) {
-              eyeDropperEl.addEventListener('click', openEyeDropper);
-              eyeDropperEl.addEventListener('keydown', (e) => {
-                  if (['Enter', ' '].includes(e.key)) {
-                      openEyeDropper();
-                  }
-              });
-          }
-      } else {
-          const noSupportElement = document.querySelector('.no-support') as HTMLElement | null;
-          if (noSupportElement) {
-              noSupportElement.style.display = 'block';
-          }
-      }
-  
-      // Bubbles
-      // Middle area where the eyedropper image is
-      const deadZone = 15;
-      document.querySelectorAll('.bubble').forEach((bubble, i, list) => {
-          const total = list.length;
-          bubble.style.setProperty('--size', `${Math.round(Math.random() * 16) + 8}vh`);
-          const widthWithoutDeadZone = (100 - deadZone);
-          let x = Math.round(i / total * widthWithoutDeadZone);
-          if (x > widthWithoutDeadZone / 2) {
-              x += deadZone;
-          }
-          bubble.style.setProperty('--x', x / 100);
-          bubble.style.setProperty('--y', `${Math.random().toFixed(2)}`);
-          bubble.style.setProperty('--hue', i * 360 / total);
-          bubble.style.setProperty('--delay', `${(Math.random() * -7).toFixed(2)}s`);
-      });
-  
-      // Droplets and ripples
-      const ripples = document.querySelectorAll('.ripple');
-      document.querySelectorAll('.droplet').forEach((droplet, i) => {
-          const delay = Math.log2(i + 1) * 0.2 + i * 0.2;
-          droplet.style.setProperty('--delay', `${(delay).toFixed(3)}s`);
-          ripples[i].style.setProperty('--delay', `${(delay - i ** 2 * .005 + 0.2).toFixed(3)}s`);
-      });
-  
-      // Eyedropper clip
-      const svgEl = document.querySelector('.eyedropper-svg') as SVGSVGElement | null;
-      if (svgEl) {
-          const w = svgEl.viewBox.baseVal.width;
-          const h = svgEl.viewBox.baseVal.height;
-          const points = [];
-          for (const { x, y } of document.querySelector('#pipette-shape').points) {
-              points.push([x / w * 100, y / h * 100]);
-          }
-          document.documentElement.style.setProperty('--pipette-polygon', points.map(([x, y]) => `${x}% ${y}%`).join(', '));
-      }
-  });
-  
-  </script>
-<!-- CSS -->
+  </div>
+  <div class="intro">
+    <div class="intro-content">Click on the dropper <span class="emoji">👆</span>, to activate it</div>
+  </div>
+  <div class="no-support">Eyedropper API is not supported in your browser</div>
+</div>
+
+<script lang="ts">
+    document.addEventListener('DOMContentLoaded', function () {
+    if (window.EyeDropper) {
+        const eyeDropper = new EyeDropper();
+        const openEyeDropper = async () => {
+            const introElement = document.querySelector('.intro') as HTMLElement | null;
+            introElement?.remove();
+            document.body.classList.remove('filled');
+            document.body.classList.add('loading');
+            try {
+                const { sRGBHex: color } = await eyeDropper.open();
+                document.body.style.setProperty('--color', color);
+                document.body.classList.add('filled');
+            } catch (err) {
+                // Canceled
+            } finally {
+                document.body.classList.remove('loading');
+            }
+        };
+
+        const eyeDropperEl = document.querySelector('.eyedropper') as HTMLElement | null;
+        if (eyeDropperEl) {
+            eyeDropperEl.addEventListener('click', openEyeDropper);
+            eyeDropperEl.addEventListener('keydown', (e) => {
+                if (['Enter', ' '].includes(e.key)) {
+                    openEyeDropper();
+                }
+            });
+        }
+    } else {
+        const noSupportElement = document.querySelector('.no-support') as HTMLElement | null;
+        if (noSupportElement) {
+            noSupportElement.style.display = 'block';
+        }
+    }
+
+    // Bubbles
+    // Middle area where the eyedropper image is
+    const deadZone = 15;
+    document.querySelectorAll('.bubble').forEach((bubble, i, list) => {
+        const total = list.length;
+        bubble.style.setProperty('--size', `${Math.round(Math.random() * 16) + 8}vh`);
+        const widthWithoutDeadZone = (100 - deadZone);
+        let x = Math.round(i / total * widthWithoutDeadZone);
+        if (x > widthWithoutDeadZone / 2) {
+            x += deadZone;
+        }
+        bubble.style.setProperty('--x', x / 100);
+        bubble.style.setProperty('--y', `${Math.random().toFixed(2)}`);
+        bubble.style.setProperty('--hue', i * 360 / total);
+        bubble.style.setProperty('--delay', `${(Math.random() * -7).toFixed(2)}s`);
+    });
+
+    // Droplets and ripples
+    const ripples = document.querySelectorAll('.ripple');
+    document.querySelectorAll('.droplet').forEach((droplet, i) => {
+        const delay = Math.log2(i + 1) * 0.2 + i * 0.2;
+        droplet.style.setProperty('--delay', `${(delay).toFixed(3)}s`);
+        ripples[i].style.setProperty('--delay', `${(delay - i ** 2 * .005 + 0.2).toFixed(3)}s`);
+    });
+
+    // Eyedropper clip
+    const svgEl = document.querySelector('.eyedropper-svg') as SVGSVGElement | null;
+    if (svgEl) {
+        const w = svgEl.viewBox.baseVal.width;
+        const h = svgEl.viewBox.baseVal.height;
+        const points = [];
+        for (const { x, y } of document.querySelector('#pipette-shape').points) {
+            points.push([x / w * 100, y / h * 100]);
+        }
+        document.documentElement.style.setProperty('--pipette-polygon', points.map(([x, y]) => `${x}% ${y}%`).join(', '));
+    }
+});
+
+</script>
+
 <style>
     :root {
 	--color: wheat;
