@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-	import Label from './components/ui/label/label.svelte';
+	  import Label from './components/ui/label/label.svelte';
 
     const borderWidth = 10;
 

@@ -5,6 +5,6 @@
 <div id="root" class="w-full h-screen">
   <slot />
   <footer class="text-sm text-center">
-     © 2024 Aleksa Belic, Julian Diaz, Kenan Imamovic, Carlos García Morán, Ron Ruszczyk
+     © 2024 Aleksa Belic, Julian Diaz, Kenan Imamovic, Carlos García Morán, Dr. Ron Ruszczyk
   </footer>
 </div>
