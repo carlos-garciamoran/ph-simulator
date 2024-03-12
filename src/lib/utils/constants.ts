@@ -70,19 +70,18 @@ export const drops = 0;
 // // Sodium Bisulfate, acidic salt of H2SO4
 // export const NaHSO4_conc=0;
 
-// HOUSEHOLD ITEMS
-export const household_items = {
-	'Table Salt (Sodium Chloride)': 7.0,
-	'Baking Soda (sodium bicarbonate)': 8.3,
-	'Hydrogen Peroxide (3% H2O2)': 6.2,
-	'Drano (contains Sodium Hydroxide)': 12.0,
-	'Liquid Plumber (contains Sulfuric Acid)': 1.0,
-	'Soft Drink (contains Citric and Carbonic Acids)': 3.2,
-	'Orange Juice (contains Citric and Ascorbic Acids)': 3.9,
-	Milk: 6.8,
-	'Dish Soap': 8.7,
-	Blood: 7.4,
-	'Battery Acid (contains Sulfuric Acid)': 1.0,
-	'Ammonia Cleaner (2% Ammonium Hydroxide)': 11.6,
-	'Vinegar (5% Acetic Acid)': 2.4
+export const householdItemsToPH: Record<string, number> = {
+	'table-salt': 7.0,
+	'baking-soda': 8.3,
+	'hydrogen-peroxide': 6.2,
+	drano: 12.0,
+	'liquid-plumber': 1.0,
+	'soft-drink': 3.2,
+	'orange-juice': 3.9,
+	milk: 6.8,
+	'dish-soap': 8.7,
+	blood: 7.4,
+	'battery-acid': 1.0,
+	'ammonia-cleaner': 11.6,
+	vinegar: 2.4
 };
