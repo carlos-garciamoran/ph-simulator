@@ -1,13 +1,12 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-	  import Label from './components/ui/label/label.svelte';
+  import { onMount } from 'svelte';
+  import { phValueStore as pHValue } from './utils/store';
 
-    const borderWidth = 10;
+  const borderWidth = 6;
 
     // Assuming the beaker height is known or dynamically determined
-    let beakerHeight = 400; // Example, adjust based on your actual dynamic value
-    let beakerWidth = 400;
-    
+    let beakerHeight = 400;
+    let beakerWidth = 400;  
     let liquidHeight: number = (2/3) * beakerHeight;
     let liquidWidth: number = beakerWidth - (borderWidth * 2);
 
@@ -20,41 +19,43 @@
         { position: (beakerHeight / 6) * 5, label: '' }, // 5th line (top-most, adjust if it goes out of beaker)
     ]; 
 
-    interface Bubble {
-        left: number;
-        animationDelay: string;
-        animationDuration: string;
-        scale: number;
+  interface Bubble {
+    left: number;
+    animationDelay: string;
+    animationDuration: string;
+    scale: number;
   }
 
-    let bubbles: Bubble[] = [];
+  let bubbles: Bubble[] = [];
 
-    onMount(() => {
-        bubbles = generateBubbles();
-    });
+  onMount(() => {
+      bubbles = generateBubbles();
+  });
 
-    function generateBubbles(): Bubble[] {
-        return Array.from({ length: 7 }, (): Bubble => ({
-        left: Math.random() * 180, // Keep as a number, don't append 'px'
-        animationDelay: `${Math.random() * 30}ms`, // String, correctly typed
-        animationDuration: `${Math.random() * (1300 - 100) + 100}ms`, // String, correctly typed
-        scale: Math.random() * (1.3 - 0.7) + 0.7, // Number, correctly typed
-        }));
-    }
+  function generateBubbles(): Bubble[] {
+      return Array.from({ length: 7 }, (): Bubble => ({
+      left: Math.random() * 180, // Keep as a number, don't append 'px'
+      animationDelay: `${Math.random() * 30}ms`, // String, correctly typed
+      animationDuration: `${Math.random() * (1300 - 100) + 100}ms`, // String, correctly typed
+      scale: Math.random() * (1.3 - 0.7) + 0.7, // Number, correctly typed
+      }));
+  }
 
-    let pHValue: number = 7; // Example initial value
+    $: updatePHColor($pHValue);
+
     let color: string;
-
-    onMount(() => {
-        color = getPHColor(pHValue);
+    function updatePHColor(newPHValue: number) {
+      color = getPHColor(newPHValue);
+      if (typeof document !== 'undefined') {
         document.documentElement.style.setProperty('--liquid-color', color);
-    });
+      }
+    }
 
     function getPHColor(pHValue: number): string {
     if (pHValue < 0 || pHValue > 14) {
         return "#f9fafb"; // Default or error color
     }
-    
+
     let r: number = 0;
     let g: number = 0;
     let b: number = 0;
@@ -118,7 +119,6 @@
 </div>
 
 <div style="--liquid-color: {color};"></div>
-
 
 <style lang="css">
 :root {
@@ -206,6 +206,4 @@
   font-size: 24px; /* Font size */
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* Font family */
 }
-
-
 </style>
