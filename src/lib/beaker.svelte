@@ -51,7 +51,7 @@
       }
     }
 
-    function getPHColor(pHValue: number): string {
+  function getPHColor(pHValue: number): string {
     if (pHValue < 0 || pHValue > 14) {
         return "#f9fafb"; // Default or error color
     }
