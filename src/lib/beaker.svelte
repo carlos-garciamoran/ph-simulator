@@ -84,7 +84,12 @@
         b = 255;
     }
 
-    // Convert RGB to Hex
+    // Fix for values between 6 and 7
+    if (6 <= pHValue && pHValue < 7) {
+      r = Math.floor(255 * (7 - pHValue)); // Red decreases from 255 to 0
+      g = 255; // Green stays at 255
+      b = 0; // Blue remains 0
+    }
     const toHex = (c: number): string => {
         const hex = c.toString(16);
         return hex.length == 1 ? "0" + hex : hex;
