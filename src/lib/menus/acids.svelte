@@ -5,7 +5,7 @@
   export let value: string;
 </script>
 
-<MenuCard title="Acids / Bases">
+<MenuCard className="bg-lime-200" title="Acids / Bases">
   <RadioGroup.Root bind:value={value}>
     <RadioItem value="Ba(OH)2" title="Ba(OH)2 / Barium Hydroxide" />
     <RadioItem value="Ca(OH)2" title="Ca(OH)2 / Calcium Hydroxide" />

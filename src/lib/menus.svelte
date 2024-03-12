@@ -23,7 +23,7 @@
       <BuffersMenu bind:value={menuValue} />
     {/if}
     {#if menu === 'household-items'}
-      <HouseholdItemsMenu bind:value={menuValue} />
+      <HouseholdItemsMenu />
     {/if}
     {#if menu === 'water'}
       <h1>huh</h1>
