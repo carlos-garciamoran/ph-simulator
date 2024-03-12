@@ -122,7 +122,7 @@
 
 <style lang="css">
 :root {
-  --liquid-color: #f9fafb; /* Default color, e.g., green for neutral pH */
+  --liquid-color: #bdbdbd; /* Default color, e.g., green for neutral pH */
 }
 
 #container {
