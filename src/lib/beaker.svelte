@@ -51,23 +51,46 @@
     });
 
     function getPHColor(pHValue: number): string {
-        if (pHValue < 0 || pHValue > 14) {
-            return "#FFFFFF"; // Default or error color
-        }
-        if (pHValue < 3) {
-            return "#FF0000"; // Red
-        } else if (pHValue < 6) {
-            return "#FFA500"; // Orange
-        } else if (pHValue < 7) {
-            return "#FFFF00"; // Yellow
-        } else if (pHValue === 7) {
-            return "#008000"; // Green
-        } else if (pHValue < 9) {
-            return "#0000FF"; // Blue
-        } else {
-            return "#800080"; // Purple
-        }
+    if (pHValue < 0 || pHValue > 14) {
+        return "#f9fafb"; // Default or error color
     }
+    
+    let r: number = 0;
+    let g: number = 0;
+    let b: number = 0;
+
+    if (pHValue < 3) {
+        // Red to Orange
+        r = 255;
+        g = Math.floor(105 + (150 / 3) * pHValue);
+    } else if (pHValue < 6) {
+        // Orange to Green
+        r = Math.floor(255 - (255 / 3) * (pHValue - 3));
+        g = Math.floor(105 + (150 / 3) * (pHValue - 3));
+    } else if (pHValue == 7) {
+        // Neutral Green
+        r = 0;
+        g = 255;
+        b = 0;
+    } else if (pHValue < 11) {
+        // Green to Blue
+        g = Math.floor(255 - (255 / 4) * (pHValue - 7));
+        b = Math.floor((255 / 4) * (pHValue - 7));
+    } else {
+        // Blue to Purple
+        r = Math.floor((255 / 3) * (pHValue - 11));
+        g = 0;
+        b = 255;
+    }
+
+    // Convert RGB to Hex
+    const toHex = (c: number): string => {
+        const hex = c.toString(16);
+        return hex.length == 1 ? "0" + hex : hex;
+    };
+
+    return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+}
 </script>
 
 <div id="container">
@@ -99,7 +122,7 @@
 
 <style lang="css">
 :root {
-  --liquid-color: #008000; /* Default color, e.g., green for neutral pH */
+  --liquid-color: #f9fafb; /* Default color, e.g., green for neutral pH */
 }
 
 #container {
