@@ -51,7 +51,7 @@
       }
     }
 
-  function getPHColor(pHValue: number): string {
+    function getPHColor(pHValue: number): string {
     if (pHValue < 0 || pHValue > 14) {
         return "#f9fafb"; // Default or error color
     }
@@ -94,28 +94,19 @@
 }
 </script>
 
-<div class="flex flex-col justify-end h-full">
-    <div id="beaker" style="height: {beakerHeight}px; width: {beakerWidth}px; border: {borderWidth}px;">
-      <div id="liquid" style="height: {liquidHeight}px; width: {liquidWidth}px;">
-        <!-- {#each bubbles as {left, animationDelay, animationDuration, scale}}
-            <div class="bubble"
-                 style="left: {left}px;
-                        animation-delay: {animationDelay};
-                        animation-duration: {animationDuration};
-                        transform: scale({scale});">
-            </div>
-        {/each} -->
-      </div>
-    {#each measurements as {position, label}}
+<div  class="justify-end flex flex-col size-full">
+  <div id="beaker">
+    <div id="liquid" style="background-color: {color};"></div>
+      {#each measurements as {position, label}}
         <div class="measurement-container" 
-             style="bottom: {position}px;">
-            <div class="measurement-line"></div>
-            {#if label}
+          style="--position: {position};">
+          <div class="measurement-line"></div>
+          {#if label}
             <div class="measurement-label">{label}</div>
-            {/if}
+          {/if}
         </div>
-    {/each}
-    </div>
+      {/each}
+  </div>
 </div>
 
 <div style="--liquid-color: {color};"></div>
@@ -126,84 +117,47 @@
 }
 
 #beaker {
-  border-top: 0;
-  border-radius: 0 0 30px 30px;
-  left: 15px;
-  right: 15px;
-  bottom: 0;
+  height: 40%; /* Relative to container */
+  width: 75%;
   position: relative;
+  /* margin: auto; */
+  border: 10px solid #000; /* This will create the beaker outline */
+  border-top: none; /* Remove top border if you want an open beaker */
+  border-radius: 0 0 20px 20px; /* Rounded bottom corners */
 }
 
 #liquid {
-  background-color: var(--liquid-color);
-  border: 10px solid #000;
-  border-radius: 0 0 20px 20px;
-  bottom: 0;
-  overflow: hidden;
-}
-
-#liquid:after {
-  background-color: rgba(255, 255, 255, 0.25);
-  bottom: -10px;
-  content: '';
-  height: 200px;
-  left: -40px;
+  height: 66%; /* 2/3 of beaker height */
+  width: 100%; /* Full width of beaker */
   position: absolute;
-  transform: rotate(30deg);
-  transform: rotate(15deg);
-  width: 110px;
+  bottom: 0; /* Align to the bottom of the beaker */
+  background-color: var(--liquid-color); /* Use the CSS variable for color */
 }
 
-#liquid .bubble {
-  animation-name: bubble;
-  animation-name: bubble;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  background-color: rgba(255, 255, 255, 0.2);
-  bottom: 0;
-  border-radius: 10px;
-  height: 20px;
-  width: 20px;
-}
-
-@keyframes bubble {
-    0% { 
-        bottom: 0; 
-        opacity: 1;
-    }
-
-    50% {
-      background-color: rgba(255, 255, 255, 0.2);
-      bottom: 80px;
-    }
-
-    100% {
-      background-color: rgba(255, 255, 255, 0);
-      bottom: 100%;
-      opacity: 0;
-    }
-  }
-
-  .measurement-line {
-  width: calc(100% - 30px); /* Line width relative to the beaker width */
-  height: 7.5px; /* Line thickness */
-  background-color: #000; /* Line color, assuming black */
+.measurement-line {
+  width: 25%; /* Relative to measurement container width */
+  height: 5px; /* Thickness of the line */
+  background-color: #000; /* Line color */
   position: absolute;
-  bottom: 0; /* Align the line to the bottom of the beaker */
-  left: 15px; /* Align the line with the left edge of the beaker */
+  bottom: 0; /* Align to the bottom of measurement container */
 }
 
 .measurement-container {
-  position: relative;
+  position: absolute;
+  width: 100%; /* Full width of beaker */
+  bottom: var(--position); /* Position from bottom, using CSS variable */
+  left: 0;
 }
 
 .measurement-label {
   position: absolute;
   width: 150px; /* Fixed width */
-  left: calc(50% + 35px); /* Position label horizontally at center + 35px from the beaker left edge */
-  bottom: 5px; /* Distance from the bottom of the beaker */
+  left: 30%; /* Position label to the right */
+  bottom: 0; /* Align with the measurement line */
   color: #000; /* Label color */
   font-size: 24px; /* Font size */
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* Font family */
 }
+
+
 </style>
