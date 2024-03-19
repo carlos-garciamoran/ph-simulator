@@ -2,7 +2,14 @@
   import * as RadioGroup from "$lib/components/ui/radio-group";
 	import RadioItem from "../helpers/radio-item.svelte";
 	import MenuCard from "./menu-card.svelte";
+  import { phValueStore } from '@/utils/store';
+  import * as calculations from '@/utils/calculations';
   export let value: string;
+
+  // const handleRadioChange = (newValue: string) => {
+  //   const pHValue = BuffersToPH[newValue];
+  //   phValueStore.set(pHValue);
+  // };
 </script>
 
 <MenuCard className="bg-orange-200" title="Buffers">

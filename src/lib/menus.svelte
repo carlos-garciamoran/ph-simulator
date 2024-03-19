@@ -26,7 +26,7 @@
       <HouseholdItemsMenu />
     {/if}
     {#if menu === 'water'}
-      <h1>huh</h1>
+      <h1></h1>
     {/if}
   </div>
   <!-- TODO: show slider dynamically based on value -->
