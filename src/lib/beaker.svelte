@@ -7,8 +7,8 @@
     // Assuming the beaker height is known or dynamically determined
     let beakerHeight = 400;
     let beakerWidth = 400;  
-    let liquidHeight: number = (2/3) * beakerHeight;
-    let liquidWidth: number = beakerWidth - (borderWidth * 2);
+    // let liquidHeight: number = (2/6) * beakerHeight;
+    // let liquidWidth: number = beakerWidth - (borderWidth * 2);
 
     // Define your measurements relative to the beaker's height
     let measurements = [
@@ -104,12 +104,12 @@
 }
 </script>
 
-<div  class="justify-end flex flex-col size-full">
+<div class="justify-end items-center flex flex-col size-full">
   <div id="beaker">
     <div id="liquid" style="background-color: {color};"></div>
       {#each measurements as {position, label}}
         <div class="measurement-container" 
-          style="--position: {position};">
+          style="--position: {position}px;">
           <div class="measurement-line"></div>
           {#if label}
             <div class="measurement-label">{label}</div>
@@ -128,16 +128,46 @@
 
 #beaker {
   height: 40%; /* Relative to container */
-  width: 75%;
+  width: 60%;
   position: relative;
-  /* margin: auto; */
   border: 10px solid #000; /* This will create the beaker outline */
   border-top: none; /* Remove top border if you want an open beaker */
   border-radius: 0 0 20px 20px; /* Rounded bottom corners */
+  margin: bottom;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
 }
 
+/* #beaker::before,
+#beaker::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 10px; 
+  width: 40px; 
+  height: 30px; 
+  background: #fff; 
+  border: 10px solid #000;
+  border-bottom: none;
+  border-radius: 50%;
+}
+
+#beaker::before {
+  left: -5px; 
+  transform: translateX(-50%) translateY(-50%); 
+  border-right: none;
+}
+
+#beaker::after {
+  right: -5px; 
+  transform: translateX(-50%) translateY(-50%); 
+  border-left: none;
+} */
+
 #liquid {
-  height: 66%; /* 2/3 of beaker height */
+  height: calc(36.5%); /* 2/3 of beaker height */
   width: 100%; /* Full width of beaker */
   position: absolute;
   bottom: 0; /* Align to the bottom of the beaker */
@@ -162,8 +192,8 @@
 .measurement-label {
   position: absolute;
   width: 150px; /* Fixed width */
-  left: 30%; /* Position label to the right */
-  bottom: 0; /* Align with the measurement line */
+  left: 28%; /* Position label to the right */
+  bottom: -15px; /* Align with the measurement line */
   color: #000; /* Label color */
   font-size: 24px; /* Font size */
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* Font family */
