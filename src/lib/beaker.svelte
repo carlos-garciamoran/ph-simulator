@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { phValueStore as pHValue } from './utils/store';
+  import { phValueStore as pHValue, checkedStore } from './utils/store';
 
   const borderWidth = 6;
 
@@ -41,11 +41,16 @@
       }));
   }
 
-    $: updatePHColor($pHValue);
+    $: $checkedStore, updatePHColor($pHValue);
 
     let color: string;
+    let defualtColor = '#e0e1e1';
     function updatePHColor(newPHValue: number) {
-      color = getPHColor(newPHValue);
+      if ($checkedStore) {
+        color = getPHColor(newPHValue);
+      } else {
+        color = defualtColor; // Default or no indicator color
+      }
       if (typeof document !== 'undefined') {
         document.documentElement.style.setProperty('--liquid-color', color);
       }
@@ -53,7 +58,7 @@
 
     function getPHColor(pHValue: number): string {
     if (pHValue < 0 || pHValue > 14) {
-        return "#f9fafb"; // Default or error color
+        return defualtColor; // Default or error color
     }
 
     let r: number = 0;

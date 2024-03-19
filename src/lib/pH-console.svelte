@@ -4,7 +4,7 @@
 	import ArrowUp from "./icons/arrow-up.svelte";
 	import ArrowDown from "./icons/arrow-down.svelte";
 	import Label from "./components/ui/label/label.svelte";
-	import { phValueStore } from '@/utils/store';
+	import { phValueStore, checkedStore } from '@/utils/store';
 
 	let checked = false;
 
@@ -25,7 +25,7 @@
 		</span>
 	</div>
 	<div class="flex items-center gap-2">
-		<Checkbox id="indicator-solution" bind:checked />
+		<Checkbox id="indicator-solution" bind:checked={$checkedStore} />
 		<Label for="indicator-solution">pH Indicator Solution</Label>
 	</div>
 	<div class="flex gap-2 mx-auto flex-col w-full justify-center mt-4">
