@@ -13,3 +13,29 @@
     <p class="text-center">{value} M</p>
   </div>
 </div>
+
+
+<!-- PSEUDO CODE
+if acids
+  acids slider
+else if salts
+  salts slider
+else if buffers
+  buffer slider 1
+  buffer slider 2
+  dropper
+    Goes from 0 to 20 drops
+    Changes volume by .036 mL per drop
+else if water
+  dropper
+    Goes from 0 to 20 drops
+    Changes volume by .036 mL per drop
+else household items
+  remove all slider elements (just shows constant ph values)
+
+
+
+
+
+-->
+
