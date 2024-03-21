@@ -5,37 +5,46 @@
 	import ArrowDown from "./icons/arrow-down.svelte";
 	import Label from "./components/ui/label/label.svelte";
 	import { phValueStore, checkedStore } from '@/utils/store';
+	import { probePosition } from '@/utils/probePositionStore'; // Import our new store
 
 	let checked = false;
 
-	// TODO: implement
 	function handleRemoveProbe() {
-		console.log("Probe removed");
+		probePosition.set(0); // Move the probe up
+		// Emit an event for the parent component
+		dispatch('removeProbe');
 	}
+
 	function handleInsertProbe() {
-		console.log("Probe removed");
+		probePosition.set(1); // Move the probe down
+		// Emit an event for the parent component
+		dispatch('insertProbe');
 	}
+
+	// Event dispatcher for custom events
+	import { createEventDispatcher } from 'svelte';
+	const dispatch = createEventDispatcher();
 </script>
 
 <div class="border rounded-2xl w-full mx-auto p-6 h-fit flex flex-col gap-3">
 	<div class="flex justify-between items-center">
-		<p>Current pH</p>
-		<span id="phValue" class="bg-secondary rounded-md text-2xl px-3 py-2 font-semibold">
-			{$phValueStore}
-		</span>
+	  <p>Current pH</p>
+	  <span id="phValue" class="bg-secondary rounded-md text-2xl px-3 py-2 font-semibold">
+		{$phValueStore}
+	  </span>
 	</div>
 	<div class="flex items-center gap-2">
-		<Checkbox id="indicator-solution" bind:checked={$checkedStore} />
-		<Label for="indicator-solution">pH Indicator Solution</Label>
+	  <Checkbox id="indicator-solution" bind:checked={$checkedStore} />
+	  <Label for="indicator-solution">pH Indicator Solution</Label>
 	</div>
 	<div class="flex gap-2 mx-auto flex-col w-full justify-center mt-4">
-		<Button class="gap-2" on:click={handleRemoveProbe}>
-			Remove probe
-			<svelte:component this={ArrowUp} />
-		</Button>
-		<Button class="gap-2" on:click={handleInsertProbe}>
-			Insert Probe
-			<svelte:component this={ArrowDown} />
-		</Button>
+	  <Button class="gap-2" on:click={handleRemoveProbe}>
+		<ArrowUp />
+		Remove probe
+	  </Button>
+	  <Button class="gap-2" on:click={handleInsertProbe}>
+		<ArrowDown />
+		Insert Probe
+	  </Button>
 	</div>
-</div>
+  </div>
