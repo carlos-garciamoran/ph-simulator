@@ -2,7 +2,8 @@
 	import Console from '$lib/pH-console.svelte';
 	import Menus from '$lib/menus.svelte';
 	import Beaker from '$lib/beaker.svelte';
-	import Probe from '@/probe.svelte';
+	import Probe from '$lib/probe.svelte';
+	import Wire from '$lib/wire.svelte';
 	import { probePosition } from '@/helpers/store';
 
 	// Functions to handle probe animation, based on the events from the Console
@@ -20,6 +21,7 @@
 	<div class="">
 		<Beaker />
 		<!-- <Dropper /> -->
+		<Wire />
 		<Probe />
 	</div>
 	<Console on:insertProbe={insertProbe} on:removeProbe={removeProbe} />
