@@ -2,57 +2,24 @@
 	import { onMount } from 'svelte';
 	import { phValueStore as pHValue, checkedStore } from './helpers/store';
 
-	const borderWidth = 6;
-
 	// Assuming the beaker height is known or dynamically determined
 	let beakerHeight = 400;
 	let beakerWidth = 400;
-	// let liquidHeight: number = (2/6) * beakerHeight;
-	// let liquidWidth: number = beakerWidth - (borderWidth * 2);
 
 	// Define your measurements relative to the beaker's height
 	let measurements = [
 		{ position: beakerHeight / 6, label: '' }, // 1st line (bottom-most)
 		{ position: (beakerHeight / 6) * 2, label: '10 mL' }, // 2nd line
 		{ position: (beakerHeight / 6) * 3, label: '' }, // 3rd line
-		{ position: (beakerHeight / 6) * 4, label: '20 mL' }, // 4th line
-		{ position: (beakerHeight / 6) * 5, label: '' } // 5th line (top-most, adjust if it goes out of beaker)
+		{ position: (beakerHeight / 6) * 4, label: '20 mL' } // 4th line
 	];
-
-	interface Bubble {
-		left: number;
-		animationDelay: string;
-		animationDuration: string;
-		scale: number;
-	}
-
-	let bubbles: Bubble[] = [];
-
-	onMount(() => {
-		bubbles = generateBubbles();
-	});
-
-	function generateBubbles(): Bubble[] {
-		return Array.from(
-			{ length: 7 },
-			(): Bubble => ({
-				left: Math.random() * 180, // Keep as a number, don't append 'px'
-				animationDelay: `${Math.random() * 30}ms`,
-				animationDuration: `${Math.random() * (1300 - 100) + 100}ms`,
-				scale: Math.random() * (1.3 - 0.7) + 0.7
-			})
-		);
-	}
 
 	$: $checkedStore, updatePHColor($pHValue);
 
-	let color: string;
-	let defualtColor = '#e0e1e1';
+	let color: string = '#e0e1e1';
 	function updatePHColor(newPHValue: number) {
 		if ($checkedStore) {
 			color = getPHColor(newPHValue);
-		} else {
-			color = defualtColor; // Default or no indicator color
 		}
 		if (typeof document !== 'undefined') {
 			document.documentElement.style.setProperty('--liquid-color', color);
@@ -109,7 +76,7 @@
 
 <div class="justify-end items-center flex flex-col size-full">
 	<div id="beaker">
-		<div id="liquid" style="background-color: {color};"></div>
+		<div id="liquid" />
 		{#each measurements as { position, label }}
 			<div class="measurement-container" style="--position: {position}px;">
 				<div class="measurement-line"></div>
@@ -132,52 +99,24 @@
 		height: 40%; /* Relative to container */
 		width: 60%;
 		position: relative;
-		border: 10px solid #000; /* This will create the beaker outline */
-		border-top: none; /* Remove top border if you want an open beaker */
+		border: 6px solid #000; /* This will create the beaker outline */
 		border-radius: 0 0 20px 20px; /* Rounded bottom corners */
 		margin: bottom;
-		align-items: center;
-		display: flex;
-		justify-content: center;
 		overflow: visible;
 	}
 
-	/* #beaker::before,
-#beaker::after {
-  content: '';
-  display: block;
-  position: absolute;
-  top: 10px; 
-  width: 40px; 
-  height: 30px; 
-  background: #fff; 
-  border: 10px solid #000;
-  border-bottom: none;
-  border-radius: 50%;
-}
-
-#beaker::before {
-  left: -5px; 
-  transform: translateX(-50%) translateY(-50%); 
-  border-right: none;
-}
-
-#beaker::after {
-  right: -5px; 
-  transform: translateX(-50%) translateY(-50%); 
-  border-left: none;
-} */
-
 	#liquid {
-		height: calc(36.5%); /* 2/3 of beaker height */
-		width: 100%; /* Full width of beaker */
+		background-color: var(--liquid-color);
+		border-bottom-left-radius: 14px;
+		border-bottom-right-radius: 14px;
+		bottom: 0;
 		position: absolute;
-		bottom: 0; /* Align to the bottom of the beaker */
-		background-color: var(--liquid-color); /* Use the CSS variable for color */
+		height: calc(36.6%);
+		width: 100%;
 	}
 
 	.measurement-line {
-		width: 25%; /* Relative to measurement container width */
+		width: 20%; /* Relative to measurement container width */
 		height: 5px; /* Thickness of the line */
 		background-color: #000; /* Line color */
 		position: absolute;
@@ -193,11 +132,10 @@
 
 	.measurement-label {
 		position: absolute;
-		width: 150px;
-		left: 28%;
-		bottom: -15px;
-		color: #000;
-		font-size: 24px;
-		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+		width: 80px;
+		left: 25%;
+		bottom: -10px;
+		font-size: 20px;
+		color: black;
 	}
 </style>
