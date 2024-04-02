@@ -16,7 +16,7 @@
 	};
 </script>
 
-<MenuCard className="bg-sky-200" title="Household Items">
+<MenuCard className="bg-sky-200" title="🧼 Household Items">
 	<RadioGroup.Root bind:value onValueChange={handleRadioChange}>
 		<RadioItem value="table-salt" title="Table Salt / Sodium Chloride" />
 		<RadioItem value="baking-soda" title="Baking Soda / Sodium Bicarbonate" />

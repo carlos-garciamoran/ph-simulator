@@ -5,7 +5,9 @@
 	export let className = '';
 </script>
 
-<div class={cn('border bg-secondary p-4', className)}>
-	<h1 class="text-lg mb-4 border-b pb-1">{title}</h1>
-	<slot />
+<div class={cn('border border-neutral-400 bg-secondary', className)}>
+	<h1 class="text-lg mb-4 border-b border-neutral-400 py-2 px-4">{title}</h1>
+	<div class="p-4 pt-0">
+		<slot />
+	</div>
 </div>

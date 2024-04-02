@@ -54,7 +54,7 @@
 	}
 </script>
 
-<MenuCard className="bg-yellow-200" title="Salts">
+<MenuCard className="bg-yellow-200" title="🧂 Salts">
 	<RadioGroup.Root bind:value={selectedSalt} on:change={updatePHValue}>
 		<RadioItem value="NaCl" title="NaCl / Sodium Chloride" />
 		<RadioItem value="NH4Cl" title="NH4Cl / Ammonium Chloride" />

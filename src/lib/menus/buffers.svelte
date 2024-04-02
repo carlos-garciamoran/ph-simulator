@@ -64,7 +64,7 @@
 	}
 </script>
 
-<MenuCard className="bg-orange-200" title="Buffers">
+<MenuCard className="bg-orange-200" title="🧑🏻‍🔬 Buffers">
 	<RadioGroup.Root bind:value={selectedBuffer}>
 		<RadioItem
 			value="HC2H3O2 & NaC2H3O2"

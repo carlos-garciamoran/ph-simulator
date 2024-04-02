@@ -54,7 +54,7 @@
 	}
 </script>
 
-<MenuCard className="bg-lime-200" title="Acids / Bases">
+<MenuCard className="bg-lime-200" title="🧪 Acids / Bases">
 	<RadioGroup.Root bind:value={selectedAcidBase} on:change={updatePHValue}>
 		<RadioItem value="Ba(OH)2" title="Ba(OH)2 / Barium Hydroxide" />
 		<RadioItem value="Ca(OH)2" title="Ca(OH)2 / Calcium Hydroxide" />
