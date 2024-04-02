@@ -26,7 +26,7 @@
 	<div class="flex justify-between items-center">
 		<p>Current pH</p>
 		<span id="phValue" class="bg-secondary rounded-md text-2xl px-3 py-2 font-semibold">
-			{$phValueStore.toFixed(2)}
+			{$phValueStore ? $phValueStore.toFixed(2) : '--'}
 		</span>
 	</div>
 	<div class="flex items-center gap-2">

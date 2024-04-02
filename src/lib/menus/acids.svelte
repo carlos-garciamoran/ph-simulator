@@ -10,7 +10,7 @@
 	type AcidBase = 'Ba(OH)2' | 'Ca(OH)2' | 'NaOH' | 'NH4OH' | 'HCl' | 'HNO3' | 'HC2H3O2' | 'H2CO3';
 
 	// Local component state for the selected acid/base
-	let selectedAcidBase: AcidBase = 'Ba(OH)2';
+	let selectedAcidBase: AcidBase | undefined;
 
 	// Function to update the pH value based on the selected acid/base and concentration
 	function updatePHValue() {
