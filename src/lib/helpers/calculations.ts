@@ -1,4 +1,7 @@
-import * as constants from '@/utils/constants';
+import * as constants from '@/helpers/constants';
+import { get_HC2H3O2_Hplus } from './calculations/acids-bases';
+import { get_NaC2H3O2_Hplus } from './calculations/salts';
+
 // READ ME
 // Calling variables as arguments is likely redundant as they are global variables
 // Keeping them just to be safe tho
@@ -25,76 +28,9 @@ export function get_pKb(Kb: number) {
 	return -Math.log10(Kb);
 }
 
-// Barium Hydroxide, strong base
-export function get_Ba_OH_2_Hplus(Ba_OH_2_conc: number) {
-	return constants.Kw / (2 * Ba_OH_2_conc);
-}
-
-// Calcium Hydroxide, strong base
-export function get_CA_OH_2_Hplus(CA_OH_2_conc: number) {
-	return constants.Kw / (2 * CA_OH_2_conc);
-}
-
-// Sodium Hydroxide, strong base
-export function get_NaOH_Hplus(NaOH_conc: number) {
-	return constants.Kw / NaOH_conc;
-}
-
-// Ammonium Hydroxide, weak base
-export function get_NH4OH_Hplus(NH4OH_conc: number) {
-	return constants.Kw / Math.sqrt(constants.Kb_ammonia * NH4OH_conc);
-}
-
-// Hydrochloric Acid, strong acid
-export function get_HCl_Hplus(HCl_conc: number) {
-	return HCl_conc;
-}
-
-// Nitric Acid, strong acid
-export function get_HNO3_Hplus(HNO3_conc: number) {
-	return HNO3_conc;
-}
-
-// Acetic Acid, weak acid
-export function get_HC2H3O2_Hplus(HC2H3O2_conc: number) {
-	return Math.sqrt(constants.Ka_acetic_acid * HC2H3O2_conc);
-}
-
-// Carbonic Acid, weak acid
-export function get_H2CO3_Hplus(H2CO3_conc: number) {
-	return Math.sqrt(constants.Ka_carbonic_acid * H2CO3_conc);
-}
-
-// Sodium Chloride, neutral salt
-export function get_NaCl_Hplus() {
-	return 7;
-}
-
-// Ammonium Chloride, acidic salt of NH3
-export function get_NH4Cl_Hplus(NH4Cl_conc: number) {
-	return Math.sqrt((constants.Kw / constants.Kb_ammonia) * NH4Cl_conc);
-}
-
-// Sodium Acetate, basic salt of HC2H3O2
-export function get_NaC2H3O2_Hplus(NaC2H3O2_conc: number) {
-	return constants.Kw / Math.sqrt((constants.Kw / constants.Ka_acetic_acid) * NaC2H3O2_conc);
-}
-
-// Sodium Bicarbonate, basic salt H2CO3
-export function get_NaHCO3_Hplus(NaHCO3_conc: number) {
-	return constants.Kw / Math.sqrt(constants.Ka_carbonic_acid * NaHCO3_conc);
-}
-
-// Sodium Carbonate, basic salt of HCO3
-export function get_Na2CO3_Hplus(Na2CO3_conc: number) {
-	return constants.Kw / Math.sqrt((constants.Kw / constants.Ka_bicarbonate) * Na2CO3_conc);
-}
-
-// Sodium Bisulfate, acidic salt of H2SO4
-export function get_NaHSO4_Hplus(NaHSO4_conc: number) {
-	return Math.sqrt(constants.Ka_hydrogen_sulfate * NaHSO4_conc);
-}
-
+////////////////////////////////////////////////////////
+//////////////////////// BUFFERS ///////////////////////
+////////////////////////////////////////////////////////
 export function get_volume_added(drops: number) {
 	return constants.drop_volume * drops;
 }

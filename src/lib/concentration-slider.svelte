@@ -1,37 +1,40 @@
 <script lang="ts">
-  import { writable } from 'svelte/store';
+	import { writable } from 'svelte/store';
 
-  const allowedValues = [
-    0.1, 0.09, 0.08, 0.07, 0.06, 0.05, 0.04, 0.03, 0.02, 0.01,
-    0.009, 0.008, 0.007, 0.006, 0.005, 0.004, 0.003, 0.002, 0.001,
-    0.0009, 0.0008, 0.0007, 0.0006, 0.0005, 0.0004, 0.0003, 0.0002, 0.0001,
-  ];
+	const allowedValues = [
+		0.1, 0.09, 0.08, 0.07, 0.06, 0.05, 0.04, 0.03, 0.02, 0.01, 0.009, 0.008, 0.007, 0.006, 0.005,
+		0.004, 0.003, 0.002, 0.001, 0.0009, 0.0008, 0.0007, 0.0006, 0.0005, 0.0004, 0.0003, 0.0002,
+		0.0001
+	];
 
-  let index = allowedValues.length - 1; // Start with the smallest value
-  let value = writable(allowedValues[index]); // Initialize with the corresponding allowed value
+	let index = allowedValues.length - 1; // Start with the smallest value
+	let value = writable(allowedValues[index]); // Initialize with the corresponding allowed value
 
-  function onInput(event: Event) {
-    index = parseInt((event.target as HTMLInputElement).value);
-    value.set(allowedValues[index]); // Update the store with the new value
-  }
+	function onInput(event: Event) {
+		index = parseInt((event.target as HTMLInputElement).value);
+		value.set(allowedValues[index]); // Update the store with the new value
+	}
 </script>
 
 <div class="border p-4 flex flex-col gap-4">
-  <h2>Concentration (molarity)</h2>
-  <div class="flex flex-col gap-2">
-    <input type="range" min="0" max="{allowedValues.length - 1}" 
-           on:input="{onInput}" 
-           step="1" class="w-full" 
-           bind:value="{index}" />
-    <p class="text-center">
-      {$value.toFixed(4)} M <!-- Use the store value directly -->
-    </p>
-  </div>
+	<h2>Concentration (molarity)</h2>
+	<div class="flex flex-col gap-2">
+		<input
+			type="range"
+			min="0"
+			max={allowedValues.length - 1}
+			on:input={onInput}
+			step="1"
+			class="w-full"
+			bind:value={index}
+		/>
+		<p class="text-center">
+			{$value.toFixed(4)} M <!-- Use the store value directly -->
+		</p>
+	</div>
 </div>
 
-
 <!-- OLD SLIDER - might use this in v2
-  
   <script lang="ts">
   import type { Slider as SliderPrimitive } from "bits-ui";
   import { Slider } from "$lib/components/ui/slider";
@@ -47,7 +50,6 @@
     <p class="text-center">{value} M</p>
   </div>
 </div> -->
-
 
 <!-- PSEUDO CODE
 if acids
@@ -77,10 +79,4 @@ else if water
     Changes volume by .036 mL per drop
 else household items
   remove all slider elements (just shows constant ph values)
-
-
-
-
-
 -->
-
