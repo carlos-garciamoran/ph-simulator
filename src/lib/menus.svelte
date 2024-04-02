@@ -14,17 +14,13 @@
 		<MainMenu bind:value={menu} />
 		{#if menu === 'acids/bases'}
 			<AcidsMenu />
-		{/if}
-		{#if menu === 'salts'}
+		{:else if menu === 'salts'}
 			<SaltsMenu />
-		{/if}
-		{#if menu === 'buffers'}
+		{:else if menu === 'buffers'}
 			<BuffersMenu />
-		{/if}
-		{#if menu === 'household-items'}
+		{:else if menu === 'household-items'}
 			<HouseholdItemsMenu />
-		{/if}
-		{#if menu === 'water'}
+		{:else if menu === 'water'}
 			<h1>Water</h1>
 		{/if}
 	</div>

@@ -14,8 +14,10 @@
 	import { get_pH } from '$lib/helpers/calculations';
 	import { phValueStore, concentration } from '$lib/helpers/store';
 
-	// Local component state for the selected acid/base
-	let selectedSalt = '';
+	type Salt = 'NaCl' | 'NH4Cl' | 'NaC2H3O2' | 'NaHCO3' | 'Na2CO3' | 'NaHSO4';
+
+	// Local component state for the selected salt
+	let selectedSalt: Salt = 'NaCl';
 
 	function updatePHValue() {
 		concentration.subscribe(($concentration) => {
@@ -42,11 +44,11 @@
 				default:
 					pH = 7; // Neutral pH as a default
 			}
-			phValueStore.set(pH); // Update the shared pH value store
+			phValueStore.set(pH);
 		});
 	}
 
-	// Watch for changes in selectedAcidBase and update the pH value
+	// Watch for changes in selectedSalt and update the pH value
 	$: if (selectedSalt) {
 		updatePHValue();
 	}

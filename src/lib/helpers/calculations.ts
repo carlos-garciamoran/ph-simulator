@@ -5,7 +5,7 @@ import { get_NaC2H3O2_Hplus } from './calculations/salts';
 // READ ME
 // Calling variables as arguments is likely redundant as they are global variables
 // Keeping them just to be safe tho
-//
+
 // Function to calculate pH from [H+]
 // used for acid, bases, salts, and water
 export function get_pH(Hplus: number) {

@@ -1,14 +1,16 @@
 <script lang="ts">
-	import * as RadioGroup from '$lib/components/ui/radio-group';
-	import { get_pH } from '$lib/helpers/calculations';
+	import * as RadioGroup from '@/components/ui/radio-group';
+	import { get_pH } from '@/helpers/calculations';
 	import * as calcs from '@/helpers/calculations/acids-bases';
-	import { phValueStore, concentration } from '$lib/helpers/store';
+	import { phValueStore, concentration } from '@/helpers/store';
 
 	import MenuCard from '../components/menu-card.svelte';
 	import RadioItem from '../components/radio-item.svelte';
 
+	type AcidBase = 'Ba(OH)2' | 'Ca(OH)2' | 'NaOH' | 'NH4OH' | 'HCl' | 'HNO3' | 'HC2H3O2' | 'H2CO3';
+
 	// Local component state for the selected acid/base
-	let selectedAcidBase = '';
+	let selectedAcidBase: AcidBase = 'Ba(OH)2';
 
 	// Function to update the pH value based on the selected acid/base and concentration
 	function updatePHValue() {
@@ -42,7 +44,7 @@
 				default:
 					pH = 7; // Neutral pH as a default
 			}
-			phValueStore.set(pH); // Update the shared pH value store
+			phValueStore.set(pH);
 		});
 	}
 

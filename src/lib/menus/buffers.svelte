@@ -4,10 +4,17 @@
 	import MenuCard from '../components/menu-card.svelte';
 	import { concentration, phValueStore } from '@/helpers/store';
 
-	// Local component state for the selected acid/base
-	let selectedBuffer = '';
+	type Buffer =
+		| 'HC2H3O2 & NaC2H3O2'
+		| 'NH4Cl & NH3'
+		| 'NaH2PO4 & Na2HPO4'
+		| 'NaHCO3 & Na2CO3'
+		| 'H2CO3 & NaHCO3';
 
-	// Function to update the pH value based on the selected acid/base and concentration
+	// Local component state for the selected buffer
+	let selectedBuffer: Buffer = 'HC2H3O2 & NaC2H3O2';
+
+	// Function to update the pH value based on the selected buffer and concentration
 	function updatePHValue() {
 		concentration.subscribe(($concentration) => {
 			let pH;
@@ -47,7 +54,7 @@
 				default:
 					pH = 7; // Neutral pH as a default
 			}
-			// phValueStore.set(pH); // Update the shared pH value store
+			// phValueStore.set(pH);
 		});
 	}
 
