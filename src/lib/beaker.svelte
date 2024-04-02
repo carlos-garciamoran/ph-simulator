@@ -37,9 +37,9 @@
 			{ length: 7 },
 			(): Bubble => ({
 				left: Math.random() * 180, // Keep as a number, don't append 'px'
-				animationDelay: `${Math.random() * 30}ms`, // String, correctly typed
-				animationDuration: `${Math.random() * (1300 - 100) + 100}ms`, // String, correctly typed
-				scale: Math.random() * (1.3 - 0.7) + 0.7 // Number, correctly typed
+				animationDelay: `${Math.random() * 30}ms`,
+				animationDuration: `${Math.random() * (1300 - 100) + 100}ms`,
+				scale: Math.random() * (1.3 - 0.7) + 0.7
 			})
 		);
 	}
@@ -193,11 +193,11 @@
 
 	.measurement-label {
 		position: absolute;
-		width: 150px; /* Fixed width */
-		left: 28%; /* Position label to the right */
-		bottom: -15px; /* Align with the measurement line */
-		color: #000; /* Label color */
-		font-size: 24px; /* Font size */
-		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* Font family */
+		width: 150px;
+		left: 28%;
+		bottom: -15px;
+		color: #000;
+		font-size: 24px;
+		font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 	}
 </style>

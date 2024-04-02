@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { tweened } from 'svelte/motion';
 	import { cubicOut } from 'svelte/easing';
+
 	import { probePosition } from './helpers/store';
 
 	// Assuming the probe's starting Y position is 0 (fully raised)

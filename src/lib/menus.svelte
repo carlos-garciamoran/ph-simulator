@@ -1,9 +1,9 @@
 <script lang="ts">
 	import AcidsMenu from './menus/acids.svelte';
 	import BuffersMenu from './menus/buffers.svelte';
-	import SaltsMenu from './menus/salts.svelte';
 	import HouseholdItemsMenu from './menus/household-items.svelte';
 	import MainMenu from './menus/main.svelte';
+	import SaltsMenu from './menus/salts.svelte';
 	import ConcentrationSlider from './concentration-slider.svelte';
 
 	let menu = 'acids/bases';

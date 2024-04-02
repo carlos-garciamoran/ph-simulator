@@ -1,17 +1,15 @@
 <script lang="ts">
 	import Button from './components/ui/button/button.svelte';
 	import Checkbox from './components/ui/checkbox/checkbox.svelte';
+	import Label from './components/ui/label/label.svelte';
+
+	import { checkedStore, phValueStore, probePosition } from './helpers/store';
 	import ArrowUp from './icons/arrow-up.svelte';
 	import ArrowDown from './icons/arrow-down.svelte';
-	import Label from './components/ui/label/label.svelte';
-	import { phValueStore, checkedStore } from '@/helpers/store'; // Ensure these paths are correct
-	import { probePosition } from '@/helpers/store'; // Import the probe position store
 
 	// Event dispatcher for custom events
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
-
-	// Removed the unused 'checked' variable since we are binding directly to $checkedStore now
 
 	function handleRemoveProbe() {
 		probePosition.set(0); // Move the probe up
@@ -29,7 +27,6 @@
 		<p>Current pH</p>
 		<span id="phValue" class="bg-secondary rounded-md text-2xl px-3 py-2 font-semibold">
 			{$phValueStore.toFixed(2)}
-			<!-- Use phValueStore here -->
 		</span>
 	</div>
 	<div class="flex items-center gap-2">
