@@ -1,4 +1,5 @@
 import { writable, type Writable } from 'svelte/store';
+type Menu = 'acids/bases' | 'salts' | 'buffers' | 'household-items' | 'water';
 
 // ph Indicator Solution checkbox
 export const checkedStore = writable(false);
@@ -15,4 +16,6 @@ export const probePosition = writable(0);
 // number of drops used, 20 max
 export const dropCount = writable(0);
 
-// export const currentMenu = writable('acids'); // Default to 'acids' or any other default value you prefer
+// Current menu selected
+export const menu: Writable<Menu> = writable('acids/bases');
+
