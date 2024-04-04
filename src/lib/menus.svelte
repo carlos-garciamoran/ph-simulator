@@ -3,6 +3,7 @@
 	import { menu } from './helpers/store';
 	import AcidsMenu from './menus/acids.svelte';
 	import BuffersMenu from './menus/buffers.svelte';
+	import DropperMenu from './menus/dropper-menu.svelte';
 	import HouseholdItemsMenu from './menus/household-items.svelte';
 	import MainMenu from './menus/main.svelte';
 	import SaltsMenu from './menus/salts.svelte';
@@ -17,6 +18,7 @@
 			<SaltsMenu />
 		{:else if $menu === 'buffers'}
 			<BuffersMenu />
+			<DropperMenu />
 		{:else if $menu === 'household-items'}
 			<HouseholdItemsMenu />
 		{:else if $menu === 'water'}

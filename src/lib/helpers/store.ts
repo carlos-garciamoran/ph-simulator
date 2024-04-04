@@ -19,3 +19,6 @@ export const dropCount = writable(0);
 // Current menu selected
 export const menu: Writable<Menu> = writable('acids/bases');
 
+// TODO: type this as 4 types
+// Currently selected drop option (under buffer menu)
+export const currentDrop: Writable<string> = writable('');
