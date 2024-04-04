@@ -130,7 +130,7 @@ export function get_Hplus_OH(drops: number, M_NaOH: number, HC2H3O2_conc: number
 
 // ask Ron for export function purpose
 // pKa_acid, acid, and base are placeholders
-export function get_acid_base_buffer_system(
+export function get_buffer_system(
 	pKa_acid: number,
 	acid_conc: number,
 	base_conc: number,
