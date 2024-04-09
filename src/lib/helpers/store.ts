@@ -28,4 +28,11 @@ export const menu: Writable<Menu> = writable('acids/bases');
 
 // TODO: type this as 4 types
 // Currently selected drop option (under buffer menu)
-export const currentDrop: Writable<string> = writable('');
+export const currentDrop = writable({ type: '', concentration: 0 });
+
+// Define the type for the drops counter
+interface DropsCounter {
+	[key: string]: number;
+  }
+  
+  export const dropsCounter: Writable<DropsCounter> = writable({ HCl: 0, NaOH: 0 });

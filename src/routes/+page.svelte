@@ -5,6 +5,7 @@
 	import Probe from '$lib/probe.svelte';
 	import Wire from '$lib/wire.svelte';
 	import Dropper from '$lib/dropper.svelte'
+	import DropperCounter from '@/dropper-counter.svelte';
 	import { probePosition } from '@/helpers/store';
 
 	// Functions to handle probe animation, based on the events from the Console
@@ -26,5 +27,18 @@
 		<Probe />
 		<Dropper />
 	</div>
-	<Console on:insertProbe={insertProbe} on:removeProbe={removeProbe} />
+	<div class='console-counter-container'>
+		<Console on:insertProbe={insertProbe} on:removeProbe={removeProbe} />
+		<DropperCounter />
+	</div>
 </div>
+
+<style>
+  .console-counter-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* This will push the counter to the bottom */
+    height: 100%; /* Full height to enable justify-content */
+    /* Add any additional styling here */
+  }
+</style>

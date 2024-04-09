@@ -1,20 +1,29 @@
 <script lang="ts">
-	import { writable, type Writable } from 'svelte/store';
+	import { writable, get, type Writable } from 'svelte/store';
+	import { dropsCounter, currentDrop } from './helpers/store';
   
-	// Define a type for the drop
 	type Drop = {
 	  id: number;
 	  cy: number;
 	};
   
-	// Use the type in the writable store initialization
 	const drops: Writable<Drop[]> = writable([]);
   
-	// Function to add a drop
+	// Function to add a drop and update the counter
 	function addDrop() {
+	  const currentDropValue = get(currentDrop);
+	  const volumeToAdd = getVolumeFromConcentration(currentDropValue.concentration);
+  
+	  if (currentDropValue.type === 'HCl' || currentDropValue.type === 'NaOH') {
+		dropsCounter.update(counts => {
+		  const newCount = (counts[currentDropValue.type] || 0) + volumeToAdd;
+		  return { ...counts, [currentDropValue.type]: newCount };
+		});
+	  }
+	  
 	  drops.update(currentDrops => {
 		let newDrop: Drop = {
-		  id: Math.random(), // Unique ID for key tracking
+		  id: Math.random(),
 		  cy: 0 // Starting y coordinate
 		};
 		return [newDrop, ...currentDrops];
@@ -23,27 +32,28 @@
   
 	// Function to handle the animation end of a drop
 	function removeDrop(id: number) {
-	  drops.update(currentDrops => {
-		return currentDrops.filter(drop => drop.id !== id);
-	  });
+	  drops.update(currentDrops => currentDrops.filter(drop => drop.id !== id));
+	}
+  
+	// Maps the selected dropper string to the volume added per drop
+	function getVolumeFromConcentration(concentration: number): number {
+	  const volumeMap: Record<number, number> = {
+		0.1: 0.1,
+		0.01: 0.01
+	  };
+	  return volumeMap[concentration] || 0; // Default to 0 if not found
 	}
   </script>
   
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <!-- Dropper SVG and animation -->
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
   <div id="dropper-container" on:click={addDrop}>
-	<svg
-	  class="dropper"
-	  width="200"
-	  height="700"
-	  viewBox="0 0 50 350"
-	  xmlns="http://www.w3.org/2000/svg"
-	>
-	  <!-- Dropper -->
-	  <!-- Bigger --><rect x="15" y="60" width="20" height="90" fill="#ccc" stroke="#707070" stroke-width="1.5" />
-	  <!-- Smaller --><rect x="21.5" y="150" width="7.5" height="20" fill="#ccc" stroke="#707070" stroke-width="1.5" />
+	<svg class="dropper" width="200" height="700" viewBox="0 0 50 350" xmlns="http://www.w3.org/2000/svg">
+	  <!-- Restored dropper visuals -->
+	  <rect x="15" y="60" width="20" height="90" fill="#ccc" stroke="#707070" stroke-width="1.5" />
+	  <rect x="21.5" y="150" width="7.5" height="20" fill="#ccc" stroke="#707070" stroke-width="1.5" />
 	  <ellipse cx="25" cy="50" rx="20" ry="22.5" fill="#000" stroke="#00000" stroke-width="1.5"/>
-  
 	  <!-- Drops -->
 	  {#each $drops as drop (drop.id)}
 		<circle
@@ -60,9 +70,9 @@
   
   <style>
 	@keyframes drop {
-	  to { transform: translateY(400px); } /* Adjust the final position based on your UI */
+	  to { transform: translateY(400px); } /* Adjust based on UI */
 	}
-  
+	
 	.dropper {
 	  position: absolute;
 	  left: calc(50% - 180px); /* Adjust so it's left of the probe */
