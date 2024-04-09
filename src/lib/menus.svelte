@@ -14,19 +14,17 @@
 		<MainMenu bind:value={$menu} />
 		{#if $menu === 'acids/bases'}
 			<AcidsMenu />
+			<ConcentrationSlider title="Concentration (molarity)" />
 		{:else if $menu === 'salts'}
 			<SaltsMenu />
+			<ConcentrationSlider title="Concentration (molarity)" />
 		{:else if $menu === 'buffers'}
 			<BuffersMenu />
 			<DropperMenu />
+			<ConcentrationSlider title="Conc 1" />
+			<ConcentrationSlider title="Conc 2" />
 		{:else if $menu === 'household-items'}
 			<HouseholdItemsMenu />
 		{/if}
 	</div>
-	{#if $menu === 'buffers'}
-		<ConcentrationSlider />
-	{/if}
-	{#if $menu !== 'water' && $menu !== 'household-items'}
-		<ConcentrationSlider />
-	{/if}
 </div>

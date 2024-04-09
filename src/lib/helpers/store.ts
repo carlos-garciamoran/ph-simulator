@@ -5,9 +5,9 @@ type Menu = 'acids/bases' | 'salts' | 'buffers' | 'household-items' | 'water';
 export const checkedStore = writable(false);
 
 // Default concentration or whatever starting value you need
-export const bufferconcentration = writable({
-    acid: 0.0,
-    base: 0.0
+export const bufferConcentration = writable({
+	acid: 0.0,
+	base: 0.0
 });
 
 //Default concentration for everything that isn't a buffer

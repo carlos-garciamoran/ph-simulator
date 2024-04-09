@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { writable, derived } from 'svelte/store';
-	import { concentration, menu } from './helpers/store'; // Assuming you have a store to track the current menu
+
+	import { concentration, menu } from './helpers/store';
 
 	const acidValues = [
 		0.1, 0.09, 0.08, 0.07, 0.06, 0.05, 0.04, 0.03, 0.02, 0.01, 0.009, 0.008, 0.007, 0.006, 0.005,
@@ -16,6 +17,8 @@
 		0.01, 0.009, 0.008, 0.007, 0.006, 0.005, 0.004, 0.003, 0.002, 0.001
 	];
 
+	export let title: string;
+
 	// Derived store to dynamically set allowed values based on the current menu
 	const allowedValues = derived(menu, ($menu) => {
 		switch ($menu) {
@@ -30,8 +33,6 @@
 		}
 	});
 
-	// let index = writable(0); // Initialize index
-	// let value = derived([allowedValues, index], ([$allowedValues, $index]) => $allowedValues[$index]);
 	let index = 0;
 	let value = writable($allowedValues[index]);
 
@@ -44,7 +45,7 @@
 </script>
 
 <div class="border p-4 flex flex-col gap-4">
-	<h2>Concentration (molarity)</h2>
+	<h2>{title}</h2>
 	<div class="flex flex-col gap-2">
 		<input
 			type="range"
