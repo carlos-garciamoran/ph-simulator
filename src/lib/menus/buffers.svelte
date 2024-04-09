@@ -1,11 +1,9 @@
 <script lang="ts">
-	import * as RadioGroup from '$lib/components/ui/radio-group';
 	import RadioItem from '@/components/radio-item.svelte';
 	import MenuCard from '@/components/menu-card.svelte';
-	import * as calcs from '@/helpers/calculations';
+	import * as RadioGroup from '@/components/ui/radio-group';
 	import * as buffercalcs from '@/helpers/calculations/buffers';
 	import { bufferConcentration, phValueStore, currentDrop } from '@/helpers/store';
-
 
 	type Buffer =
 		| 'HC2H3O2 & NaC2H3O2'
@@ -16,48 +14,64 @@
 
 	// Local component state for the selected buffer
 	let selectedBuffer: Buffer = 'HC2H3O2 & NaC2H3O2';
-	let pKa_acid = 1;
-	let drops = 0;
-	let M_HCl = 0.1;
-	let M_NaOH = 0.1;
 
 	// Function to update the pH value based on the selected buffer and concentration
 	function updatePHValue() {
 		bufferConcentration.subscribe(($bufferConc) => {
 			let pH = 7;
 
+			// Acid and base are defined in each case.
+			// In the first case, HC2H3O2 is the acid and NaC2H3O2 is the base.
 			switch (selectedBuffer) {
 				case 'HC2H3O2 & NaC2H3O2':
-					// acid and base are defined in each case. in this case HC2H3O2 is the acid and NaC2H3O2 is the base
-					buffercalcs.calculateBufferSystem(selectedBuffer, $bufferConc.acid, $bufferConc.base, $currentDrop, 0);
+					buffercalcs.calculateBufferSystem(
+						selectedBuffer,
+						$bufferConc.acid,
+						$bufferConc.base,
+						$currentDrop,
+						0
+					);
 					break;
 				case 'NH4Cl & NH3':
-					// Add code for NH4Cl & NH3 buffer system
-					//define acid n base here
-					//copy paste calcs here
-					buffercalcs.calculateBufferSystem(selectedBuffer, $bufferConc.acid, $bufferConc.base, $currentDrop, 0);
+					buffercalcs.calculateBufferSystem(
+						selectedBuffer,
+						$bufferConc.acid,
+						$bufferConc.base,
+						$currentDrop,
+						0
+					);
 					break;
 				case 'NaH2PO4 & Na2HPO4':
-					// Add code for NaH2PO4 & Na2HPO4 buffer system
-					//define acid n base here
-					//copy paste calcs here
-					buffercalcs.calculateBufferSystem(selectedBuffer, $bufferConc.acid, $bufferConc.base, $currentDrop, 0);
+					buffercalcs.calculateBufferSystem(
+						selectedBuffer,
+						$bufferConc.acid,
+						$bufferConc.base,
+						$currentDrop,
+						0
+					);
 					break;
 				case 'NaHCO3 & Na2CO3':
-					// Add code for NaHCO3 & Na2CO3 buffer system
-					//define acid n base here
-					//copy paste calcs here
-					buffercalcs.calculateBufferSystem(selectedBuffer, $bufferConc.acid, $bufferConc.base, $currentDrop, 0);
+					buffercalcs.calculateBufferSystem(
+						selectedBuffer,
+						$bufferConc.acid,
+						$bufferConc.base,
+						$currentDrop,
+						0
+					);
 					break;
 				case 'H2CO3 & NaHCO3':
-					// Add code for H2CO3 & NaHCO3 buffer system
-					//define acid n base here
-					//copy paste calcs here
-					buffercalcs.calculateBufferSystem(selectedBuffer, $bufferConc.acid, $bufferConc.base, $currentDrop, 0);
+					buffercalcs.calculateBufferSystem(
+						selectedBuffer,
+						$bufferConc.acid,
+						$bufferConc.base,
+						$currentDrop,
+						0
+					);
 					break;
 				default:
 					pH = 7; // Neutral pH as a default
 			}
+
 			phValueStore.set(pH);
 		});
 	}
