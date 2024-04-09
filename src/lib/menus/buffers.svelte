@@ -1,24 +1,18 @@
 <script lang="ts">
-	import RadioItem from '@/components/radio-item.svelte';
 	import MenuCard from '@/components/menu-card.svelte';
+	import RadioItem from '@/components/radio-item.svelte';
 	import * as RadioGroup from '@/components/ui/radio-group';
-	import * as buffercalcs from '@/helpers/calculations/buffers';
+	import { calculateBufferSystem } from '@/helpers/calculations/buffers';
 	import {
 		bufferConcentration,
 		phValueStore,
-		currentDrop,
+		// currentDrop,
 		selectedBufferStore
 	} from '@/helpers/store';
-
-	type Buffer =
-		| 'HC2H3O2 & NaC2H3O2'
-		| 'NH4Cl & NH3'
-		| 'NaH2PO4 & Na2HPO4'
-		| 'NaHCO3 & Na2CO3'
-		| 'H2CO3 & NaHCO3';
+	import type { SelectedBuffer } from '@/helpers/types';
 
 	// Local component state for the selected buffer
-	let selectedBuffer: Buffer = 'HC2H3O2 & NaC2H3O2';
+	let selectedBuffer: SelectedBuffer = 'HC2H3O2 & NaC2H3O2';
 
 	// Function to update the pH value based on the selected buffer and concentration
 	function updatePHValue() {
@@ -29,47 +23,47 @@
 			// In the first case, HC2H3O2 is the acid and NaC2H3O2 is the base.
 			switch (selectedBuffer) {
 				case 'HC2H3O2 & NaC2H3O2':
-					buffercalcs.calculateBufferSystem(
+					pH = calculateBufferSystem(
 						selectedBuffer,
 						$bufferConc.acid,
 						$bufferConc.base,
-						$currentDrop,
+						'', // TODO: replace with current drop from dropper-menu (store)
 						0
 					);
 					break;
 				case 'NH4Cl & NH3':
-					buffercalcs.calculateBufferSystem(
+					pH = calculateBufferSystem(
 						selectedBuffer,
 						$bufferConc.acid,
 						$bufferConc.base,
-						$currentDrop,
+						'', // TODO: replace with current drop from dropper-menu (store)
 						0
 					);
 					break;
 				case 'NaH2PO4 & Na2HPO4':
-					buffercalcs.calculateBufferSystem(
+					pH = calculateBufferSystem(
 						selectedBuffer,
 						$bufferConc.acid,
 						$bufferConc.base,
-						$currentDrop,
+						'', // TODO: replace with current drop from dropper-menu (store)
 						0
 					);
 					break;
 				case 'NaHCO3 & Na2CO3':
-					buffercalcs.calculateBufferSystem(
+					pH = calculateBufferSystem(
 						selectedBuffer,
 						$bufferConc.acid,
 						$bufferConc.base,
-						$currentDrop,
+						'', // TODO: replace with current drop from dropper-menu (store)
 						0
 					);
 					break;
 				case 'H2CO3 & NaHCO3':
-					buffercalcs.calculateBufferSystem(
+					pH = calculateBufferSystem(
 						selectedBuffer,
 						$bufferConc.acid,
 						$bufferConc.base,
-						$currentDrop,
+						'', // TODO: replace with current drop from dropper-menu (store)
 						0
 					);
 					break;
