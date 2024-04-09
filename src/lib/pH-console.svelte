@@ -31,7 +31,7 @@
 		<p class="text-lg">pH</p>
 		<span class="text-2xl font-semibold">
 			<!-- Display the pH value only when the probe is inside the liquid -->
-			{$probePosition == 1 && $phValueStore !== undefined ? $phValueStore.toFixed(2) : '--'}
+			{$probePosition == 1 && $phValueStore !== undefined ? $phValueStore.toFixed(3) : '--'}
 			<!-- {$phValueStore ? $phValueStore.toFixed(2) : '--'} -->
 		</span>
 	</div>
