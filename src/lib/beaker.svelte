@@ -21,16 +21,6 @@
 		document.documentElement.style.setProperty('--liquid-color', color);
 	}
 
-	// let color: string = '#e0e1e1';
-	// function updatePHColor(newPHValue: number) {
-	// 	if ($checkedStore) {
-	// 		color = getPHColor(newPHValue);
-	// 	}
-	// 	if (typeof document !== 'undefined') {
-	// 		document.documentElement.style.setProperty('--liquid-color', color);
-	// 	}
-	// }
-
 	function getPHColor(pHValue: number): string {
 		if (pHValue < 0 || pHValue > 14) {
 			return defualtColor; // Default or error color
