@@ -21,10 +21,11 @@
 			<DropperMenu />
 		{:else if $menu === 'household-items'}
 			<HouseholdItemsMenu />
-		{:else if $menu === 'water'}
-			<h1>Water</h1>
 		{/if}
 	</div>
+	{#if $menu === 'buffers'}
+		<ConcentrationSlider />
+	{/if}
 	{#if $menu !== 'water' && $menu !== 'household-items'}
 		<ConcentrationSlider />
 	{/if}
