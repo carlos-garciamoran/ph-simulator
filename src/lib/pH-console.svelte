@@ -36,7 +36,11 @@
 		</span>
 	</div>
 	<div class="flex items-center gap-2">
-		<Checkbox id="indicator-solution" bind:checked={$checkedStore} />
+		<Checkbox
+			disabled={$probePosition === 0}
+			id="indicator-solution"
+			bind:checked={$checkedStore}
+		/>
 		<Label for="indicator-solution" class="text-base">pH Indicator Solution</Label>
 	</div>
 	<div class="flex gap-2 flex-col w-full">
