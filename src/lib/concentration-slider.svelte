@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { writable, derived } from 'svelte/store';
 
-	import { concentration, menu } from './helpers/store';
+	import { bufferConcentration, concentration, menu, selectedBufferStore } from './helpers/store';
 
 	const acidValues = [
 		0.1, 0.09, 0.08, 0.07, 0.06, 0.05, 0.04, 0.03, 0.02, 0.01, 0.009, 0.008, 0.007, 0.006, 0.005,
@@ -17,7 +17,42 @@
 		0.01, 0.009, 0.008, 0.007, 0.006, 0.005, 0.004, 0.003, 0.002, 0.001
 	];
 
-	export let title: string;
+	export let type: 'normal' | 'acid' | 'base';
+
+	const title = derived(selectedBufferStore, ($currentBuffer) => {
+		if (type === 'normal') return 'Concentration (molarity)';
+		if (type === 'acid') {
+			switch ($currentBuffer) {
+				case 'HC2H3O2 & NaC2H3O2':
+					return 'Acetic Acid';
+				case 'NH4Cl & NH3':
+					return 'Ammonium Chloride';
+				case 'NaH2PO4 & Na2HPO4':
+					return 'Sodium Dihydrogen Phosphate';
+				case 'NaHCO3 & Na2CO3':
+					return 'Sodium Bicarbonate';
+				case 'H2CO3 & NaHCO3':
+					return 'Carbonic Acid';
+				default:
+					return 'Concentration (molarity)';
+			}
+		} else if (type === 'base') {
+			switch ($currentBuffer) {
+				case 'HC2H3O2 & NaC2H3O2':
+					return 'Sodium Acetate';
+				case 'NH4Cl & NH3':
+					return 'Ammonia';
+				case 'NaH2PO4 & Na2HPO4':
+					return 'Disodium Hydrogen Phosphate';
+				case 'NaHCO3 & Na2CO3':
+					return 'Sodium Carbonate';
+				case 'H2CO3 & NaHCO3':
+					return 'Sodium Bicarbonate';
+				default:
+					return 'Concentration (molarity)';
+			}
+		}
+	});
 
 	// Derived store to dynamically set allowed values based on the current menu
 	const allowedValues = derived(menu, ($menu) => {
@@ -40,12 +75,20 @@
 		index = parseInt((event.target as HTMLInputElement).value);
 		const newValue = $allowedValues[index];
 		value.set(newValue);
-		concentration.set(newValue);
+
+		// Update global state accordingly
+		if (type === 'acid') {
+			bufferConcentration.update((prev) => ({ ...prev, acid: newValue }));
+		} else if (type === 'base') {
+			bufferConcentration.update((prev) => ({ ...prev, base: newValue }));
+		} else {
+			concentration.set(newValue);
+		}
 	}
 </script>
 
 <div class="border p-4 flex flex-col gap-4">
-	<h2>{title}</h2>
+	<h2>{$title}</h2>
 	<div class="flex flex-col gap-2">
 		<input
 			type="range"

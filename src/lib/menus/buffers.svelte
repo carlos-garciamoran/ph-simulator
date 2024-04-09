@@ -3,7 +3,12 @@
 	import MenuCard from '@/components/menu-card.svelte';
 	import * as RadioGroup from '@/components/ui/radio-group';
 	import * as buffercalcs from '@/helpers/calculations/buffers';
-	import { bufferConcentration, phValueStore, currentDrop } from '@/helpers/store';
+	import {
+		bufferConcentration,
+		phValueStore,
+		currentDrop,
+		selectedBufferStore
+	} from '@/helpers/store';
 
 	type Buffer =
 		| 'HC2H3O2 & NaC2H3O2'
@@ -78,6 +83,7 @@
 
 	// Watch for changes in selectedBuffer and update the pH value
 	$: if (selectedBuffer) {
+		selectedBufferStore.set(selectedBuffer);
 		updatePHValue();
 	}
 </script>
