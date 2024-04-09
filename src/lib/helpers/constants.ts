@@ -10,8 +10,8 @@ export const Kb_ammonia = 1.8e-5; // Used for NH3
 // pKa values for weak acids and bases
 export const pKa_acetic_acid = 4.745; // Used for HC2H3O2
 export const pKa_ammonium_chloride = 9.255; // Used for NH4Cl
-export const pKa_monohydrogen_phosphate = 7.208; // Used for NaH2PO4
-export const pKa_bicarbonate = 10.252; // Used for HO3 // strange minus mark at the end (ignored)
+export const pKa_sodium_dihydrogen_phosphate = 7.208; // Used for NaH2PO4
+export const pKa_sodium_bicarbonate = 10.252; // Used for HO3 // strange minus mark at the end (ignored)
 export const pKa_carbonic_acid = 6.367; // Used for H2CO3
 
 // other consts
