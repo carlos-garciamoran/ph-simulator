@@ -35,24 +35,24 @@
 	<svg
 	  class="dropper"
 	  width="200"
-	  height="400"
-	  viewBox="0 0 50 200"
+	  height="700"
+	  viewBox="0 0 50 350"
 	  xmlns="http://www.w3.org/2000/svg"
 	>
 	  <!-- Dropper -->
-	  <!-- Bigger --><rect x="15" y="70" width="20" height="80" fill="#ccc" stroke="#707070" stroke-width="1.5" />
+	  <!-- Bigger --><rect x="15" y="60" width="20" height="90" fill="#ccc" stroke="#707070" stroke-width="1.5" />
 	  <!-- Smaller --><rect x="21.5" y="150" width="7.5" height="20" fill="#ccc" stroke="#707070" stroke-width="1.5" />
-	  <ellipse cx="25" cy="50" rx="25" ry="25" fill="#000" stroke="#00000" stroke-width="1.5"/>
+	  <ellipse cx="25" cy="50" rx="20" ry="22.5" fill="#000" stroke="#00000" stroke-width="1.5"/>
   
 	  <!-- Drops -->
 	  {#each $drops as drop (drop.id)}
 		<circle
 		  cx="25"
-		  cy={drop.cy}
+		  cy="170"
 		  r="3"
-		  fill="blue"
+		  fill="gray"
+		  class="drop"
 		  on:animationend={() => removeDrop(drop.id)}
-		  style="animation: drop 1s ease-out forwards;"
 		/>
 	  {/each}
 	</svg>
@@ -60,13 +60,17 @@
   
   <style>
 	@keyframes drop {
-	  to { cy: 300; } /* Adjust the final position based on your UI */
+	  to { transform: translateY(400px); } /* Adjust the final position based on your UI */
 	}
   
 	.dropper {
 	  position: absolute;
 	  left: calc(50% - 180px); /* Adjust so it's left of the probe */
 	  top: 170px; /* Adjust so it's at the same height as the probe */
+	}
+  
+	.drop {
+	  animation: drop 2s ease-out forwards;
 	}
   </style>
   
