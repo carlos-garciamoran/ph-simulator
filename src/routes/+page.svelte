@@ -4,6 +4,7 @@
 	import Beaker from '$lib/beaker.svelte';
 	import Probe from '$lib/probe.svelte';
 	import Wire from '$lib/wire.svelte';
+	import Dropper from '$lib/dropper.svelte'
 	import { probePosition } from '@/helpers/store';
 
 	// Functions to handle probe animation, based on the events from the Console
@@ -23,6 +24,7 @@
 		<!-- <Dropper /> -->
 		<Wire />
 		<Probe />
+		<Dropper />
 	</div>
 	<Console on:insertProbe={insertProbe} on:removeProbe={removeProbe} />
 </div>

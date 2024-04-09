@@ -8,7 +8,7 @@
     position: absolute;
     top: 85px; /* Adjust this to the wire's fixed starting point */
     left: 55%; /* Center the wire horizontally, adjust as needed */
-    height: 570px; /* The fixed length of the wire */
+    height: 500px; /* The fixed length of the wire */
     width: 7.5px; /* The thickness of the wire */
     background-color: #606060; /* Wire color */
     transform: translateX(-50%); /* Center the wire horizontally */

@@ -1,46 +1,72 @@
-<script>
-	// JavaScript to handle click event on the pipette
-	document.addEventListener('DOMContentLoaded', function () {
-		const pipette = document.getElementById('pipette');
-
-		if (pipette) {
-			pipette.addEventListener('click', function () {
-				// Change color of the pipette when clicked
-				const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-				pipette.style.backgroundColor = randomColor;
-			});
-		}
-	});
-</script>
-
-<title>Pipette</title>
-
-<div class="container">
-	<div class="pipette" id="pipette"></div>
-</div>
-
-<style>
-	body,
-	html {
-		height: 100%;
-		margin: 0;
+<script lang="ts">
+	import { writable, type Writable } from 'svelte/store';
+  
+	// Define a type for the drop
+	type Drop = {
+	  id: number;
+	  cy: number;
+	};
+  
+	// Use the type in the writable store initialization
+	const drops: Writable<Drop[]> = writable([]);
+  
+	// Function to add a drop
+	function addDrop() {
+	  drops.update(currentDrops => {
+		let newDrop: Drop = {
+		  id: Math.random(), // Unique ID for key tracking
+		  cy: 0 // Starting y coordinate
+		};
+		return [newDrop, ...currentDrops];
+	  });
 	}
-
-	.container {
-		position: relative;
-		height: 50%; /* Make the container take half the height of the window */
+  
+	// Function to handle the animation end of a drop
+	function removeDrop(id: number) {
+	  drops.update(currentDrops => {
+		return currentDrops.filter(drop => drop.id !== id);
+	  });
 	}
-
-	.pipette {
-		width: 50px;
-		height: 200px;
-		background-color: white; /* White background */
-		border: 2px solid black; /* Black border */
-		border-radius: 25px; /* Half of the width */
-		position: absolute;
-		top: 50%; /* Center vertically */
-		left: 50%; /* Center horizontally */
-		transform-origin: center; /* Set the transformation origin to the center */
-		transform: translate(-50%, -50%) rotate(90deg); /* Rotate 90 degrees clockwise */
+  </script>
+  
+  <!-- svelte-ignore a11y-click-events-have-key-events -->
+  <!-- svelte-ignore a11y-no-static-element-interactions -->
+  <div id="dropper-container" on:click={addDrop}>
+	<svg
+	  class="dropper"
+	  width="200"
+	  height="400"
+	  viewBox="0 0 50 200"
+	  xmlns="http://www.w3.org/2000/svg"
+	>
+	  <!-- Dropper -->
+	  <!-- Bigger --><rect x="15" y="70" width="20" height="80" fill="#ccc" stroke="#707070" stroke-width="1.5" />
+	  <!-- Smaller --><rect x="21.5" y="150" width="7.5" height="20" fill="#ccc" stroke="#707070" stroke-width="1.5" />
+	  <ellipse cx="25" cy="50" rx="25" ry="25" fill="#000" stroke="#00000" stroke-width="1.5"/>
+  
+	  <!-- Drops -->
+	  {#each $drops as drop (drop.id)}
+		<circle
+		  cx="25"
+		  cy={drop.cy}
+		  r="3"
+		  fill="blue"
+		  on:animationend={() => removeDrop(drop.id)}
+		  style="animation: drop 1s ease-out forwards;"
+		/>
+	  {/each}
+	</svg>
+  </div>
+  
+  <style>
+	@keyframes drop {
+	  to { cy: 300; } /* Adjust the final position based on your UI */
 	}
-</style>
+  
+	.dropper {
+	  position: absolute;
+	  left: calc(50% - 180px); /* Adjust so it's left of the probe */
+	  top: 170px; /* Adjust so it's at the same height as the probe */
+	}
+  </style>
+  
