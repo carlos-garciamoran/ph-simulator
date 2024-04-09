@@ -26,40 +26,36 @@
 			return defualtColor; // Default or error color
 		}
 
-		let r: number = 0;
-		let g: number = 0;
-		let b: number = 0;
+		let r = 0;
+		let g = 0;
+		let b = 0;
 
-		if (pHValue < 3) {
-			// Red to Orange
-			r = 255;
-			g = Math.floor(105 + (150 / 3) * pHValue);
-		} else if (pHValue < 6) {
-			// Orange to Green
-			r = Math.floor(255 - (255 / 3) * (pHValue - 3));
-			g = Math.floor(105 + (150 / 3) * (pHValue - 3));
-		} else if (pHValue == 7) {
-			// Neutral Green
-			r = 0;
-			g = 255;
-			b = 0;
-		} else if (pHValue < 11) {
-			// Green to Blue
-			g = Math.floor(255 - (255 / 4) * (pHValue - 7));
-			b = Math.floor((255 / 4) * (pHValue - 7));
-		} else {
-			// Blue to Purple
-			r = Math.floor((255 / 3) * (pHValue - 11));
-			g = 0;
-			b = 255;
-		}
+		if (pHValue <= 2) {
+        // Red
+        r = 255;
+        g = 0;
+        b = 0;
+    } else if (pHValue <= 6) {
+        // Transition from red to yellow
+        r = 255; // Red stays at max
+        g = Math.floor(255 * (pHValue - 2) / 4); // Green ramps up from 0 to 255
+        b = 0; // Blue stays at 0
+    } else if (pHValue < 8) {
+        // Yellow to Green
+        r = Math.floor(255 - (255 * (pHValue - 6) / 2)); // Red decreases to 0
+        g = 255; // Green stays at max
+    } else if (pHValue <= 11) {
+        // Green to Blue
+        r = 0; // Red is 0
+        g = Math.floor(255 - (255 * (pHValue - 8) / 3)); // Green decreases to 0
+        b = Math.floor((255 * (pHValue - 8) / 3)); // Blue ramps up to max
+    } else {
+        // Blue to Purple
+        r = Math.floor((127 * (pHValue - 11) / 3)); // Red ramps up to a mid-value
+        g = 0; // Green is 0
+        b = 255; // Blue stays at max
+    }
 
-		// Fix for values between 6 and 7
-		if (6 <= pHValue && pHValue < 7) {
-			r = Math.floor(255 * (7 - pHValue)); // Red decreases from 255 to 0
-			g = 255; // Green stays at 255
-			b = 0; // Blue remains 0
-		}
 		const toHex = (c: number): string => {
 			const hex = c.toString(16);
 			return hex.length == 1 ? '0' + hex : hex;
@@ -87,7 +83,7 @@
 
 <style lang="css">
 	:root {
-		--liquid-color: #bdbdbd; /* Default color, e.g., green for neutral pH */
+		--liquid-color: #e0e1e1; /* Default color */
 	}
 
 	#beaker {
