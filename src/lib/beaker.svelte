@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { phValueStore as pHValue, checkedStore } from './helpers/store';
+	import { phValueStore, checkedStore } from './helpers/store';
 
-	// Assuming the beaker height is known or dynamically determined
+	let defualtColor = '#e0e1e1';
 	let beakerHeight = 400;
-	let beakerWidth = 400;
 
 	// Define your measurements relative to the beaker's height
 	let measurements = [
@@ -14,17 +13,23 @@
 		{ position: (beakerHeight / 6) * 4, label: '20 mL' } // 4th line
 	];
 
-	$: $checkedStore, updatePHColor($pHValue);
+	// Reactive statement to update the color
+	$: color = $checkedStore ? getPHColor($phValueStore) : defualtColor;
 
-	let color: string = '#e0e1e1';
-	function updatePHColor(newPHValue: number) {
-		if ($checkedStore) {
-			color = getPHColor(newPHValue);
-		}
-		if (typeof document !== 'undefined') {
-			document.documentElement.style.setProperty('--liquid-color', color);
-		}
+	// Update the --liquid-color variable whenever the 'color' variable changes
+	$: if (typeof document !== 'undefined') {
+		document.documentElement.style.setProperty('--liquid-color', color);
 	}
+
+	// let color: string = '#e0e1e1';
+	// function updatePHColor(newPHValue: number) {
+	// 	if ($checkedStore) {
+	// 		color = getPHColor(newPHValue);
+	// 	}
+	// 	if (typeof document !== 'undefined') {
+	// 		document.documentElement.style.setProperty('--liquid-color', color);
+	// 	}
+	// }
 
 	function getPHColor(pHValue: number): string {
 		if (pHValue < 0 || pHValue > 14) {
