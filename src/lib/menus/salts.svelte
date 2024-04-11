@@ -13,7 +13,7 @@
 	} from '@/helpers/calculations/salts';
 	import { get_pH } from '$lib/helpers/calculations';
 	import { resetDropsAndVolume } from '@/helpers/resetFunctions';
-	import { phValueStore, concentration, selectedSolutionStore } from '$lib/helpers/store';
+	import { phValueStore, concentration, selectedSolutionStore, totalDrops } from '$lib/helpers/store';
 
 	type Salt = 'NaCl' | 'NH4Cl' | 'NaC2H3O2' | 'NaHCO3' | 'Na2CO3' | 'NaHSO4';
 
@@ -54,6 +54,7 @@
 		resetDropsAndVolume();
 		selectedSolutionStore.set(`Salt: ${selectedSalt}`);
 		updatePHValue();
+		totalDrops.set(0);
 	}
 </script>
 

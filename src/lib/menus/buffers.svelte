@@ -39,6 +39,7 @@
 		selectedBufferStore.set(selectedBuffer);
 		resetDropsAndVolume();
 		updatePHValue();
+		totalDrops.set(0);
 	}
 </script>
 

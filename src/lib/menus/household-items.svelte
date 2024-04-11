@@ -5,7 +5,7 @@
 
 	import { householdItemsToPH } from '@/helpers/constants';
 	import { resetDropsAndVolume } from '@/helpers/resetFunctions';
-	import { phValueStore, selectedSolutionStore } from '@/helpers/store';
+	import { phValueStore, selectedSolutionStore, totalDrops } from '@/helpers/store';
 
 	// Local component state for the selected household item
 	let value = 'table-salt';
@@ -19,6 +19,7 @@
 
 	if (value) {
 		resetDropsAndVolume();
+		totalDrops.set(0);
 	}
 </script>
 

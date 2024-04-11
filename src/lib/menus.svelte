@@ -1,6 +1,6 @@
 <script lang="ts">
 	import ConcentrationSlider from './concentration-slider.svelte';
-	import { menu } from './helpers/store';
+	import { menu, totalDrops } from './helpers/store';
 	import AcidsMenu from './menus/acids.svelte';
 	import BuffersMenu from './menus/buffers.svelte';
 	import HouseholdItemsMenu from './menus/household-items.svelte';
@@ -10,6 +10,7 @@
 
 	$: if ($menu) {
   		resetDropsAndVolume();
+		totalDrops.set(0);
 	}
 </script>
 

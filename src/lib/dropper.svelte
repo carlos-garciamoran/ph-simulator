@@ -29,14 +29,32 @@
 		}
 
 		// Update the respective stores
-		totalDrops.update((drop) => drop + 1);
-		currentDrop.set(currentDropValue);
-		dropsCounter.update((counts) => {
+		totalDrops.update(currentTotal => {
+        if (currentTotal < 20) {
+            totalDrops.update((drop) => drop + 1);
+			currentDrop.set(currentDropValue);
+			dropsCounter.update((counts) => {
 			const newCount =
 				(counts[currentDropValue.type as keyof typeof counts] || 0) +
 				currentDropValue.concentration;
 			return { ...counts, [currentDropValue.type]: newCount };
 		});
+            return currentTotal + 1;
+        } else {
+            // If there are already 20 drops, do not add more and perhaps alert the user
+            console.log("Maximum number of drops reached.");
+            return currentTotal; // Return the current count without incrementing
+        }
+    });
+		
+		// totalDrops.update((drop) => drop + 1);
+		// currentDrop.set(currentDropValue);
+		// dropsCounter.update((counts) => {
+		// 	const newCount =
+		// 		(counts[currentDropValue.type as keyof typeof counts] || 0) +
+		// 		currentDropValue.concentration;
+		// 	return { ...counts, [currentDropValue.type]: newCount };
+		// });
 
 		// Update the UI
 		drops.update((currentDrops) => {
