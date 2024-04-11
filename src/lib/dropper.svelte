@@ -34,15 +34,6 @@
 	function removeDrop(id: number) {
 		drops.update((currentDrops) => currentDrops.filter((drop) => drop.id !== id));
 	}
-
-	// Maps the selected dropper string to the volume added per drop
-	function getVolumeFromConcentration(concentration: number): number {
-		const volumeMap: Record<number, number> = {
-			0.1: 0.1,
-			0.01: 0.01
-		};
-		return concentration || 0; // Default to 0 if not found
-	}
 </script>
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
