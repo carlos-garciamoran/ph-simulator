@@ -25,7 +25,7 @@
 	}
 </script>
 
-<MenuCard className="bg-sky-200 w-1/2" title="💦 Add drops">
+<MenuCard className="bg-sky-200 w-4/6" title="💦 Add drops">
 	<RadioGroup.Root bind:value={selectedDropper} onValueChange={updateDropValue}>
 		<RadioItem value=".1M-HCl" title=".1 M HCl" />
 		<RadioItem value=".1M-NaOH" title=".1 M NaOH" />
