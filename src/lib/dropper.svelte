@@ -14,10 +14,10 @@
 	  const currentDropValue = get(currentDrop);
 	  const volumeToAdd = getVolumeFromConcentration(currentDropValue.concentration);
   
-	  if (currentDropValue.type === 'HCl' || currentDropValue.type === 'NaOH') {
+	  if (['HCl', 'NaOH'].includes(currentDropValue.type)) {
 		dropsCounter.update(counts => {
-		  const newCount = (counts[currentDropValue.type] || 0) + volumeToAdd;
-		  return { ...counts, [currentDropValue.type]: newCount };
+			const newCount = (counts[currentDropValue.type as keyof typeof counts] || 0) + volumeToAdd;
+			return {...counts, [currentDropValue.type]: newCount};
 		});
 	  }
 	  

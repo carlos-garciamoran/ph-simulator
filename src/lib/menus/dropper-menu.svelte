@@ -7,7 +7,14 @@
 	let selectedDropper = '';
 
 	function updateDropValue() {
-		currentDrop.set(selectedDropper);
+		let parts = selectedDropper.split("-");
+		if (parts.length === 2) {
+			let [concentration, type] = parts;
+			currentDrop.set({
+				type: type.replace("M", "").trim(), // HCl or NaOH
+				concentration: parseFloat(concentration)
+			});
+		}
 	}
 </script>
 

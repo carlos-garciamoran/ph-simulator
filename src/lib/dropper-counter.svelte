@@ -1,22 +1,23 @@
 <script lang="ts">
-    import { dropsCounter } from './helpers/store';
-  
-    // Function to handle addition of drops
-    export function addDrop(solution: 'HCl' | 'NaOH', volume: number) {
-      dropsCounter.update(counts => {
-        counts[solution] += volume;
-        return counts;
-      });
-    }
-  </script>
-  
-  <div class="dropper-counter">
-    <h3>Drops Added:</h3>
-    <div>
-      <p>HCl: {$dropsCounter.HCl} mL</p>
-      <p>NaOH: {$dropsCounter.NaOH} mL</p>
-    </div>
+  import { dropsCounter } from './helpers/store';
+
+  let HClDrops = 0;
+  let NaOHDrops = 0;
+
+  // Reactively update the counters whenever the store changes
+  $: if ($dropsCounter) {
+    HClDrops = $dropsCounter.HCl;
+    NaOHDrops = $dropsCounter.NaOH;
+  }
+</script>
+
+<div class="dropper-counter">
+  <h3>Drops Added:</h3>
+  <div>
+    <p>HCl: {HClDrops} mL</p>
+    <p>NaOH: {NaOHDrops} mL</p>
   </div>
+</div>
   
   <style>
     .dropper-counter {
