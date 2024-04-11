@@ -125,6 +125,9 @@ export function get_Hplus_OH(drops: number, M_NaOH: number, HC2H3O2_conc: number
 	const Hplus = constants.Kw / get_OH(drops, M_NaOH, HC2H3O2_conc);
 	return Hplus;
 }
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
 
 // For General Acid / Base Buffer System
 
@@ -145,12 +148,12 @@ export function get_buffer_system(
 
 // Adding drops of .1 or .01 M HCl
 export function get_HCl_acid(acid_conc: number, M_HCl: number, drops: number) {
-	return (10 * acid_conc + constants.drop_volume * drops * M_HCl) / get_volume_added(drops);
+	return ((10 * acid_conc) + (constants.drop_volume * drops * M_HCl)) / get_total_volume(drops);
 }
 
 // Adding drops of .1 or .01 M HCl
 export function get_HCl_base(base_conc: number, M_HCl: number, drops: number) {
-	return (10 * base_conc - constants.drop_volume * drops * M_HCl) / get_volume_added(drops);
+	return ((10 * base_conc) - (constants.drop_volume * drops * M_HCl)) / get_total_volume(drops);
 }
 
 // Base buffer capacity calculations
@@ -177,11 +180,11 @@ export function get_base_Hplus(drops: number, M_HCl: number, base_conc: number) 
 // Adding drops of .1 or .01 NaOH
 
 export function get_NaOH_acid(H_conc: number, M_NaOH: number, drops: number) {
-	return (10.0 * H_conc - constants.drop_volume * drops * M_NaOH) / get_total_volume(drops);
+	return ((10.0 * H_conc) - (constants.drop_volume * drops * M_NaOH)) / get_total_volume(drops);
 }
 
 export function get_NaOH_base(Na_conc: number, M_NaOH: number, drops: number) {
-	return (10.0 * Na_conc + constants.drop_volume * drops * M_NaOH) / get_total_volume(drops);
+	return ((10.0 * Na_conc) + (constants.drop_volume * drops * M_NaOH)) / get_total_volume(drops);
 }
 
 export function get_acid_buffer_overload() {

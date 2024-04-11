@@ -40,32 +40,32 @@ export function calculateBufferSystem(
 			} else {
 				M_HCl = 0.01;
 			}
-
-			const HC2H3O2_conc = calcs.get_HCl_acid(acidConc, M_HCl, drops);
-			const NaC2H3O2_conc = calcs.get_HCl_base(baseConc, M_HCl, drops);
-
-			if (HC2H3O2_conc <= 0 || NaC2H3O2_conc <= 0) {
+	
+			const acid = calcs.get_HCl_acid(acidConc, M_HCl, drops);
+			const base = calcs.get_HCl_base(baseConc, M_HCl, drops);
+	
+			if (acid <= 0 || base <= 0) {
 				calcs.get_NaC2H3O2_buffer_overload();
 				return NaN;
 			}
-
-			return calcs.get_buffer_system(pKa_acid, acidConc, baseConc, M_HCl, drops);
+	
+			return calcs.get_buffer_system(pKa_acid, acid, base, M_HCl, drops);
 		} else if ($drop === '.1M-NaOH' || $drop === '.01M-NaOH') {
 			if ($drop === '.1M-NaOH') {
 				M_NaOH = 0.1;
 			} else {
 				M_NaOH = 0.01;
 			}
-
-			const HC2H3O2_conc = calcs.get_NaOH_acid(acidConc, M_NaOH, drops);
-			const NaC2H3O2_conc = calcs.get_NaOH_base(baseConc, M_NaOH, drops);
-
-			if (HC2H3O2_conc <= 0 || NaC2H3O2_conc <= 0) {
+	
+			const acid = calcs.get_NaOH_acid(acidConc, M_NaOH, drops);
+			const base = calcs.get_NaOH_base(baseConc, M_NaOH, drops);
+	
+			if (acid <= 0 || base <= 0) {
 				calcs.get_HC2H3O2_buffer_overload();
 				return NaN;
 			}
-
-			return calcs.get_buffer_system(pKa_acid, acidConc, baseConc, M_NaOH, drops);
+	
+			return calcs.get_buffer_system(pKa_acid, acid, base, M_NaOH, drops);
 		}
 	});
 

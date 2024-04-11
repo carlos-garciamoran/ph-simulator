@@ -27,6 +27,7 @@
 			switch (selectedBuffer) {
 				case 'HC2H3O2 & NaC2H3O2':
 					pH = calculateBufferSystem(
+						//'HC2H3O2 & NaC2H3O2', 0.3, 0.04, 0
 						selectedBuffer,
 						$bufferConc.acid,
 						$bufferConc.base,
