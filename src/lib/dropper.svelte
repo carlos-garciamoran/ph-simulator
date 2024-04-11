@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { writable, get, type Writable } from 'svelte/store';
-	import { dropsCounter, currentDrop } from './helpers/store';
+	import { dropsCounter, currentDrop, currentDropType } from './helpers/store';
 
 	type Drop = {
 		id: number;
@@ -12,15 +12,32 @@
 	// Function to add a drop and update the counter
 	function addDrop() {
 		const currentDropValue = get(currentDrop);
-		const volumeToAdd = currentDropValue.concentration || 0;
+		const currentDropStruct = get(currentDropType);
 
-		if (['HCl', 'NaOH'].includes(currentDropValue.type)) {
-			dropsCounter.update((counts) => {
-				const newCount = (counts[currentDropValue.type as keyof typeof counts] || 0) + volumeToAdd;
-				return { ...counts, [currentDropValue.type]: newCount };
-			});
+		// Get the type
+		if (currentDropStruct === '.01M-HCl' || currentDropStruct === '.1M-HCl') {
+			currentDropValue.type = 'HCl';
+		} else if (currentDropStruct === '.01M-NaOH' || currentDropStruct === '.1M-NaOH') {
+			currentDropValue.type = 'NaOH';
 		}
 
+		// Get the molarity count
+		if (currentDropStruct === '.01M-HCl' || currentDropStruct === '.01M-NaOH') {
+			currentDropValue.concentration = 0.01;
+		} else if (currentDropStruct === '.1M-HCl' || currentDropStruct === '.1M-NaOH') {
+			currentDropValue.concentration = 0.1;
+		}
+
+		// Update the respective stores
+		currentDrop.set(currentDropValue);
+		dropsCounter.update((counts) => {
+			const newCount =
+				(counts[currentDropValue.type as keyof typeof counts] || 0) +
+				currentDropValue.concentration;
+			return { ...counts, [currentDropValue.type]: newCount };
+		});
+
+		// Update the UI
 		drops.update((currentDrops) => {
 			let newDrop: Drop = {
 				id: Math.random(),
