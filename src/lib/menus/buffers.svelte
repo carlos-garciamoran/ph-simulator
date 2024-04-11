@@ -11,6 +11,7 @@
 		selectedBufferStore
 	} from '@/helpers/store';
 	import type { SelectedBuffer } from '@/helpers/types';
+	import { resetDropsAndVolume } from '@/helpers/resetFunctions';
 
 	// Local component state for the selected buffer
 	let selectedBuffer: SelectedBuffer = 'HC2H3O2 & NaC2H3O2';
@@ -77,6 +78,7 @@
 	// Watch for changes in selectedBuffer and update the pH value
 	$: if (selectedBuffer) {
 		selectedBufferStore.set(selectedBuffer);
+		resetDropsAndVolume();
 		updatePHValue();
 	}
 </script>

@@ -6,6 +6,7 @@
 
 	import MenuCard from '../components/menu-card.svelte';
 	import RadioItem from '../components/radio-item.svelte';
+	import { resetDropsAndVolume } from '@/helpers/resetFunctions';
 
 	type AcidBase = 'Ba(OH)2' | 'Ca(OH)2' | 'NaOH' | 'NH4OH' | 'HCl' | 'HNO3' | 'HC2H3O2' | 'H2CO3';
 
@@ -50,6 +51,7 @@
 
 	// Watch for changes in selectedAcidBase and update the pH value
 	$: if (selectedAcidBase) {
+		resetDropsAndVolume();
 		updatePHValue();
 	}
 </script>

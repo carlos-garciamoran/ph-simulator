@@ -5,6 +5,7 @@
 
 	import { householdItemsToPH } from '@/helpers/constants';
 	import { phValueStore } from '@/helpers/store';
+	import { resetDropsAndVolume } from '@/helpers/resetFunctions';
 
 	// Local component state for the selected household item
 	let value = 'table-salt';
@@ -14,6 +15,10 @@
 		const pHValue = householdItemsToPH[newValue];
 		phValueStore.set(pHValue);
 	};
+
+	if (value) {
+		resetDropsAndVolume();
+	}
 </script>
 
 <MenuCard className="bg-sky-200" title="🧼 Household Items">

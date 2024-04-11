@@ -6,6 +6,11 @@
 	import HouseholdItemsMenu from './menus/household-items.svelte';
 	import MainMenu from './menus/main.svelte';
 	import SaltsMenu from './menus/salts.svelte';
+	import { resetDropsAndVolume } from './helpers/resetFunctions';
+
+	$: if ($menu) {
+  		resetDropsAndVolume();
+	}
 </script>
 
 <div class="flex flex-col gap-4 justify-between">
