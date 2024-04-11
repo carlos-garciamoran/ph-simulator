@@ -8,5 +8,5 @@
 		<li>HCl: {$dropsCounter.HCl.toFixed(2)} mL</li>
 		<li>NaOH: {$dropsCounter.NaOH.toFixed(2)} mL</li>
 	</ul>
-  <h3>Total Volume: {$totalVolume.toFixed(2)} mL</h3>
+  <h3>Total Volume: {$totalVolume.toFixed(3)} mL</h3>
 </MenuCard>
