@@ -16,6 +16,7 @@
 		const pHValue = householdItemsToPH[newValue];
 		phValueStore.set(pHValue);
 	};
+	
 
 	if (value) {
 		resetDropsAndVolume();
