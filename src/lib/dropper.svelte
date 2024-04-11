@@ -9,60 +9,48 @@
 
 	// Function to add a drop and update the counter
 	function addDrop() {
-		const currentDropValue = get(currentDrop);
-		const currentDropStruct = get(currentDropType);
+    const currentDropValue = get(currentDrop);
+    const currentDropStruct = get(currentDropType);
 
-		totalVolume.update(currentTotal => currentTotal + volumeToAdd);
-
-		// Get the type
-		if (currentDropStruct === '.01M-HCl' || currentDropStruct === '.1M-HCl') {
-			currentDropValue.type = 'HCl';
-		} else if (currentDropStruct === '.01M-NaOH' || currentDropStruct === '.1M-NaOH') {
-			currentDropValue.type = 'NaOH';
-		}
-
-		// Get the molarity count
-		if (currentDropStruct === '.01M-HCl' || currentDropStruct === '.01M-NaOH') {
-			currentDropValue.concentration = 0.01;
-		} else if (currentDropStruct === '.1M-HCl' || currentDropStruct === '.1M-NaOH') {
-			currentDropValue.concentration = 0.1;
-		}
-
-		// Update the respective stores
-		totalDrops.update(currentTotal => {
+    totalDrops.update(currentTotal => {
         if (currentTotal < 20) {
-            totalDrops.update((drop) => drop + 1);
-			currentDrop.set(currentDropValue);
-			dropsCounter.update((counts) => {
-			const newCount =
-				(counts[currentDropValue.type as keyof typeof counts] || 0) +
-				currentDropValue.concentration;
-			return { ...counts, [currentDropValue.type]: newCount };
-		});
-            return currentTotal + 1;
+            // Get the type
+            if (currentDropStruct === '.01M-HCl' || currentDropStruct === '.1M-HCl') {
+                currentDropValue.type = 'HCl';
+            } else if (currentDropStruct === '.01M-NaOH' || currentDropStruct === '.1M-NaOH') {
+                currentDropValue.type = 'NaOH';
+            }
+
+            // Get the molarity count
+            if (currentDropStruct === '.01M-HCl' || currentDropStruct === '.01M-NaOH') {
+                currentDropValue.concentration = 0.01;
+            } else if (currentDropStruct === '.1M-HCl' || currentDropStruct === '.1M-NaOH') {
+                currentDropValue.concentration = 0.1;
+            }
+
+            // Update the respective stores only if the currentTotal is less than 20
+            totalVolume.update(currentVolume => currentVolume + volumeToAdd);
+
+            currentDrop.set(currentDropValue);
+            dropsCounter.update(counts => {
+                const newCount = (counts[currentDropValue.type as keyof typeof counts] || 0) + currentDropValue.concentration;
+                return { ...counts, [currentDropValue.type]: newCount };
+            });
+
+            // Update the UI
+            drops.update(currentDrops => {
+                let newDrop: Drop = {
+                    id: Math.random(),
+                    cy: 0 // Starting y coordinate
+                };
+                return [newDrop, ...currentDrops];
+            });
+
+            return currentTotal + 1; // Increment the total drops
         } else {
-            // If there are already 20 drops, do not add more and perhaps alert the user
             console.log("Maximum number of drops reached.");
             return currentTotal; // Return the current count without incrementing
         }
-    });
-		
-		// totalDrops.update((drop) => drop + 1);
-		// currentDrop.set(currentDropValue);
-		// dropsCounter.update((counts) => {
-		// 	const newCount =
-		// 		(counts[currentDropValue.type as keyof typeof counts] || 0) +
-		// 		currentDropValue.concentration;
-		// 	return { ...counts, [currentDropValue.type]: newCount };
-		// });
-
-		// Update the UI
-		drops.update((currentDrops) => {
-			let newDrop: Drop = {
-				id: Math.random(),
-				cy: 0 // Starting y coordinate
-			};
-			return [newDrop, ...currentDrops];
 		});
 	}
 
