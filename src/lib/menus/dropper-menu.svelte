@@ -5,14 +5,14 @@
 	import { currentDrop } from '@/helpers/store';
 	import type { DropType } from '@/helpers/types';
 
-	let selectedDropper : DropType;
+	let selectedDropper: DropType;
 
 	function updateDropValue() {
-		let parts = selectedDropper.split("-");
+		let parts = selectedDropper.split('-');
 		if (parts.length === 2) {
 			let [concentration, type] = parts;
 			currentDrop.set({
-				type: type.replace("M", "").trim(), // HCl or NaOH
+				type: type.replace('M', '').trim() as 'HCl' | 'NaOH', // HCl or NaOH
 				concentration: parseFloat(concentration)
 			});
 		}

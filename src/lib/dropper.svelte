@@ -1,86 +1,101 @@
 <script lang="ts">
 	import { writable, get, type Writable } from 'svelte/store';
 	import { dropsCounter, currentDrop } from './helpers/store';
-  
+
 	type Drop = {
-	  id: number;
-	  cy: number;
+		id: number;
+		cy: number;
 	};
-  
+
 	const drops: Writable<Drop[]> = writable([]);
-  
+
 	// Function to add a drop and update the counter
 	function addDrop() {
-	  const currentDropValue = get(currentDrop);
-	  const volumeToAdd = getVolumeFromConcentration(currentDropValue.concentration);
-  
-	  if (['HCl', 'NaOH'].includes(currentDropValue.type)) {
-		dropsCounter.update(counts => {
-			const newCount = (counts[currentDropValue.type as keyof typeof counts] || 0) + volumeToAdd;
-			return {...counts, [currentDropValue.type]: newCount};
+		const currentDropValue = get(currentDrop);
+		const volumeToAdd = currentDropValue.concentration || 0;
+
+		if (['HCl', 'NaOH'].includes(currentDropValue.type)) {
+			dropsCounter.update((counts) => {
+				const newCount = (counts[currentDropValue.type as keyof typeof counts] || 0) + volumeToAdd;
+				return { ...counts, [currentDropValue.type]: newCount };
+			});
+		}
+
+		drops.update((currentDrops) => {
+			let newDrop: Drop = {
+				id: Math.random(),
+				cy: 0 // Starting y coordinate
+			};
+			return [newDrop, ...currentDrops];
 		});
-	  }
-	  
-	  drops.update(currentDrops => {
-		let newDrop: Drop = {
-		  id: Math.random(),
-		  cy: 0 // Starting y coordinate
-		};
-		return [newDrop, ...currentDrops];
-	  });
 	}
-  
+
 	// Function to handle the animation end of a drop
 	function removeDrop(id: number) {
-	  drops.update(currentDrops => currentDrops.filter(drop => drop.id !== id));
+		drops.update((currentDrops) => currentDrops.filter((drop) => drop.id !== id));
 	}
-  
+
 	// Maps the selected dropper string to the volume added per drop
 	function getVolumeFromConcentration(concentration: number): number {
-	  const volumeMap: Record<number, number> = {
-		0.1: 0.1,
-		0.01: 0.01
-	  };
-	  return volumeMap[concentration] || 0; // Default to 0 if not found
+		const volumeMap: Record<number, number> = {
+			0.1: 0.1,
+			0.01: 0.01
+		};
+		return concentration || 0; // Default to 0 if not found
 	}
-  </script>
-  
-  <!-- svelte-ignore a11y-no-static-element-interactions -->
-  <!-- Dropper SVG and animation -->
-  <!-- svelte-ignore a11y-click-events-have-key-events -->
-  <div id="dropper-container" on:click={addDrop}>
-	<svg class="dropper" width="200" height="700" viewBox="0 0 50 350" xmlns="http://www.w3.org/2000/svg">
-	  <!-- Restored dropper visuals -->
-	  <rect x="15" y="60" width="20" height="90" fill="#ccc" stroke="#707070" stroke-width="1.5" />
-	  <rect x="21.5" y="150" width="7.5" height="20" fill="#ccc" stroke="#707070" stroke-width="1.5" />
-	  <ellipse cx="25" cy="50" rx="20" ry="22.5" fill="#000" stroke="#00000" stroke-width="1.5"/>
-	  <!-- Drops -->
-	  {#each $drops as drop (drop.id)}
-		<circle
-		  cx="25"
-		  cy="170"
-		  r="3"
-		  fill="gray"
-		  class="drop"
-		  on:animationend={() => removeDrop(drop.id)}
+</script>
+
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- Dropper SVG and animation -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div id="dropper-container" on:click={addDrop}>
+	<svg
+		class="dropper"
+		width="200"
+		height="700"
+		viewBox="0 0 50 350"
+		xmlns="http://www.w3.org/2000/svg"
+	>
+		<!-- Restored dropper visuals -->
+		<rect x="15" y="60" width="20" height="90" fill="#ccc" stroke="#707070" stroke-width="1.5" />
+		<rect
+			x="21.5"
+			y="150"
+			width="7.5"
+			height="20"
+			fill="#ccc"
+			stroke="#707070"
+			stroke-width="1.5"
 		/>
-	  {/each}
+		<ellipse cx="25" cy="50" rx="20" ry="22.5" fill="#000" stroke="#00000" stroke-width="1.5" />
+		<!-- Drops -->
+		{#each $drops as drop (drop.id)}
+			<circle
+				cx="25"
+				cy="170"
+				r="3"
+				fill="gray"
+				class="drop"
+				on:animationend={() => removeDrop(drop.id)}
+			/>
+		{/each}
 	</svg>
-  </div>
-  
-  <style>
+</div>
+
+<style>
 	@keyframes drop {
-	  to { transform: translateY(400px); } /* Adjust based on UI */
+		to {
+			transform: translateY(400px);
+		} /* Adjust based on UI */
 	}
-	
+
 	.dropper {
-	  position: absolute;
-	  left: calc(50% - 180px); /* Adjust so it's left of the probe */
-	  top: 170px; /* Adjust so it's at the same height as the probe */
+		position: absolute;
+		left: calc(50% - 180px); /* Adjust so it's left of the probe */
+		top: 170px; /* Adjust so it's at the same height as the probe */
 	}
-  
+
 	.drop {
-	  animation: drop 2s ease-out forwards;
+		animation: drop 2s ease-out forwards;
 	}
-  </style>
-  
+</style>

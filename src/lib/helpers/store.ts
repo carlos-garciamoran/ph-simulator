@@ -1,6 +1,6 @@
 import { writable, type Writable } from 'svelte/store';
 
-import type { DropType, Menu, SelectedBuffer } from './types';
+import type { DropStruct, Menu, SelectedBuffer } from './types';
 
 // ph Indicator Solution checkbox
 export const checkedStore = writable(false);
@@ -24,7 +24,11 @@ export const probePosition = writable(0);
 export const menu: Writable<Menu> = writable('acids/bases');
 
 // Currently selected drop option (under buffer menu)
-export const currentDrop = writable<DropType>('.1M-HCl');
+// export const currentDrop = writable<DropType>('.1M-HCl');
+export const currentDrop = writable<DropStruct>({
+	type: '',
+	concentration: 0.0
+});
 
 // Number of drops added. 20 max for each.
 export const dropsCounter = writable({ HCl: 0, NaOH: 0 });
