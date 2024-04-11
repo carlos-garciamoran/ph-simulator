@@ -6,7 +6,8 @@
 	import Wire from '$lib/wire.svelte';
 	import Dropper from '$lib/dropper.svelte'
 	import DropperCounter from '@/dropper-counter.svelte';
-	import { probePosition } from '@/helpers/store';
+	import { menu, probePosition } from '@/helpers/store';
+	import DropperMenu from '@/menus/dropper-menu.svelte';
 
 	// Functions to handle probe animation, based on the events from the Console
 	function insertProbe() {
@@ -29,7 +30,10 @@
 	</div>
 	<div class='console-counter-container'>
 		<Console on:insertProbe={insertProbe} on:removeProbe={removeProbe} />
-		<DropperCounter />
+		{#if $menu === 'buffers' || $menu === 'water'}
+			<DropperMenu />
+			<DropperCounter />
+		{/if}
 	</div>
 </div>
 

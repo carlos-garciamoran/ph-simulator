@@ -20,13 +20,13 @@
 			<ConcentrationSlider type="normal" />
 		{:else if $menu === 'buffers'}
 			<BuffersMenu />
-			<DropperMenu />
+			<!-- <DropperMenu /> -->
 			<ConcentrationSlider type="acid" />
 			<ConcentrationSlider type="base" />
 		{:else if $menu === 'household-items'}
 			<HouseholdItemsMenu />
 		{:else if $menu === 'water'}
-			<DropperMenu />
+			<!-- <DropperMenu /> -->
 		{/if}
 	</div>
 </div>
