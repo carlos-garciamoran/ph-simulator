@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { phValueStore, checkedStore } from './helpers/store';
+	import { phValueStore, checkedStore, selectedSolutionStore } from './helpers/store';
 
 	let defualtColor = '#e0e1e1';
 	let beakerHeight = 400;
@@ -79,6 +79,10 @@
 	</div>
 </div>
 
+<div class="solution-info">
+    <p>{$selectedSolutionStore}</p>
+</div>
+
 <div style="--liquid-color: {color};"></div>
 
 <style lang="css">
@@ -129,4 +133,14 @@
 		font-size: 20px;
 		color: black;
 	}
+	.solution-info {
+        display: flex;
+        justify-content: center; /* Horizontally center the content */
+        align-items: center; /* Vertically center the content */
+        height: 30px; /* Set a fixed height for the container */
+    }
+
+    .solution-info p {
+        margin: 0; /* Remove default margin */
+    }
 </style>

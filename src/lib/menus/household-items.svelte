@@ -4,14 +4,15 @@
 	import * as RadioGroup from '$lib/components/ui/radio-group';
 
 	import { householdItemsToPH } from '@/helpers/constants';
-	import { phValueStore } from '@/helpers/store';
 	import { resetDropsAndVolume } from '@/helpers/resetFunctions';
+	import { phValueStore, selectedSolutionStore } from '@/helpers/store';
 
 	// Local component state for the selected household item
 	let value = 'table-salt';
 
 	// Calculate the pH value of the selected household item by looking up in the map.
 	const handleRadioChange = (newValue: string) => {
+		selectedSolutionStore.set(`Household Item: ${newValue}`);
 		const pHValue = householdItemsToPH[newValue];
 		phValueStore.set(pHValue);
 	};

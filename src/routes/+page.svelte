@@ -23,6 +23,7 @@
 	<Menus />
 	<div class="">
 		<Beaker />
+		
 		<Wire />
 		<Probe />
 		{#if $menu === 'buffers' || $menu === 'water'}

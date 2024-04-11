@@ -2,7 +2,7 @@
 	import * as RadioGroup from '@/components/ui/radio-group';
 	import { get_pH } from '@/helpers/calculations';
 	import * as calcs from '@/helpers/calculations/acids-bases';
-	import { phValueStore, concentration } from '@/helpers/store';
+	import { phValueStore, concentration, selectedSolutionStore } from '@/helpers/store';
 
 	import MenuCard from '../components/menu-card.svelte';
 	import RadioItem from '../components/radio-item.svelte';
@@ -52,6 +52,7 @@
 	// Watch for changes in selectedAcidBase and update the pH value
 	$: if (selectedAcidBase) {
 		resetDropsAndVolume();
+		selectedSolutionStore.set(`Acids / Bases: ${selectedAcidBase}`);
 		updatePHValue();
 	}
 </script>

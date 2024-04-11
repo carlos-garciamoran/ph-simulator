@@ -6,9 +6,10 @@
 	import {
 		bufferConcentration,
 		phValueStore,
+		totalDrops,
+		// currentDrop,
 		selectedBufferStore,
-		totalDrops
-
+        selectedSolutionStore // Added this line to import the global store
 	} from '@/helpers/store';
 	import type { SelectedBuffer } from '@/helpers/types';
 	import { resetDropsAndVolume } from '@/helpers/resetFunctions';
@@ -34,6 +35,7 @@
 
 	// Watch for changes in selectedBuffer and update the pH value
 	$: if (selectedBuffer) {
+		selectedSolutionStore.set(`Buffer: ${selectedBuffer}`); // Modified this line according to instructions
 		selectedBufferStore.set(selectedBuffer);
 		resetDropsAndVolume();
 		updatePHValue();
