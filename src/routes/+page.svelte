@@ -36,7 +36,7 @@
 	<div class="console-counter-container">
 		<Console on:insertProbe={insertProbe} on:removeProbe={removeProbe} />
 		{#if $menu === 'buffers' || $menu === 'water'}
-			<div class="flex gap-4">
+			<div class="flex gap-10 h-fit">
 				<DropperMenu />
 				<DropperCounter />
 			</div>
