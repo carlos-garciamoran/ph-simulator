@@ -35,6 +35,7 @@ export function calculateBufferSystem(
 	console.log(pKa_acid);
 
 	currentDropType.subscribe(($drop) => {
+		console.log($drop);
 		if ($drop === '.1M-HCl' || $drop === '.01M-HCl') {
 			if ($drop === '.1M-HCl') {
 				console.log('M_HCl = 0.1');
@@ -54,8 +55,10 @@ export function calculateBufferSystem(
 			// 	calcs.get_NaC2H3O2_buffer_overload();
 			// 	return NaN;
 			// }
-	
-			return calcs.get_buffer_system(pKa_acid, acid, base, M_HCl, drops);
+			//console.log({pKa_acid, acid, base, M_HCl, drops});
+			const final = calcs.get_buffer_system(pKa_acid, acid, base);
+			console.log(final);
+			return final;
 		} else if ($drop === '.1M-NaOH' || $drop === '.01M-NaOH') {
 			if ($drop === '.1M-NaOH') {
 				M_NaOH = 0.1;
@@ -71,9 +74,9 @@ export function calculateBufferSystem(
 			// 	return NaN;
 			// }
 	
-			return calcs.get_buffer_system(pKa_acid, acid, base, M_NaOH, drops);
+			return calcs.get_buffer_system(pKa_acid, acid, base);
 		}
 	});
 
-	return NaN;
+	//return NaN;
 }

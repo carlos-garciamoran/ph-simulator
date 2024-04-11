@@ -137,13 +137,8 @@ export function get_buffer_system(
 	pKa_acid: number,
 	acid_conc: number,
 	base_conc: number,
-	M_HCl: number,
-	drops: number
 ) {
-	return (
-		pKa_acid +
-		Math.log10(get_HCl_base(base_conc, M_HCl, drops) / get_HCl_acid(acid_conc, M_HCl, drops))
-	);
+	return pKa_acid + Math.log10(base_conc / acid_conc);
 }
 
 // Adding drops of .1 or .01 M HCl
