@@ -1,12 +1,13 @@
 import * as calcs from '@/helpers/calculations';
 import * as consts from '@/helpers/constants';
 import type { SelectedBuffer } from '../types';
+import { currentDrop } from '../store';
 
 export function calculateBufferSystem(
 	buffer: SelectedBuffer,
 	acidConc: number,
 	baseConc: number,
-	currentDrop: string,
+	//currentDrop: DropType,
 	drops: number
 ) {
 	let M_HCl = 0;
@@ -31,39 +32,41 @@ export function calculateBufferSystem(
 			break;
 	}
 
-	if (currentDrop === '.1M-HCl' || currentDrop === '.01M HCl') {
-		if (currentDrop === '.1M-HCl') {
-			M_HCl = 0.1;
-		} else {
-			M_HCl = 0.01;
+	currentDrop.subscribe(($drop) => {
+		if ($drop === '.1M-HCl' || $drop === '.01M-HCl') {
+			if ($drop === '.1M-HCl') {
+				M_HCl = 0.1;
+			} else {
+				M_HCl = 0.01;
+			}
+	
+			const HC2H3O2_conc = calcs.get_HCl_acid(acidConc, M_HCl, drops);
+			const NaC2H3O2_conc = calcs.get_HCl_base(baseConc, M_HCl, drops);
+	
+			if (HC2H3O2_conc <= 0 || NaC2H3O2_conc <= 0) {
+				calcs.get_NaC2H3O2_buffer_overload();
+				return NaN;
+			}
+	
+			return calcs.get_buffer_system(pKa_acid, acidConc, baseConc, M_HCl, drops);
+		} else if ($drop === '.1M-NaOH' || $drop === '.01M-NaOH') {
+			if ($drop === '.1M-NaOH') {
+				M_NaOH = 0.1;
+			} else {
+				M_NaOH = 0.01;
+			}
+	
+			const HC2H3O2_conc = calcs.get_NaOH_acid(acidConc, M_NaOH, drops);
+			const NaC2H3O2_conc = calcs.get_NaOH_base(baseConc, M_NaOH, drops);
+	
+			if (HC2H3O2_conc <= 0 || NaC2H3O2_conc <= 0) {
+				calcs.get_HC2H3O2_buffer_overload();
+				return NaN;
+			}
+	
+			return calcs.get_buffer_system(pKa_acid, acidConc, baseConc, M_NaOH, drops);
 		}
-
-		const HC2H3O2_conc = calcs.get_HCl_acid(acidConc, M_HCl, drops);
-		const NaC2H3O2_conc = calcs.get_HCl_base(baseConc, M_HCl, drops);
-
-		if (HC2H3O2_conc <= 0 || NaC2H3O2_conc <= 0) {
-			calcs.get_NaC2H3O2_buffer_overload();
-			return NaN;
-		}
-
-		return calcs.get_buffer_system(pKa_acid, acidConc, baseConc, M_HCl, drops);
-	} else if (currentDrop === '.1M-NaOH' || currentDrop === '.01M NaOH') {
-		if (currentDrop === '.1M-NaOH') {
-			M_NaOH = 0.1;
-		} else {
-			M_NaOH = 0.01;
-		}
-
-		const HC2H3O2_conc = calcs.get_NaOH_acid(acidConc, M_NaOH, drops);
-		const NaC2H3O2_conc = calcs.get_NaOH_base(baseConc, M_NaOH, drops);
-
-		if (HC2H3O2_conc <= 0 || NaC2H3O2_conc <= 0) {
-			calcs.get_HC2H3O2_buffer_overload();
-			return NaN;
-		}
-
-		return calcs.get_buffer_system(pKa_acid, acidConc, baseConc, M_NaOH, drops);
-	}
+	})
 
 	return NaN;
 }

@@ -25,6 +25,8 @@
 			<ConcentrationSlider type="base" />
 		{:else if $menu === 'household-items'}
 			<HouseholdItemsMenu />
+		{:else if $menu === 'water'}
+			<DropperMenu />
 		{/if}
 	</div>
 </div>

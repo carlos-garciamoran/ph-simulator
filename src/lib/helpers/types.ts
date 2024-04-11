@@ -6,3 +6,9 @@ export type SelectedBuffer =
 	| 'NaH2PO4 & Na2HPO4'
 	| 'NaHCO3 & Na2CO3'
 	| 'H2CO3 & NaHCO3';
+	
+export type DropType =
+	| ".1M-HCl"
+	| ".1M-NaOH"
+	| ".01M-HCl"
+	| ".01M-NaOH";

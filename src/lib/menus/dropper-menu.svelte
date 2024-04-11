@@ -3,8 +3,9 @@
 	import RadioItem from '../components/radio-item.svelte';
 	import MenuCard from '../components/menu-card.svelte';
 	import { currentDrop } from '@/helpers/store';
+	import type { DropType } from '@/helpers/types';
 
-	let selectedDropper = '';
+	let selectedDropper : DropType;
 
 	function updateDropValue() {
 		let parts = selectedDropper.split("-");
