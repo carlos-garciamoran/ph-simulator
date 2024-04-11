@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { writable, get, type Writable } from 'svelte/store';
-	import { dropsCounter, currentDrop, currentDropType } from './helpers/store';
+	import { dropsCounter, currentDrop, currentDropType, totalVolume } from './helpers/store';
+
 
 	type Drop = {
 		id: number;
@@ -13,6 +14,9 @@
 	function addDrop() {
 		const currentDropValue = get(currentDrop);
 		const currentDropStruct = get(currentDropType);
+		const volumeToAdd = 0.036;
+
+		totalVolume.update(currentTotal => currentTotal + volumeToAdd);
 
 		// Get the type
 		if (currentDropStruct === '.01M-HCl' || currentDropStruct === '.1M-HCl') {

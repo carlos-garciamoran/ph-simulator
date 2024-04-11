@@ -1,6 +1,6 @@
 <script lang="ts">
 	import MenuCard from './components/menu-card.svelte';
-	import { dropsCounter } from './helpers/store';
+	import { dropsCounter, totalVolume } from './helpers/store';
 </script>
 
 <MenuCard title="Drops Added" className="w-1/2">
@@ -8,4 +8,5 @@
 		<li>HCl: {$dropsCounter.HCl.toFixed(2)} mL</li>
 		<li>NaOH: {$dropsCounter.NaOH.toFixed(2)} mL</li>
 	</ul>
+  <h3>Total Volume: {$totalVolume.toFixed(2)} mL</h3>
 </MenuCard>
