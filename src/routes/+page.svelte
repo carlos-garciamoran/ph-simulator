@@ -25,7 +25,12 @@
 		<Beaker />
 		<Wire />
 		<Probe />
-		<Dropper />
+		{#if $menu === 'buffers' || $menu === 'water'}
+			<div class="flex gap-4">
+				<Dropper />
+			</div>
+		{/if}
+		
 	</div>
 	<div class="console-counter-container">
 		<Console on:insertProbe={insertProbe} on:removeProbe={removeProbe} />
