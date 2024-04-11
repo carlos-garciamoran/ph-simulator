@@ -9,7 +9,7 @@
 		"dev:electron": "electron src/electron.cjs",
 		"build": "vite build",
 		"build:all": "bun run build && bun run build:electron",
-		"build:electron": "cross-env NODE_ENV=production  electron-builder -mwl --config build.config.json",
+		"build:electron": "cross-env NODE_ENV=production electron-builder -mwl --config build.config.json",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",

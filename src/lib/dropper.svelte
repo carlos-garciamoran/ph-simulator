@@ -1,56 +1,64 @@
 <script lang="ts">
 	import { writable, get, type Writable } from 'svelte/store';
 
-	import { volumeToAdd } from './helpers/constants';
-	import { dropsCounter, currentDrop, currentDropType, totalVolume, totalDrops } from './helpers/store';
+	import { dropVolume } from './helpers/constants';
+	import {
+		currentDrop,
+		currentDropType,
+		dropsCounter,
+		totalVolume,
+		totalDrops
+	} from './helpers/store';
 	import type { Drop } from './helpers/types';
 
 	const drops: Writable<Drop[]> = writable([]);
 
 	// Function to add a drop and update the counter
 	function addDrop() {
-    const currentDropValue = get(currentDrop);
-    const currentDropStruct = get(currentDropType);
+		const currentDropValue = get(currentDrop);
+		const currentDropStruct = get(currentDropType);
 
-    totalDrops.update(currentTotal => {
-        if (currentTotal < 20) {
-            // Get the type
-            if (currentDropStruct === '.01M-HCl' || currentDropStruct === '.1M-HCl') {
-                currentDropValue.type = 'HCl';
-            } else if (currentDropStruct === '.01M-NaOH' || currentDropStruct === '.1M-NaOH') {
-                currentDropValue.type = 'NaOH';
-            }
+		totalDrops.update((currentTotal) => {
+			if (currentTotal < 20) {
+				// Get the type
+				if (currentDropStruct === '.01M-HCl' || currentDropStruct === '.1M-HCl') {
+					currentDropValue.type = 'HCl';
+				} else if (currentDropStruct === '.01M-NaOH' || currentDropStruct === '.1M-NaOH') {
+					currentDropValue.type = 'NaOH';
+				}
 
-            // Get the molarity count
-            if (currentDropStruct === '.01M-HCl' || currentDropStruct === '.01M-NaOH') {
-                currentDropValue.concentration = 0.01;
-            } else if (currentDropStruct === '.1M-HCl' || currentDropStruct === '.1M-NaOH') {
-                currentDropValue.concentration = 0.1;
-            }
+				// Get the molarity count
+				if (currentDropStruct === '.01M-HCl' || currentDropStruct === '.01M-NaOH') {
+					currentDropValue.concentration = 0.01;
+				} else if (currentDropStruct === '.1M-HCl' || currentDropStruct === '.1M-NaOH') {
+					currentDropValue.concentration = 0.1;
+				}
 
-            // Update the respective stores only if the currentTotal is less than 20
-            totalVolume.update(currentVolume => currentVolume + volumeToAdd);
+				// Update the respective stores only if the currentTotal is less than 20
+				totalVolume.update((currentVolume) => currentVolume + dropVolume);
 
-            currentDrop.set(currentDropValue);
-            dropsCounter.update(counts => {
-                const newCount = (counts[currentDropValue.type as keyof typeof counts] || 0) + currentDropValue.concentration;
-                return { ...counts, [currentDropValue.type]: newCount };
-            });
+				currentDrop.set(currentDropValue);
+				dropsCounter.update((counts) => {
+					const newCount =
+						(counts[currentDropValue.type as keyof typeof counts] || 0) +
+						currentDropValue.concentration;
+					return { ...counts, [currentDropValue.type]: newCount };
+				});
 
-            // Update the UI
-            drops.update(currentDrops => {
-                let newDrop: Drop = {
-                    id: Math.random(),
-                    cy: 0 // Starting y coordinate
-                };
-                return [newDrop, ...currentDrops];
-            });
+				// Update the UI
+				drops.update((currentDrops) => {
+					let newDrop: Drop = {
+						id: Math.random(),
+						cy: 0 // Starting y coordinate
+					};
+					return [newDrop, ...currentDrops];
+				});
 
-            return currentTotal + 1; // Increment the total drops
-        } else {
-            console.log("Maximum number of drops reached.");
-            return currentTotal; // Return the current count without incrementing
-        }
+				return currentTotal + 1; // Increment the total drops
+			} else {
+				console.log('Maximum number of drops reached.');
+				return currentTotal; // Return the current count without incrementing
+			}
 		});
 	}
 

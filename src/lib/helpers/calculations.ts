@@ -32,7 +32,7 @@ export function get_pKb(Kb: number) {
 //////////////////////// BUFFERS ///////////////////////
 ////////////////////////////////////////////////////////
 export function get_volume_added(drops: number) {
-	return constants.drop_volume * drops;
+	return constants.dropVolume * drops;
 }
 
 export function get_total_volume(drops: number) {
@@ -58,12 +58,12 @@ export function get_ace_buffer_system(NaC2H3O2_conc: number, HC2H3O2_conc: numbe
 
 // Adding drops of .1 or .01 M HCl
 export function get_HCl_HC2H3O2(HC2H3O2_conc: number, M_HCl: number, drops: number) {
-	return (10 * HC2H3O2_conc + constants.drop_volume * drops * M_HCl) / get_volume_added(drops);
+	return (10 * HC2H3O2_conc + constants.dropVolume * drops * M_HCl) / get_volume_added(drops);
 }
 
 // Adding drops of .1 or .01 M HCl
 export function get_HCl_NaC2H3O2(NaC2H3O2_conc: number, M_HCl: number, drops: number) {
-	return (10 * NaC2H3O2_conc - constants.drop_volume * drops * M_HCl) / get_volume_added(drops);
+	return (10 * NaC2H3O2_conc - constants.dropVolume * drops * M_HCl) / get_volume_added(drops);
 }
 
 // NaC2H3O2 (Sodium Acetate) buffer capacity calculations
@@ -93,11 +93,11 @@ export function get_Hplus_fe(drops: number, M_HCl: number, NaC2H3O2_conc: number
 // Adding drops of .1 or .01 NaOH
 
 export function get_NaOH_HC2H3O2(HC2H3O2_conc: number, M_NaOH: number, drops: number) {
-	return (10.0 * HC2H3O2_conc - constants.drop_volume * drops * M_NaOH) / get_total_volume(drops);
+	return (10.0 * HC2H3O2_conc - constants.dropVolume * drops * M_NaOH) / get_total_volume(drops);
 }
 
 export function get_NaOH_NaC2H3O2(NaC2H3O2_conc: number, M_NaOH: number, drops: number) {
-	return (10.0 * NaC2H3O2_conc + constants.drop_volume * drops * M_NaOH) / get_total_volume(drops);
+	return (10.0 * NaC2H3O2_conc + constants.dropVolume * drops * M_NaOH) / get_total_volume(drops);
 }
 
 export function get_HC2H3O2_buffer_overload() {
@@ -109,7 +109,7 @@ export function get_HC2H3O2_init_M(HC2H3O2_conc: number) {
 }
 
 export function get_M_NaOH(drops: number, M_NaOH: number) {
-	return constants.drop_volume * drops * M_NaOH;
+	return constants.dropVolume * drops * M_NaOH;
 }
 
 export function get_excess_OH_HC2H3O2(drops: number, M_NaOH: number, HC2H3O2_conc: number) {
@@ -148,12 +148,12 @@ export function get_buffer_system(
 
 // Adding drops of .1 or .01 M HCl
 export function get_HCl_acid(acid_conc: number, M_HCl: number, drops: number) {
-	return ((10 * acid_conc) + (constants.drop_volume * drops * M_HCl)) / get_total_volume(drops);
+	return (10 * acid_conc + constants.dropVolume * drops * M_HCl) / get_total_volume(drops);
 }
 
 // Adding drops of .1 or .01 M HCl
 export function get_HCl_base(base_conc: number, M_HCl: number, drops: number) {
-	return ((10 * base_conc) - (constants.drop_volume * drops * M_HCl)) / get_total_volume(drops);
+	return (10 * base_conc - constants.dropVolume * drops * M_HCl) / get_total_volume(drops);
 }
 
 // Base buffer capacity calculations
@@ -180,11 +180,11 @@ export function get_base_Hplus(drops: number, M_HCl: number, base_conc: number) 
 // Adding drops of .1 or .01 NaOH
 
 export function get_NaOH_acid(H_conc: number, M_NaOH: number, drops: number) {
-	return ((10.0 * H_conc) - (constants.drop_volume * drops * M_NaOH)) / get_total_volume(drops);
+	return (10.0 * H_conc - constants.dropVolume * drops * M_NaOH) / get_total_volume(drops);
 }
 
 export function get_NaOH_base(Na_conc: number, M_NaOH: number, drops: number) {
-	return ((10.0 * Na_conc) + (constants.drop_volume * drops * M_NaOH)) / get_total_volume(drops);
+	return (10.0 * Na_conc + constants.dropVolume * drops * M_NaOH) / get_total_volume(drops);
 }
 
 export function get_acid_buffer_overload() {
