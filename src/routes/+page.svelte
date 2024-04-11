@@ -4,7 +4,7 @@
 	import Beaker from '$lib/beaker.svelte';
 	import Probe from '$lib/probe.svelte';
 	import Wire from '$lib/wire.svelte';
-	import Dropper from '$lib/dropper.svelte'
+	import Dropper from '$lib/dropper.svelte';
 	import DropperCounter from '@/dropper-counter.svelte';
 	import { menu, probePosition } from '@/helpers/store';
 	import DropperMenu from '@/menus/dropper-menu.svelte';
@@ -23,26 +23,27 @@
 	<Menus />
 	<div class="">
 		<Beaker />
-		<!-- <Dropper /> -->
 		<Wire />
 		<Probe />
 		<Dropper />
 	</div>
-	<div class='console-counter-container'>
+	<div class="console-counter-container">
 		<Console on:insertProbe={insertProbe} on:removeProbe={removeProbe} />
 		{#if $menu === 'buffers' || $menu === 'water'}
-			<DropperMenu />
-			<DropperCounter />
+			<div class="flex gap-4">
+				<DropperMenu />
+				<DropperCounter />
+			</div>
 		{/if}
 	</div>
 </div>
 
 <style>
-  .console-counter-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* This will push the counter to the bottom */
-    height: 100%; /* Full height to enable justify-content */
-    /* Add any additional styling here */
-  }
+	.console-counter-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between; /* This will push the counter to the bottom */
+		height: 100%; /* Full height to enable justify-content */
+		/* Add any additional styling here */
+	}
 </style>
