@@ -1,12 +1,9 @@
 <script lang="ts">
 	import { writable, get, type Writable } from 'svelte/store';
+
+	import { volumeToAdd } from './helpers/constants';
 	import { dropsCounter, currentDrop, currentDropType, totalVolume, totalDrops } from './helpers/store';
-
-
-	type Drop = {
-		id: number;
-		cy: number;
-	};
+	import type { Drop } from './helpers/types';
 
 	const drops: Writable<Drop[]> = writable([]);
 
@@ -14,7 +11,6 @@
 	function addDrop() {
 		const currentDropValue = get(currentDrop);
 		const currentDropStruct = get(currentDropType);
-		const volumeToAdd = 0.036;
 
 		totalVolume.update(currentTotal => currentTotal + volumeToAdd);
 
@@ -33,7 +29,7 @@
 		}
 
 		// Update the respective stores
-		totalDrops.update((drop) => drop+1);
+		totalDrops.update((drop) => drop + 1);
 		currentDrop.set(currentDropValue);
 		dropsCounter.update((counts) => {
 			const newCount =

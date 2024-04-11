@@ -18,6 +18,7 @@ export const pKa_carbonic_acid = 6.367; // Used for H2CO3
 export const initial_water_pH = 7;
 export const drop_volume = 0.036;
 export const drops = 0;
+export const volumeToAdd = 0.036;
 // export const base_conc=0
 // export const acid_conc=0
 // export const M_HCl=0

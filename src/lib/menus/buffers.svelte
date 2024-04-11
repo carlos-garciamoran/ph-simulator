@@ -5,7 +5,6 @@
 	import { calculateBufferSystem } from '@/helpers/calculations/buffers';
 	import {
 		bufferConcentration,
-		currentDrop,
 		phValueStore,
 		selectedBufferStore,
 		totalDrops
@@ -16,8 +15,6 @@
 
 	// Local component state for the selected buffer
 	let selectedBuffer: SelectedBuffer = 'HC2H3O2 & NaC2H3O2';
-	let drop = currentDrop.subscribe((drop) => drop);
-
 
 	// Function to update the pH value based on the selected buffer and concentration
 	function updatePHValue() {
