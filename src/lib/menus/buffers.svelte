@@ -7,8 +7,9 @@
 		bufferConcentration,
 		currentDrop,
 		phValueStore,
-		// currentDrop,
-		selectedBufferStore
+		selectedBufferStore,
+		totalDrops
+
 	} from '@/helpers/store';
 	import type { SelectedBuffer } from '@/helpers/types';
 	import { resetDropsAndVolume } from '@/helpers/resetFunctions';
@@ -21,55 +22,14 @@
 	// Function to update the pH value based on the selected buffer and concentration
 	function updatePHValue() {
 		bufferConcentration.subscribe(($bufferConc) => {
-			let pH = 7;
-
 			// Acid and base are defined in each case.
 			// In the first case, HC2H3O2 is the acid and NaC2H3O2 is the base.
-			switch (selectedBuffer) {
-				case 'HC2H3O2 & NaC2H3O2':
-					pH = calculateBufferSystem(
-						//'HC2H3O2 & NaC2H3O2', 0.3, 0.04, 0
-						selectedBuffer,
-						$bufferConc.acid,
-						$bufferConc.base,
-						0
-					);
-					break;
-				case 'NH4Cl & NH3':
-					pH = calculateBufferSystem(
-						selectedBuffer,
-						$bufferConc.acid,
-						$bufferConc.base,
-						0
-					);
-					break;
-				case 'NaH2PO4 & Na2HPO4':
-					pH = calculateBufferSystem(
-						selectedBuffer,
-						$bufferConc.acid,
-						$bufferConc.base,
-						0
-					);
-					break;
-				case 'NaHCO3 & Na2CO3':
-					pH = calculateBufferSystem(
-						selectedBuffer,
-						$bufferConc.acid,
-						$bufferConc.base,
-						0
-					);
-					break;
-				case 'H2CO3 & NaHCO3':
-					pH = calculateBufferSystem(
-						selectedBuffer,
-						$bufferConc.acid,
-						$bufferConc.base,
-						0
-					);
-					break;
-				default:
-					pH = 7; // Neutral pH as a default
-			}
+			let pH = calculateBufferSystem(
+				selectedBuffer,
+				$bufferConc.acid,
+				$bufferConc.base,
+				$totalDrops
+			);
 
 			phValueStore.set(pH);
 		});

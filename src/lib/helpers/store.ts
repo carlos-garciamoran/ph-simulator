@@ -29,6 +29,7 @@ export const currentDrop = writable<DropStruct>({
 	type: '',
 	concentration: 0.0
 });
+export const totalDrops = writable(0);
 
 // Number of drops added. 20 max for each.
 export const dropsCounter = writable({ HCl: 0, NaOH: 0 });

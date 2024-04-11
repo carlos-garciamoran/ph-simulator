@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { writable, get, type Writable } from 'svelte/store';
-	import { dropsCounter, currentDrop, currentDropType, totalVolume } from './helpers/store';
+	import { dropsCounter, currentDrop, currentDropType, totalVolume, totalDrops } from './helpers/store';
 
 
 	type Drop = {
@@ -33,6 +33,7 @@
 		}
 
 		// Update the respective stores
+		totalDrops.update((drop) => drop+1);
 		currentDrop.set(currentDropValue);
 		dropsCounter.update((counts) => {
 			const newCount =
