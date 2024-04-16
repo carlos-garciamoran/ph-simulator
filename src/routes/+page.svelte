@@ -21,9 +21,8 @@
 
 <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 size-full p-6 lg:p-10">
 	<Menus />
-	<div class="">
+	<div>
 		<Beaker />
-		
 		<Wire />
 		<Probe />
 		{#if $menu === 'buffers' || $menu === 'water'}
@@ -50,6 +49,36 @@
 		flex-direction: column;
 		justify-content: space-between; /* This will push the counter to the bottom */
 		height: 100%; /* Full height to enable justify-content */
-		/* Add any additional styling here */
+	}
+
+	@media (max-width: 640px) {
+  		.console-counter-container {
+    		flex-direction: row; /* Or 'column' if that fits better */
+  		}
+	}	
+
+	/* page.svelte */
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust min size as needed */
+		gap: 1rem;
+		padding: 1rem;
+	}
+
+	@media (min-width: 640px) { /* Tailwind's sm breakpoint */
+		.grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: 2rem;
+		}
+		.console-counter-container {
+    		flex-direction: row; /* Or 'column' if that fits better */
+  		}
+	}
+
+	@media (min-width: 1024px) { /* Tailwind's lg breakpoint */
+		.grid {
+			grid-template-columns: repeat(3, 1fr);
+			gap: 3rem;
+		}
 	}
 </style>
