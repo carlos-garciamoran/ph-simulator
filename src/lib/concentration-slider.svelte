@@ -1,21 +1,15 @@
 <script lang="ts">
 	import { writable, derived } from 'svelte/store';
 
-	import { bufferConcentration, concentration, menu, selectedBufferStore } from './helpers/store';
-
-	const acidValues = [
-		0.0001, 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.0007, 0.0008, 0.0009, 0.001, 0.002, 0.003,
-		0.004, 0.005, 0.006, 0.007, 0.008, 0.009, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09,
-		0.1
-	];
-	const saltValues = [
-		0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.007, 0.008, 0.009, 0.01, 0.02, 0.03, 0.04, 0.05,
-		0.06, 0.07, 0.08, 0.09, 0.1
-	];
-	const bufferValues = [
-		0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.007, 0.008, 0.009, 0.01, 0.02, 0.03, 0.04, 0.05,
-		0.06, 0.07, 0.08, 0.09, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1
-	];
+	import { acidValues, saltValues, bufferValues } from './helpers/constants';
+	import {
+		allowedValues,
+		bufferConcentration,
+		concentration,
+		menu,
+		selectedBufferStore,
+		sliderIndex
+	} from './helpers/store';
 
 	export let type: 'normal' | 'acid' | 'base';
 
@@ -55,35 +49,60 @@
 	});
 
 	// Derived store to dynamically set allowed values based on the current menu
-	const allowedValues = derived(menu, ($menu) => {
-		switch ($menu) {
-			case 'acids/bases':
-				return acidValues;
-			case 'salts':
-				return saltValues;
-			case 'buffers':
-				return bufferValues;
-			default:
-				return []; // For water and household items, no slider values
-		}
-	});
+	// const allowedValues = derived(menu, ($menu) => {
+	// 	switch ($menu) {
+	// 		case 'acids/bases':
+	// 			return acidValues;
+	// 		case 'salts':
+	// 			return saltValues;
+	// 		case 'buffers':
+	// 			return bufferValues;
+	// 		default:
+	// 			return []; // For water and household items, no slider values
+	// 	}
+	// });
 
-	let index = 0;
-	let value = writable($allowedValues[index]);
+	// Slider index and value
+	// let index = 0;
+	// let value = writable($allowedValues[index]);
+	// export const value = derived(
+	// 	[sliderIndex, allowedValues],
+	// 	([$index, $allowedValues]) => $allowedValues[$index]
+	// );
 
+	// function onInput(event: Event) {
+	// 	index = parseInt((event.target as HTMLInputElement).value);
+	// 	const newValue = $allowedValues[index];
+	// 	value.set(newValue);
+
+	// 	// Update global state accordingly
+	// 	if (type === 'acid') {
+	// 		bufferConcentration.update((prev) => ({ ...prev, acid: newValue }));
+	// 	} else if (type === 'base') {
+	// 		bufferConcentration.update((prev) => ({ ...prev, base: newValue }));
+	// 	} else {
+	// 		concentration.set(newValue);
+	// 	}
+	// }
+	let value = $allowedValues[$sliderIndex];
 	function onInput(event: Event) {
-		index = parseInt((event.target as HTMLInputElement).value);
-		const newValue = $allowedValues[index];
-		value.set(newValue);
+		const newIndex = parseInt((event.target as HTMLInputElement).value);
+		sliderIndex.set(newIndex);
+
+		// value.update(($allowedValues) => {
+		value = $allowedValues[newIndex];
 
 		// Update global state accordingly
 		if (type === 'acid') {
-			bufferConcentration.update((prev) => ({ ...prev, acid: newValue }));
+			bufferConcentration.update((prev) => ({ ...prev, acid: value }));
 		} else if (type === 'base') {
-			bufferConcentration.update((prev) => ({ ...prev, base: newValue }));
+			bufferConcentration.update((prev) => ({ ...prev, base: value }));
 		} else {
-			concentration.set(newValue);
+			concentration.set(value);
 		}
+
+		// return newValue;
+		// });
 	}
 </script>
 
@@ -92,15 +111,15 @@
 	<div class="flex flex-col gap-2">
 		<input
 			type="range"
-			min="0"
+			min={0}
+			step={1}
+			class="w-full"
 			max={$allowedValues.length - 1}
 			on:input={onInput}
-			step="1"
-			class="w-full"
-			bind:value={index}
+			bind:value={$sliderIndex}
 		/>
 		<p class="text-center">
-			{$value.toFixed(4)} M <!-- Use the store value directly -->
+			{value.toFixed(4)} M
 		</p>
 	</div>
 </div>

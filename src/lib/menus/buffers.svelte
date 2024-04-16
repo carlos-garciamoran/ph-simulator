@@ -12,7 +12,7 @@
 		selectedSolutionStore // Added this line to import the global store
 	} from '@/helpers/store';
 	import type { SelectedBuffer } from '@/helpers/types';
-	import { resetDropsAndVolume } from '@/helpers/resetFunctions';
+	import { resetValues } from '@/helpers/reset';
 
 	// Local component state for the selected buffer
 	let selectedBuffer: SelectedBuffer = 'HC2H3O2 & NaC2H3O2';
@@ -37,7 +37,7 @@
 	$: if (selectedBuffer) {
 		selectedSolutionStore.set(`Buffer: ${selectedBuffer}`); // Modified this line according to instructions
 		selectedBufferStore.set(selectedBuffer);
-		resetDropsAndVolume();
+		resetValues();
 		updatePHValue();
 		totalDrops.set(0);
 	}

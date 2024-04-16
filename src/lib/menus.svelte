@@ -6,17 +6,16 @@
 	import HouseholdItemsMenu from './menus/household-items.svelte';
 	import MainMenu from './menus/main.svelte';
 	import SaltsMenu from './menus/salts.svelte';
-	import { resetDropsAndVolume } from './helpers/resetFunctions';
+	import { resetValues } from './helpers/reset';
 
 	$: if ($menu) {
-  		resetDropsAndVolume();
+		resetValues();
 		totalDrops.set(0);
 		if ($menu === 'water') {
 			$phValueStore = 7;
-			selectedSolutionStore.set(`Water`);
+			selectedSolutionStore.set('Water');
 		}
 	}
-
 </script>
 
 <div class="flex flex-col gap-4 justify-between">

@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { phValueStore, checkedStore, selectedSolutionStore } from './helpers/store';
+	import {
+		phValueStore,
+		checkedStore,
+		selectedSolutionStore,
+		concentration
+	} from './helpers/store';
+	import SubscriptLabel from './components/subscript-label.svelte';
 
 	let defualtColor = '#e0e1e1';
 	let beakerHeight = 400;
@@ -31,30 +37,30 @@
 		let b = 0;
 
 		if (pHValue <= 2) {
-        // Red
-        r = 255;
-        g = 0;
-        b = 0;
-    } else if (pHValue <= 6) {
-        // Transition from red to yellow
-        r = 255; // Red stays at max
-        g = Math.floor(255 * (pHValue - 2) / 4); // Green ramps up from 0 to 255
-        b = 0; // Blue stays at 0
-    } else if (pHValue < 8) {
-        // Yellow to Green
-        r = Math.floor(255 - (255 * (pHValue - 6) / 2)); // Red decreases to 0
-        g = 255; // Green stays at max
-    } else if (pHValue <= 11) {
-        // Green to Blue
-        r = 0; // Red is 0
-        g = Math.floor(255 - (255 * (pHValue - 8) / 3)); // Green decreases to 0
-        b = Math.floor((255 * (pHValue - 8) / 3)); // Blue ramps up to max
-    } else {
-        // Blue to Purple
-        r = Math.floor((127 * (pHValue - 11) / 3)); // Red ramps up to a mid-value
-        g = 0; // Green is 0
-        b = 255; // Blue stays at max
-    }
+			// Red
+			r = 255;
+			g = 0;
+			b = 0;
+		} else if (pHValue <= 6) {
+			// Transition from red to yellow
+			r = 255; // Red stays at max
+			g = Math.floor((255 * (pHValue - 2)) / 4); // Green ramps up from 0 to 255
+			b = 0; // Blue stays at 0
+		} else if (pHValue < 8) {
+			// Yellow to Green
+			r = Math.floor(255 - (255 * (pHValue - 6)) / 2); // Red decreases to 0
+			g = 255; // Green stays at max
+		} else if (pHValue <= 11) {
+			// Green to Blue
+			r = 0; // Red is 0
+			g = Math.floor(255 - (255 * (pHValue - 8)) / 3); // Green decreases to 0
+			b = Math.floor((255 * (pHValue - 8)) / 3); // Blue ramps up to max
+		} else {
+			// Blue to Purple
+			r = Math.floor((127 * (pHValue - 11)) / 3); // Red ramps up to a mid-value
+			g = 0; // Green is 0
+			b = 255; // Blue stays at max
+		}
 
 		const toHex = (c: number): string => {
 			const hex = c.toString(16);
@@ -80,7 +86,7 @@
 </div>
 
 <div class="solution-info">
-    <p>{$selectedSolutionStore}</p>
+	<p><SubscriptLabel title={$selectedSolutionStore} /> {$concentration}M</p>
 </div>
 
 <div style="--liquid-color: {color};"></div>
@@ -134,13 +140,13 @@
 		color: black;
 	}
 	.solution-info {
-        display: flex;
-        justify-content: center; /* Horizontally center the content */
-        align-items: center; /* Vertically center the content */
-        height: 30px; /* Set a fixed height for the container */
-    }
+		display: flex;
+		justify-content: center; /* Horizontally center the content */
+		align-items: center; /* Vertically center the content */
+		height: 30px; /* Set a fixed height for the container */
+	}
 
-    .solution-info p {
-        margin: 0; /* Remove default margin */
-    }
+	.solution-info p {
+		margin: 0; /* Remove default margin */
+	}
 </style>

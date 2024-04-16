@@ -1,6 +1,7 @@
-import { writable, type Writable } from 'svelte/store';
+import { derived, writable, type Writable } from 'svelte/store';
 
 import type { DropStruct, DropType, Menu, SelectedBuffer } from './types';
+import { acidValues, saltValues, bufferValues } from './constants';
 
 // ph Indicator Solution checkbox
 export const checkedStore = writable(false);
@@ -39,4 +40,23 @@ export const selectedBufferStore = writable<SelectedBuffer>('HC2H3O2 & NaC2H3O2'
 
 export const totalVolume: Writable<number> = writable(10);
 
-export const selectedSolutionStore = writable(""); // Default to "Water"
+export const selectedSolutionStore = writable(''); // Default to "Water"
+
+// Concentration of the selected buffer
+export const allowedValues = derived(menu, ($menu) => {
+	switch ($menu) {
+		case 'acids/bases':
+			return acidValues;
+		case 'salts':
+			return saltValues;
+		case 'buffers':
+			return bufferValues;
+		default:
+			return []; // For water and household items, no slider values
+	}
+});
+export const sliderIndex = writable(0);
+export const concentrationValue = derived(
+	[sliderIndex, allowedValues],
+	([$index, $allowedValues]) => $allowedValues[$index]
+);

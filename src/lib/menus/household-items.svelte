@@ -4,7 +4,7 @@
 	import * as RadioGroup from '$lib/components/ui/radio-group';
 
 	import { householdItemsToPH } from '@/helpers/constants';
-	import { resetDropsAndVolume } from '@/helpers/resetFunctions';
+	import { resetValues } from '@/helpers/reset';
 	import { phValueStore, selectedSolutionStore, totalDrops } from '@/helpers/store';
 
 	// Local component state for the selected household item
@@ -16,10 +16,9 @@
 		const pHValue = householdItemsToPH[newValue];
 		phValueStore.set(pHValue);
 	};
-	
 
 	if (value) {
-		resetDropsAndVolume();
+		resetValues();
 		totalDrops.set(0);
 	}
 </script>
