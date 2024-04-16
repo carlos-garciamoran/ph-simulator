@@ -6,7 +6,7 @@
 	import Checkbox from './components/ui/checkbox/checkbox.svelte';
 	import Label from './components/ui/label/label.svelte';
 
-	import { checkedStore, phValueStore, probePosition } from './helpers/store';
+	import { checkedStore, menu, phValueStore, probePosition } from './helpers/store';
 
 	const dispatch = createEventDispatcher();
 
@@ -31,7 +31,11 @@
 		<p class="text-lg">pH</p>
 		<span class="text-2xl font-semibold">
 			<!-- Display the pH value only when the probe is inside the liquid -->
-			{$probePosition == 1 && $phValueStore !== undefined ? $phValueStore.toFixed(3) : '--'}
+			{$probePosition == 1 && $phValueStore !== undefined ? ($menu === 'household-items' ? $phValueStore.toFixed(2) : $phValueStore.toFixed(3)) : '--'}
+			<!-- if ($menu === 'household-items') {
+				$phValueStore.toFixed(2)
+			} -->
+			
 			<!-- {$phValueStore ? $phValueStore.toFixed(2) : '--'} -->
 		</span>
 	</div>
@@ -67,3 +71,4 @@
 		/* transform: skewY(-1deg); */
 	}
 </style>
+
