@@ -12,22 +12,6 @@ export function get_pH(Hplus: number) {
 	return -Math.log10(Hplus);
 }
 
-// Function to calculate pH from concs
-// used for buffers
-export function get_pH_buffer(pKa: number, base_conc: number, acid_conc: number) {
-	return pKa + Math.log10(base_conc / acid_conc);
-}
-
-// Function to calculate pKa from Ka
-export function get_pKa(Ka: number) {
-	return -Math.log10(Ka);
-}
-
-// Function to calculate pKb from Kb
-export function get_pKb(Kb: number) {
-	return -Math.log10(Kb);
-}
-
 ////////////////////////////////////////////////////////
 //////////////////////// BUFFERS ///////////////////////
 ////////////////////////////////////////////////////////
