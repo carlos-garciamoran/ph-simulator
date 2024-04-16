@@ -39,10 +39,8 @@
 
 				currentDrop.set(currentDropValue);
 				dropsCounter.update((counts) => {
-					const newCount =
-						(counts[currentDropValue.type as keyof typeof counts] || 0) +
-						currentDropValue.concentration;
-					return { ...counts, [currentDropValue.type]: newCount };
+					const newCount = (counts[currentDropValue.type as keyof typeof counts] || 0) + 1;
+    				return { ...counts, [currentDropValue.type]: newCount };
 				});
 
 				// Update the UI

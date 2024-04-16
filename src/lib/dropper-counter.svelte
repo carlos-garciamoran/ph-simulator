@@ -6,8 +6,8 @@
   <div class="flex flex-col gap-4 w-1/2"> <!-- This ensures vertical stacking -->
 	<MenuCard title="Drops Added" className="w-full">
 	  <ul class="list-inside list-disc">
-		<li>HCl: {$dropsCounter.HCl.toFixed(2)} mL</li>
-		<li>NaOH: {$dropsCounter.NaOH.toFixed(2)} mL</li>
+		<li>HCl: {$dropsCounter.HCl}</li>
+		<li>NaOH: {$dropsCounter.NaOH}</li>
 	  </ul>
 	</MenuCard>
   
