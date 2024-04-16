@@ -9,7 +9,7 @@
 		totalDrops,
 		// currentDrop,
 		selectedBufferStore,
-        selectedSolutionStore // Added this line to import the global store
+		selectedSolutionStore // Added this line to import the global store
 	} from '@/helpers/store';
 	import type { SelectedBuffer } from '@/helpers/types';
 	import { resetDropsAndVolume } from '@/helpers/resetFunctions';

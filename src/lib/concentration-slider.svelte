@@ -4,23 +4,23 @@
 	import { bufferConcentration, concentration, menu, selectedBufferStore } from './helpers/store';
 
 	const acidValues = [
-		0.1, 0.09, 0.08, 0.07, 0.06, 0.05, 0.04, 0.03, 0.02, 0.01, 0.009, 0.008, 0.007, 0.006, 0.005,
-		0.004, 0.003, 0.002, 0.001, 0.0009, 0.0008, 0.0007, 0.0006, 0.0005, 0.0004, 0.0003, 0.0002,
-		0.0001
+		0.0001, 0.0002, 0.0003, 0.0004, 0.0005, 0.0006, 0.0007, 0.0008, 0.0009, 0.001, 0.002, 0.003,
+		0.004, 0.005, 0.006, 0.007, 0.008, 0.009, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09,
+		0.1
 	];
 	const saltValues = [
-		0.1, 0.09, 0.08, 0.07, 0.06, 0.05, 0.04, 0.03, 0.02, 0.01, 0.009, 0.008, 0.007, 0.006, 0.005,
-		0.004, 0.003, 0.002, 0.001
+		0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.007, 0.008, 0.009, 0.01, 0.02, 0.03, 0.04, 0.05,
+		0.06, 0.07, 0.08, 0.09, 0.1
 	];
 	const bufferValues = [
-		1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0.09, 0.08, 0.07, 0.06, 0.05, 0.04, 0.03, 0.02,
-		0.01, 0.009, 0.008, 0.007, 0.006, 0.005, 0.004, 0.003, 0.002, 0.001
+		0.001, 0.002, 0.003, 0.004, 0.005, 0.006, 0.007, 0.008, 0.009, 0.01, 0.02, 0.03, 0.04, 0.05,
+		0.06, 0.07, 0.08, 0.09, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1
 	];
 
 	export let type: 'normal' | 'acid' | 'base';
 
 	const title = derived(selectedBufferStore, ($currentBuffer) => {
-		if (type === 'normal') return 'Concentration (molarity)';
+		if (type === 'normal') return 'Concentration';
 		if (type === 'acid') {
 			switch ($currentBuffer) {
 				case 'HC2H3O2 & NaC2H3O2':
@@ -34,7 +34,7 @@
 				case 'H2CO3 & NaHCO3':
 					return 'Carbonic Acid';
 				default:
-					return 'Concentration (molarity)';
+					return 'Concentration';
 			}
 		} else if (type === 'base') {
 			switch ($currentBuffer) {
@@ -49,7 +49,7 @@
 				case 'H2CO3 & NaHCO3':
 					return 'Sodium Bicarbonate';
 				default:
-					return 'Concentration (molarity)';
+					return 'Concentration';
 			}
 		}
 	});
@@ -88,7 +88,7 @@
 </script>
 
 <div class="border p-4 flex flex-col gap-4">
-	<h2>{$title}</h2>
+	<h2>{$title} (Molarity)</h2>
 	<div class="flex flex-col gap-2">
 		<input
 			type="range"

@@ -43,14 +43,14 @@ export function calculateBufferSystem(
 			} else {
 				M_HCl = 0.01;
 			}
-	
+
 			const acid = calcs.get_HCl_acid(acidConc, M_HCl, drops);
 			const base = calcs.get_HCl_base(baseConc, M_HCl, drops);
-			console.log({acidConc, M_HCl, drops})
-			console.log({baseConc, M_HCl, drops})
+			console.log({ acidConc, M_HCl, drops });
+			console.log({ baseConc, M_HCl, drops });
 			console.log(acid);
 			console.log(base);
-	
+
 			// if (base <= 0) {
 			// 	calcs.get_NaC2H3O2_buffer_overload();
 			// 	return NaN;
@@ -65,18 +65,18 @@ export function calculateBufferSystem(
 			} else {
 				M_NaOH = 0.01;
 			}
-	
+
 			const acid = calcs.get_NaOH_acid(acidConc, M_NaOH, drops);
 			const base = calcs.get_NaOH_base(baseConc, M_NaOH, drops);
-	
+
 			// if (acid <= 0) {
 			// 	calcs.get_HC2H3O2_buffer_overload();
 			// 	return NaN;
 			// }
-	
+
 			return calcs.get_buffer_system(pKa_acid, acid, base);
 		}
 	});
 
-	//return NaN;
+	return NaN;
 }
