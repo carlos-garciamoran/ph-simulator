@@ -19,6 +19,11 @@
 		{ position: (beakerHeight / 6) * 4, label: '20 mL' } // 4th line
 	];
 
+	let measurementPositions = {
+        '10mL': '25%', 
+        '20mL': '75%', 
+    };
+
 	// Reactive statement to update the color
 	$: color = $checkedStore ? getPHColor($phValueStore) : defualtColor;
 
@@ -97,22 +102,21 @@
 	}
 
 	#beaker {
-		height: 40%; /* Relative to container */
-		width: 60%;
+		width: 20vw; /* Adjust the width based on the viewport width */
+		height: 60vw; /* Height is twice the width to maintain a 1:2 aspect ratio */
+		max-height: 400px; /* Maximum height can be set to prevent it from getting too tall */
 		position: relative;
-		border: 6px solid #000; /* This will create the beaker outline */
-		border-radius: 0 0 20px 20px; /* Rounded bottom corners */
-		margin: bottom;
-		overflow: visible;
+		border: 6px solid #000;
+		border-radius: 0 0 20px 20px;
 	}
 
 	#liquid {
+		position: absolute;
 		background-color: var(--liquid-color);
 		border-bottom-left-radius: 14px;
 		border-bottom-right-radius: 14px;
 		bottom: 0;
-		position: absolute;
-		height: calc(36.6%);
+		height: calc(100% / 6 * 2 + 6px); 
 		width: 100%;
 	}
 
@@ -136,7 +140,7 @@
 		width: 80px;
 		left: 25%;
 		bottom: -10px;
-		font-size: 20px;
+		font-size: 1.25em;
 		color: black;
 	}
 	.solution-info {
