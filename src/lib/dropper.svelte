@@ -97,7 +97,7 @@
 				cx="25"
 				cy="170"
 				r="3"
-				fill="gray"
+				fill=#c8cfdb
 				class="drop"
 				on:animationend={() => removeDrop(drop.id)}
 			/>
