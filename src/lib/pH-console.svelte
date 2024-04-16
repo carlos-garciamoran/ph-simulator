@@ -1,24 +1,13 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import { Play } from 'lucide-svelte';
+	import { HistoryIcon, Play, UndoIcon } from 'lucide-svelte';
 
 	import Button from './components/ui/button/button.svelte';
 	import Checkbox from './components/ui/checkbox/checkbox.svelte';
 	import Label from './components/ui/label/label.svelte';
 
 	import { checkedStore, menu, phValueStore, probePosition } from './helpers/store';
-
-	const dispatch = createEventDispatcher();
-
-	function handleRemoveProbe() {
-		probePosition.set(0); // Move the probe up
-		dispatch('removeProbe'); // Emit an event for the parent component
-	}
-
-	function handleInsertProbe() {
-		probePosition.set(1); // Move the probe down
-		dispatch('insertProbe'); // Emit an event for the parent component
-	}
+	import { resetValues } from './helpers/reset';
 </script>
 
 <div
@@ -31,12 +20,11 @@
 		<p class="text-lg">pH</p>
 		<span class="text-2xl font-semibold">
 			<!-- Display the pH value only when the probe is inside the liquid -->
-			{$probePosition == 1 && $phValueStore !== undefined ? ($menu === 'household-items' ? $phValueStore.toFixed(2) : $phValueStore.toFixed(3)) : '--'}
-			<!-- if ($menu === 'household-items') {
-				$phValueStore.toFixed(2)
-			} -->
-			
-			<!-- {$phValueStore ? $phValueStore.toFixed(2) : '--'} -->
+			{$probePosition === 1 && !!$phValueStore
+				? $menu === 'household-items'
+					? $phValueStore.toFixed(2)
+					: $phValueStore.toFixed(3)
+				: '--'}
 		</span>
 	</div>
 	<div class="flex items-center gap-2">
@@ -47,15 +35,27 @@
 		/>
 		<Label for="indicator-solution" class="text-base">pH Indicator Solution</Label>
 	</div>
-	<div class="flex gap-2 flex-col w-full">
-		<Button class="gap-2 text-base justify-between" on:click={handleRemoveProbe}>
-			<span class="">Remove probe</span>
-			<Play class="fill-white -rotate-90 size-5" />
-		</Button>
-		<Button class="gap-2 text-base justify-between" on:click={handleInsertProbe}>
-			<span class="">Insert Probe</span>
-			<Play class="fill-white rotate-90 size-5" />
-		</Button>
+	<div class="flex gap-2">
+		<div class="flex flex-col gap-2 w-3/4">
+			<Button class="gap-2 text-base justify-between w-full" on:click={() => probePosition.set(0)}>
+				Remove probe
+				<Play class="fill-background -rotate-90 size-5" />
+			</Button>
+			<Button class="gap-2 text-base justify-between w-full" on:click={() => probePosition.set(1)}>
+				Insert Probe
+				<Play class="fill-background rotate-90 size-5" />
+			</Button>
+		</div>
+		<div class="flex flex-col gap-2 w-1/4">
+			<Button class="gap-2 text-base justify-between w-full" on:click={() => resetValues()}>
+				Reset
+				<HistoryIcon class="text-background size-5" />
+			</Button>
+			<Button class="gap-2 text-base justify-between w-full" on:click={() => undefined}>
+				Undo
+				<UndoIcon class="text-background size-5" />
+			</Button>
+		</div>
 	</div>
 </div>
 
@@ -71,4 +71,3 @@
 		/* transform: skewY(-1deg); */
 	}
 </style>
-

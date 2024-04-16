@@ -22,16 +22,16 @@
 		bufferConcentration.subscribe(($bufferConc) => {
 			pH = calculateBufferSystem(selectedBuffer, $bufferConc.acid, $bufferConc.base, $totalDrops);
 		});
+		// console.log('>>> pH', pH);
 		phValueStore.set(pH);
 	}
 
 	// Watch for changes in selectedBuffer and update the pH value
 	$: if (selectedBuffer) {
-		selectedSolutionStore.set(`Buffer: ${selectedBuffer}`); // Modified this line according to instructions
+		selectedSolutionStore.set(`Buffer: ${selectedBuffer}`);
 		selectedBufferStore.set(selectedBuffer);
 		resetValues();
 		updatePHValue();
-		totalDrops.set(0);
 	}
 </script>
 

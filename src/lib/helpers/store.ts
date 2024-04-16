@@ -8,8 +8,8 @@ export const checkedStore = writable(false);
 
 // Default concentration or whatever starting value you need
 export const bufferConcentration = writable({
-	acid: 0.0,
-	base: 0.0
+	acid: 0.001,
+	base: 0.001
 });
 
 //Default concentration for everything that isn't a buffer
