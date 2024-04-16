@@ -7,9 +7,8 @@
 		bufferConcentration,
 		phValueStore,
 		totalDrops,
-		// currentDrop,
 		selectedBufferStore,
-		selectedSolutionStore // Added this line to import the global store
+		selectedSolutionStore
 	} from '@/helpers/store';
 	import type { SelectedBuffer } from '@/helpers/types';
 	import { resetValues } from '@/helpers/reset';
@@ -19,16 +18,9 @@
 
 	// Function to update the pH value based on the selected buffer and concentration
 	function updatePHValue() {
-		let pH  = 0 ;
+		let pH = 0;
 		bufferConcentration.subscribe(($bufferConc) => {
-			// Acid and base are defined in each case.
-			// In the first case, HC2H3O2 is the acid and NaC2H3O2 is the base.
-			pH = calculateBufferSystem(
-				selectedBuffer,
-				$bufferConc.acid,
-				$bufferConc.base,
-				$totalDrops
-			);
+			pH = calculateBufferSystem(selectedBuffer, $bufferConc.acid, $bufferConc.base, $totalDrops);
 		});
 		phValueStore.set(pH);
 	}

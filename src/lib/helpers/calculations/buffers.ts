@@ -1,7 +1,8 @@
 import * as calcs from '@/helpers/calculations';
 import * as consts from '@/helpers/constants';
+
+import { currentDropType } from '../store';
 import type { SelectedBuffer } from '../types';
-import { currentDropType} from '../store';
 
 export function calculateBufferSystem(
 	buffer: SelectedBuffer,
@@ -32,12 +33,9 @@ export function calculateBufferSystem(
 			break;
 	}
 
-	console.log(pKa_acid);
 	currentDropType.subscribe(($drop) => {
-		console.log($drop);
 		if ($drop === '.1M-HCl' || $drop === '.01M-HCl') {
 			if ($drop === '.1M-HCl') {
-				console.log('M_HCl = 0.1');
 				M_HCl = 0.1;
 			} else {
 				M_HCl = 0.01;
@@ -52,7 +50,6 @@ export function calculateBufferSystem(
 			// }
 
 			final = calcs.get_buffer_system(pKa_acid, acid, base);
-			
 		} else if ($drop === '.1M-NaOH' || $drop === '.01M-NaOH') {
 			if ($drop === '.1M-NaOH') {
 				M_NaOH = 0.1;
@@ -69,9 +66,7 @@ export function calculateBufferSystem(
 			// }
 
 			final = calcs.get_buffer_system(pKa_acid, acid, base);
-
 		}
-
 	});
 
 	return final;

@@ -1,12 +1,10 @@
 <script lang="ts">
-	import { writable, derived } from 'svelte/store';
+	import { derived } from 'svelte/store';
 
-	import { acidValues, saltValues, bufferValues } from './helpers/constants';
 	import {
 		allowedValues,
 		bufferConcentration,
 		concentration,
-		menu,
 		selectedBufferStore,
 		sliderIndex
 	} from './helpers/store';
@@ -48,61 +46,24 @@
 		}
 	});
 
-	// Derived store to dynamically set allowed values based on the current menu
-	// const allowedValues = derived(menu, ($menu) => {
-	// 	switch ($menu) {
-	// 		case 'acids/bases':
-	// 			return acidValues;
-	// 		case 'salts':
-	// 			return saltValues;
-	// 		case 'buffers':
-	// 			return bufferValues;
-	// 		default:
-	// 			return []; // For water and household items, no slider values
-	// 	}
-	// });
+	let index = type === 'normal' ? $sliderIndex : 0;
+	let value = $allowedValues[index];
 
-	// Slider index and value
-	// let index = 0;
-	// let value = writable($allowedValues[index]);
-	// export const value = derived(
-	// 	[sliderIndex, allowedValues],
-	// 	([$index, $allowedValues]) => $allowedValues[$index]
-	// );
-
-	// function onInput(event: Event) {
-	// 	index = parseInt((event.target as HTMLInputElement).value);
-	// 	const newValue = $allowedValues[index];
-	// 	value.set(newValue);
-
-	// 	// Update global state accordingly
-	// 	if (type === 'acid') {
-	// 		bufferConcentration.update((prev) => ({ ...prev, acid: newValue }));
-	// 	} else if (type === 'base') {
-	// 		bufferConcentration.update((prev) => ({ ...prev, base: newValue }));
-	// 	} else {
-	// 		concentration.set(newValue);
-	// 	}
-	// }
-	let value = $allowedValues[$sliderIndex];
 	function onInput(event: Event) {
 		const newIndex = parseInt((event.target as HTMLInputElement).value);
-		sliderIndex.set(newIndex);
-
-		// value.update(($allowedValues) => {
 		value = $allowedValues[newIndex];
 
 		// Update global state accordingly
 		if (type === 'acid') {
+			index = newIndex;
 			bufferConcentration.update((prev) => ({ ...prev, acid: value }));
 		} else if (type === 'base') {
+			index = newIndex;
 			bufferConcentration.update((prev) => ({ ...prev, base: value }));
 		} else {
+			sliderIndex.set(newIndex);
 			concentration.set(value);
 		}
-
-		// return newValue;
-		// });
 	}
 </script>
 
@@ -116,7 +77,7 @@
 			class="w-full"
 			max={$allowedValues.length - 1}
 			on:input={onInput}
-			bind:value={$sliderIndex}
+			bind:value={index}
 		/>
 		<p class="text-center">
 			{value.toFixed(4)} M
