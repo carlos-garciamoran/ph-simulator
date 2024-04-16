@@ -19,18 +19,18 @@
 
 	// Function to update the pH value based on the selected buffer and concentration
 	function updatePHValue() {
+		let pH  = 0 ;
 		bufferConcentration.subscribe(($bufferConc) => {
 			// Acid and base are defined in each case.
 			// In the first case, HC2H3O2 is the acid and NaC2H3O2 is the base.
-			let pH = calculateBufferSystem(
+			pH = calculateBufferSystem(
 				selectedBuffer,
 				$bufferConc.acid,
 				$bufferConc.base,
 				$totalDrops
 			);
-
-			phValueStore.set(pH);
 		});
+		phValueStore.set(pH);
 	}
 
 	// Watch for changes in selectedBuffer and update the pH value

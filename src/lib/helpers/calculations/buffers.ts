@@ -1,18 +1,18 @@
 import * as calcs from '@/helpers/calculations';
 import * as consts from '@/helpers/constants';
 import type { SelectedBuffer } from '../types';
-import { currentDropType } from '../store';
+import { currentDropType} from '../store';
 
 export function calculateBufferSystem(
 	buffer: SelectedBuffer,
 	acidConc: number,
 	baseConc: number,
-	//currentDrop: DropType,
 	drops: number
 ) {
 	let M_HCl = 0;
 	let M_NaOH = 0;
 	let pKa_acid = 0;
+	let final = 0;
 
 	switch (buffer) {
 		case 'HC2H3O2 & NaC2H3O2':
@@ -33,7 +33,6 @@ export function calculateBufferSystem(
 	}
 
 	console.log(pKa_acid);
-
 	currentDropType.subscribe(($drop) => {
 		console.log($drop);
 		if ($drop === '.1M-HCl' || $drop === '.01M-HCl') {
@@ -46,19 +45,14 @@ export function calculateBufferSystem(
 
 			const acid = calcs.get_HCl_acid(acidConc, M_HCl, drops);
 			const base = calcs.get_HCl_base(baseConc, M_HCl, drops);
-			console.log({ acidConc, M_HCl, drops });
-			console.log({ baseConc, M_HCl, drops });
-			console.log(acid);
-			console.log(base);
 
 			// if (base <= 0) {
 			// 	calcs.get_NaC2H3O2_buffer_overload();
 			// 	return NaN;
 			// }
-			//console.log({pKa_acid, acid, base, M_HCl, drops});
-			const final = calcs.get_buffer_system(pKa_acid, acid, base);
-			console.log(final);
-			return final;
+
+			final = calcs.get_buffer_system(pKa_acid, acid, base);
+			
 		} else if ($drop === '.1M-NaOH' || $drop === '.01M-NaOH') {
 			if ($drop === '.1M-NaOH') {
 				M_NaOH = 0.1;
@@ -74,9 +68,11 @@ export function calculateBufferSystem(
 			// 	return NaN;
 			// }
 
-			return calcs.get_buffer_system(pKa_acid, acid, base);
+			final = calcs.get_buffer_system(pKa_acid, acid, base);
+
 		}
+
 	});
 
-	return NaN;
+	return final;
 }
