@@ -1,7 +1,7 @@
 import * as constants from '@/helpers/constants';
 import { get_HC2H3O2_Hplus } from './calculations/acids-bases';
 import { get_NaC2H3O2_Hplus } from './calculations/salts';
-
+import { hasError } from './store';
 // READ ME
 // Calling variables as arguments is likely redundant as they are global variables
 // Keeping them just to be safe tho
@@ -69,7 +69,7 @@ export function get_HCl_NaC2H3O2(NaC2H3O2_conc: number, M_HCl: number, drops: nu
 // NaC2H3O2 (Sodium Acetate) buffer capacity calculations
 // Adding drops of .1 or .01 M HCl
 export function get_NaC2H3O2_buffer_overload() {
-	alert('Buffer Capacity Exceeded!');
+	hasError.set(true);
 }
 
 export function get_NaC2H3O2_init_M(NaC2H3O2_conc: number) {
@@ -101,7 +101,7 @@ export function get_NaOH_NaC2H3O2(NaC2H3O2_conc: number, M_NaOH: number, drops: 
 }
 
 export function get_HC2H3O2_buffer_overload() {
-	alert('Buffer Capacity Exceeded!');
+	hasError.set(true);
 }
 
 export function get_HC2H3O2_init_M(HC2H3O2_conc: number) {

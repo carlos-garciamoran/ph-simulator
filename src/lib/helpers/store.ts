@@ -60,3 +60,5 @@ export const concentrationValue = derived(
 	[sliderIndex, allowedValues],
 	([$index, $allowedValues]) => $allowedValues[$index]
 );
+
+export const hasError = writable(false);
