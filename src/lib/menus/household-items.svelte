@@ -8,7 +8,7 @@
 	import { phValueStore, selectedSolutionStore, totalDrops } from '@/helpers/store';
 
 	// Local component state for the selected household item
-	let value = 'table-salt';
+	let value = '';
 
 	// Calculate the pH value of the selected household item by looking up in the map.
 	const handleRadioChange = (newValue: string) => {

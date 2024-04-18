@@ -9,6 +9,10 @@
 <div class="flex items-center space-x-2">
 	<RadioGroup.Item {value} id={value} />
 	<Label for={value}>
-		<SubscriptLabel bind:title />
+		{#if title.startsWith('.1') || title.startsWith('.01')}
+			{title}
+		{:else}
+			<SubscriptLabel bind:title />
+		{/if}
 	</Label>
 </div>

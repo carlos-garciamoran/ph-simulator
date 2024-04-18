@@ -23,7 +23,7 @@
 	type Salt = 'NaCl' | 'NH4Cl' | 'NaC2H3O2' | 'NaHCO3' | 'Na2CO3' | 'NaHSO4';
 
 	// Local component state for the selected salt
-	let selectedSalt: Salt = 'NaCl';
+	let selectedSalt: Salt | undefined;
 
 	function updatePHValue() {
 		concentration.subscribe(($concentration) => {

@@ -14,13 +14,19 @@
 	import { resetValues } from '@/helpers/reset';
 
 	// Local component state for the selected buffer
-	let selectedBuffer: SelectedBuffer = 'HC2H3O2 & NaC2H3O2';
+	let selectedBuffer: SelectedBuffer | undefined;
 
 	// Function to update the pH value based on the selected buffer and concentration
 	function updatePHValue() {
+		if (!selectedBuffer) return;
 		let pH = 0;
 		bufferConcentration.subscribe(($bufferConc) => {
-			pH = calculateBufferSystem(selectedBuffer, $bufferConc.acid, $bufferConc.base, $totalDrops);
+			pH = calculateBufferSystem(
+				selectedBuffer as SelectedBuffer,
+				$bufferConc.acid,
+				$bufferConc.base,
+				$totalDrops
+			);
 		});
 		// console.log('>>> pH', pH);
 		phValueStore.set(pH);

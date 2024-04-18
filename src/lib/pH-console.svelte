@@ -1,13 +1,17 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
 	import { HistoryIcon, Play, UndoIcon } from 'lucide-svelte';
 
 	import Button from './components/ui/button/button.svelte';
 	import Checkbox from './components/ui/checkbox/checkbox.svelte';
 	import Label from './components/ui/label/label.svelte';
 
-	import { checkedStore, menu, phValueStore, probePosition } from './helpers/store';
 	import { resetValues } from './helpers/reset';
+	import { checkedStore, menu, phValueStore, probePosition } from './helpers/store';
+
+	const handleRemove = () => {
+		probePosition.set(0);
+		checkedStore.set(false);
+	};
 </script>
 
 <div
@@ -37,7 +41,7 @@
 	</div>
 	<div class="flex gap-2">
 		<div class="flex flex-col gap-2 w-3/4">
-			<Button class="gap-2 text-base justify-between w-full" on:click={() => probePosition.set(0)}>
+			<Button class="gap-2 text-base justify-between w-full" on:click={handleRemove}>
 				Remove probe
 				<Play class="fill-background -rotate-90 size-5" />
 			</Button>

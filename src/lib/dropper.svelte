@@ -40,7 +40,7 @@
 				currentDrop.set(currentDropValue);
 				dropsCounter.update((counts) => {
 					const newCount = (counts[currentDropValue.type as keyof typeof counts] || 0) + 1;
-    				return { ...counts, [currentDropValue.type]: newCount };
+					return { ...counts, [currentDropValue.type]: newCount };
 				});
 
 				// Update the UI
@@ -77,8 +77,15 @@
 		viewBox="0 0 50 350"
 		xmlns="http://www.w3.org/2000/svg"
 	>
-		<!-- Restored dropper visuals -->
-		<rect x="15" y="60" width="20" height="90" fill="#ccc" stroke="#707070" stroke-width="1.5" />
+		<rect
+			x="15"
+			y="60"
+			width="20"
+			height="90"
+			fill="lightblue"
+			stroke="#707070"
+			stroke-width="1.5"
+		/>
 		<rect
 			x="21.5"
 			y="150"
@@ -88,14 +95,22 @@
 			stroke="#707070"
 			stroke-width="1.5"
 		/>
-		<ellipse cx="25" cy="50" rx="20" ry="22.5" fill="#000" stroke="#00000" stroke-width="1.5" />
+		<ellipse
+			cx="25"
+			cy="50"
+			rx="20"
+			ry="22.5"
+			fill="deepskyblue"
+			stroke="gray"
+			stroke-width="1.5"
+		/>
 		<!-- Drops -->
 		{#each $drops as drop (drop.id)}
 			<circle
 				cx="25"
 				cy="170"
 				r="3"
-				fill=#c8cfdb
+				fill="deepskyblue"
 				class="drop"
 				on:animationend={() => removeDrop(drop.id)}
 			/>
@@ -107,7 +122,7 @@
 	@keyframes drop {
 		to {
 			transform: translateY(400px);
-		} /* Adjust based on UI */
+		}
 	}
 
 	.dropper {

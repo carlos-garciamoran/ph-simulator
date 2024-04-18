@@ -4,7 +4,8 @@
 		phValueStore,
 		checkedStore,
 		selectedSolutionStore,
-		concentration
+		concentration,
+		menu
 	} from './helpers/store';
 	import SubscriptLabel from './components/subscript-label.svelte';
 
@@ -20,9 +21,9 @@
 	];
 
 	let measurementPositions = {
-        '10mL': '25%', 
-        '20mL': '75%', 
-    };
+		'10mL': '25%',
+		'20mL': '75%'
+	};
 
 	// Reactive statement to update the color
 	$: color = $checkedStore ? getPHColor($phValueStore) : defualtColor;
@@ -91,7 +92,14 @@
 </div>
 
 <div class="solution-info">
-	<p><SubscriptLabel title={$selectedSolutionStore} /> {$concentration}M</p>
+	<!--
+		TODO
+		Label under beaker should give full description of contents including whether is it strong, weak, or the Ka, etc..
+		These are in the outline. -->
+	<p>
+		<SubscriptLabel title={$selectedSolutionStore} />
+		{$menu === 'water' ? '' : `${$concentration}M`}
+	</p>
 </div>
 
 <div style="--liquid-color: {color};"></div>
@@ -116,7 +124,7 @@
 		border-bottom-left-radius: 14px;
 		border-bottom-right-radius: 14px;
 		bottom: 0;
-		height: calc(100% / 6 * 2 + 6px); 
+		height: calc(100% / 6 * 2 + 6px);
 		width: 100%;
 	}
 

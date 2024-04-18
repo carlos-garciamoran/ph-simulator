@@ -27,9 +27,9 @@
 
 <MenuCard className="bg-sky-200 w-1/2" title="💦 Add drops">
 	<RadioGroup.Root bind:value={selectedDropper} onValueChange={updateDropValue}>
-		<RadioItem value=".1M-HCl" title=".1 M HCl" />
-		<RadioItem value=".1M-NaOH" title=".1 M NaOH" />
-		<RadioItem value=".01M-HCl" title=".01 M HCl" />
-		<RadioItem value=".01M-NaOH" title=".01 M NaOH" />
+		<RadioItem value=".1M-HCl" title=".1M HCl" />
+		<RadioItem value=".1M-NaOH" title=".1M NaOH" />
+		<RadioItem value=".01M-HCl" title=".01M HCl" />
+		<RadioItem value=".01M-NaOH" title=".01M NaOH" />
 	</RadioGroup.Root>
 </MenuCard>
