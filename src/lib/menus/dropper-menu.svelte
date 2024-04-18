@@ -26,11 +26,11 @@
 	}
 </script>
 
-<MenuCard className="bg-sky-200 w-1/2" title="💦 Add drops">
+<MenuCard className="bg-sky-200 w-full" title="💦 Add drops">
 	<RadioGroup.Root bind:value={selectedDropper} onValueChange={updateDropValue}>
-		<RadioItem value=".1M-HCl" title=".1M HCl" />
-		<RadioItem value=".1M-NaOH" title=".1M NaOH" />
-		<RadioItem value=".01M-HCl" title=".01M HCl" />
-		<RadioItem value=".01M-NaOH" title=".01M NaOH" />
+		<RadioItem value=".1M-HCl" title=".1M HCl" className="whitespace-nowrap" />
+		<RadioItem value=".1M-NaOH" title=".1M NaOH" className="whitespace-nowrap" />
+		<RadioItem value=".01M-HCl" title=".01M HCl" className="whitespace-nowrap" />
+		<RadioItem value=".01M-NaOH" title=".01M NaOH" className="whitespace-nowrap" />
 	</RadioGroup.Root>
 </MenuCard>

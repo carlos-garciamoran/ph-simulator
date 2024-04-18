@@ -1,19 +1,11 @@
 <script lang="ts">
 	import MenuCard from './components/menu-card.svelte';
-	import { dropsCounter, totalVolume } from './helpers/store';
-  </script>
-  
-  <div class="flex flex-col gap-4 w-1/2"> <!-- This ensures vertical stacking -->
-	<MenuCard title="Drops Added" className="w-full">
-	  <ul class="list-inside list-disc">
-		<li>HCl: {$dropsCounter.HCl}</li>
-		<li>NaOH: {$dropsCounter.NaOH}</li>
-	  </ul>
-	</MenuCard>
-  
-	<MenuCard title="Total Volume" className="w-full">
-	  <div class="text-center"> <!-- Center align the content -->
-		<h3>{$totalVolume.toFixed(3)} mL</h3>
-	  </div>
-	</MenuCard>
-  </div>
+	import { dropsCounter } from './helpers/store';
+</script>
+
+<MenuCard title="Drops Counter" className="w-full">
+	<div class="flex flex-col">
+		<p>HCl: {$dropsCounter.HCl}</p>
+		<p>NaOH: {$dropsCounter.NaOH}</p>
+	</div>
+</MenuCard>

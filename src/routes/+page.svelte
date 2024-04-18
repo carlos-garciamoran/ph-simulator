@@ -8,6 +8,7 @@
 	import DropperCounter from '@/dropper-counter.svelte';
 	import { menu, probePosition, hasError } from '@/helpers/store';
 	import DropperMenu from '@/menus/dropper-menu.svelte';
+	import TotalVolume from '@/total-volume.svelte';
 
 	// Functions to handle probe animation, based on the events from the Console
 	function insertProbe() {
@@ -31,17 +32,21 @@
 	</div>
 	<div class="flex flex-col justify-between h-full">
 		<Console on:insertProbe={insertProbe} on:removeProbe={removeProbe} />
-		{#if $menu === 'buffers' || $menu === 'water'}
-			<div class="flex gap-10 h-fit">
+		<div class="flex gap-2 2xl:gap-4 h-fit">
+			{#if $menu === 'buffers' || $menu === 'water'}
 				<DropperMenu />
 				<DropperCounter />
-			</div>
-		{/if}
+				<TotalVolume />
+			{:else}
+				<div class="w-full" />
+				<TotalVolume />
+			{/if}
+		</div>
 	</div>
 	{#if $hasError == true}
-		<div> 
+		<div>
 			<p>Error! Buffer capacity exceeded!</p>
-		</div> 
+		</div>
 	{/if}
 </div>
 
