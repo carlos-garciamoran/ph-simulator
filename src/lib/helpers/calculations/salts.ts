@@ -27,8 +27,9 @@ export function get_NaC2H3O2_Hplus(NaC2H3O2_conc: number) {
 
 // Sodium Bicarbonate, basic salt H2CO3
 export function get_NaHCO3_Hplus(NaHCO3_conc: number) {
-	return Kw / Math.sqrt(Ka_carbonic_acid * NaHCO3_conc);
+	return Kw / Math.sqrt((Kw /Ka_carbonic_acid )* NaHCO3_conc);
 }
+//=($G$4)/SQRT((($G$4)/(G18))*(D18))
 
 // Sodium Carbonate, basic salt of HCO3
 export function get_Na2CO3_Hplus(Na2CO3_conc: number) {
