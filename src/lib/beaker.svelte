@@ -5,11 +5,13 @@
 		checkedStore,
 		selectedSolutionStore,
 		concentration,
-		menu
+		menu,
+	
 	} from './helpers/store';
 	import SubscriptLabel from './components/subscript-label.svelte';
+	import { defaultColor } from './helpers/constants';
 
-	let defualtColor = '#e0e1e1';
+
 	let beakerHeight = 400;
 
 	// Define your measurements relative to the beaker's height
@@ -26,7 +28,7 @@
 	};
 
 	// Reactive statement to update the color
-	$: color = $checkedStore ? getPHColor($phValueStore) : defualtColor;
+	$: color = $checkedStore ? getPHColor($phValueStore) : defaultColor;
 
 	// Update the --liquid-color variable whenever the 'color' variable changes
 	$: if (typeof document !== 'undefined') {
@@ -35,7 +37,7 @@
 
 	function getPHColor(pHValue: number): string {
 		if (pHValue < 0 || pHValue > 14) {
-			return defualtColor; // Default or error color
+			return defaultColor; // Default or error color
 		}
 
 		let r = 0;
