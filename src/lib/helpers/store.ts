@@ -32,9 +32,6 @@ export const currentDrop = writable<DropStruct>({
 });
 export const totalDrops = writable(0);
 
-// Number of drops added. 20 max for each.
-export const dropsCounter = writable({ HCl: 0, NaOH: 0 });
-
 // Selected buffer system
 export const selectedBufferStore = writable<SelectedBuffer>('HC2H3O2 & NaC2H3O2');
 

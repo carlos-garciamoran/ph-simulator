@@ -5,7 +5,6 @@
 	import {
 		currentDrop,
 		currentDropType,
-		dropsCounter,
 		totalVolume,
 		totalDrops
 	} from './helpers/store';
@@ -38,11 +37,7 @@
 				totalVolume.update((currentVolume) => currentVolume + dropVolume);
 
 				currentDrop.set(currentDropValue);
-				dropsCounter.update((counts) => {
-					const newCount = (counts[currentDropValue.type as keyof typeof counts] || 0) + 1;
-					return { ...counts, [currentDropValue.type]: newCount };
-				});
-
+			
 				// Update the UI
 				drops.update((currentDrops) => {
 					let newDrop: Drop = {

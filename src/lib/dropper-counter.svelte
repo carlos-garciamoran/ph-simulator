@@ -1,11 +1,12 @@
 <script lang="ts">
 	import MenuCard from './components/menu-card.svelte';
-	import { dropsCounter } from './helpers/store';
+	import { totalDrops, currentDropType } from './helpers/store';
 </script>
 
 <MenuCard title="Drops Counter" className="w-full">
-	<div class="flex flex-col">
-		<p>HCl: {$dropsCounter.HCl}</p>
-		<p>NaOH: {$dropsCounter.NaOH}</p>
-	</div>
+	{#if $currentDropType.endsWith("HCl")}
+		<p>HCl: {$totalDrops}</p>
+	{:else}
+		<p>NaOH: {$totalDrops}</p>
+	{/if}
 </MenuCard>
