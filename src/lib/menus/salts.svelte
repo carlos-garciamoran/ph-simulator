@@ -59,7 +59,6 @@
 		resetValues();
 		selectedSolutionStore.set(`Salt: ${selectedSalt}`);
 		updatePHValue();
-		totalDrops.set(0);
 	}
 </script>
 

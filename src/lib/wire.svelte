@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { probeTop, probeY } from './helpers/store'; // Ensure this path is correct!
+
+	import { probeTop, probeY } from './helpers/probe';
 
 	let wireElement: HTMLElement; // DOM reference to the wire element
 
@@ -12,7 +13,7 @@
 				const wireStartX = probeTop;
 				const wireStartY = consoleRect.top;
 				const wireEndY = $probeY + 300; // Make sure $probeY is reactive
-		
+
 				wireElement.style.height = `${wireEndY - wireStartY}px`;
 				wireElement.style.top = `${wireStartY}px`;
 				wireElement.style.left = `${wireStartX}px`;
@@ -25,17 +26,16 @@
 	onMount(() => {
 		updateWirePosition();
 	});
-  </script>
-  
-  <!-- Wire visual representation -->
-  <div bind:this={wireElement} class="wire"></div>
-  
-  <style>
+</script>
+
+<!-- Wire visual representation -->
+<div bind:this={wireElement} class="wire"></div>
+
+<style>
 	.wire {
-	  position: absolute;
-	  width: 5px; 
-	  background-color: #606060; 
-	  transform: translateX(-50%); 
+		position: absolute;
+		width: 5px;
+		background-color: #606060;
+		transform: translateX(-50%);
 	}
-  </style>
-  
+</style>

@@ -5,12 +5,7 @@
 	import Label from './components/ui/label/label.svelte';
 	import { resetValues } from './helpers/reset';
 	import { checkedStore, menu, phValueStore, probePosition } from './helpers/store';
-	import { insertProbe, removeProbe } from './helpers/store';
-
-	const handleRemove = () => {
-		probePosition.set(0);
-		checkedStore.set(false);
-	};
+	import { insertProbe, removeProbe } from './helpers/probe';
 </script>
 
 <div id="console" class="console-connector">

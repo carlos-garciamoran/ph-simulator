@@ -1,9 +1,6 @@
 import { derived, writable, type Writable } from 'svelte/store';
 import type { DropStruct, DropType, Menu, SelectedBuffer } from './types';
 import { acidValues, saltValues, bufferValues } from './constants';
-import { tweened } from 'svelte/motion';
-import { cubicOut } from 'svelte/easing';
-
 
 // ph Indicator Solution checkbox
 export const checkedStore = writable(false);
@@ -16,7 +13,6 @@ export const bufferConcentration = writable({
 
 //Default concentration for everything that isn't a buffer
 export const concentration = writable(0.07);
-
 
 // Global store for the pH value
 export const phValueStore: Writable<number> = writable();
@@ -64,27 +60,3 @@ export const concentrationValue = derived(
 );
 
 export const hasError = writable(false);
-
-// Assuming the probe's starting Y position is at 0 (fully raised)
-const startY = 0; // Fully raised position of the probe
-const endY = 300; // Fully lowered position of the probe
-
-// The reactive tweened store for smooth animations of the probe's vertical movement
-export const probeY = tweened(startY, {
-  duration: 500, // Adjust duration as needed for smoothness
-  easing: cubicOut
-});
-
-// Optionally, create a derived store if you need to reactively use probeY elsewhere in a formatted manner
-export const probeTop = derived(probeY, $probeY => $probeY);
-
-// Function to simulate inserting the probe
-export function insertProbe() {
-	probeY.set(endY); // Move the probe to the lowered position
-  }
-  
-  // Function to simulate removing the probe
-  export function removeProbe() {
-	probeY.set(startY); // Move the probe back to the raised position
-  }
-  
