@@ -7,6 +7,7 @@
 	import MainMenu from './menus/main.svelte';
 	import SaltsMenu from './menus/salts.svelte';
 	import { resetValues } from './helpers/reset';
+	import Water from './menus/water.svelte';
 
 	$: if ($menu) {
 		resetValues();
@@ -33,6 +34,9 @@
 			<ConcentrationSlider type="base" />
 		{:else if $menu === 'household-items'}
 			<HouseholdItemsMenu />
+		{:else if $menu === 'water'}
+			<Water />
+			<!-- <p class="text-center">The pH of water is 7.</p> -->
 		{/if}
 	</div>
 </div>

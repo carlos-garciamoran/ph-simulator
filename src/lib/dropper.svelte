@@ -2,12 +2,7 @@
 	import { writable, get, type Writable } from 'svelte/store';
 
 	import { dropVolume } from './helpers/constants';
-	import {
-		currentDrop,
-		currentDropType,
-		totalVolume,
-		totalDrops
-	} from './helpers/store';
+	import { currentDrop, currentDropType, totalVolume, totalDrops } from './helpers/store';
 	import type { Drop } from './helpers/types';
 
 	const drops: Writable<Drop[]> = writable([]);
@@ -18,40 +13,40 @@
 		const currentDropStruct = get(currentDropType);
 
 		totalDrops.update((currentTotal) => {
-			if (currentTotal < 20) {
-				// Get the type
-				if (currentDropStruct === '.01M-HCl' || currentDropStruct === '.1M-HCl') {
-					currentDropValue.type = 'HCl';
-				} else if (currentDropStruct === '.01M-NaOH' || currentDropStruct === '.1M-NaOH') {
-					currentDropValue.type = 'NaOH';
-				}
-
-				// Get the molarity count
-				if (currentDropStruct === '.01M-HCl' || currentDropStruct === '.01M-NaOH') {
-					currentDropValue.concentration = 0.01;
-				} else if (currentDropStruct === '.1M-HCl' || currentDropStruct === '.1M-NaOH') {
-					currentDropValue.concentration = 0.1;
-				}
-
-				// Update the respective stores only if the currentTotal is less than 20
-				totalVolume.update((currentVolume) => currentVolume + dropVolume);
-
-				currentDrop.set(currentDropValue);
-			
-				// Update the UI
-				drops.update((currentDrops) => {
-					let newDrop: Drop = {
-						id: Math.random(),
-						cy: 0 // Starting y coordinate
-					};
-					return [newDrop, ...currentDrops];
-				});
-
-				return currentTotal + 1; // Increment the total drops
-			} else {
+			if (currentTotal >= 20) {
 				console.log('Maximum number of drops reached.');
 				return currentTotal; // Return the current count without incrementing
 			}
+
+			// Get the type
+			if (currentDropStruct === '.01M-HCl' || currentDropStruct === '.1M-HCl') {
+				currentDropValue.type = 'HCl';
+			} else if (currentDropStruct === '.01M-NaOH' || currentDropStruct === '.1M-NaOH') {
+				currentDropValue.type = 'NaOH';
+			}
+
+			// Get the molarity count
+			if (currentDropStruct === '.01M-HCl' || currentDropStruct === '.01M-NaOH') {
+				currentDropValue.concentration = 0.01;
+			} else if (currentDropStruct === '.1M-HCl' || currentDropStruct === '.1M-NaOH') {
+				currentDropValue.concentration = 0.1;
+			}
+
+			// Update the respective stores only if the currentTotal is less than 20
+			totalVolume.update((currentVolume) => currentVolume + dropVolume);
+
+			currentDrop.set(currentDropValue);
+
+			// Update the UI
+			drops.update((currentDrops) => {
+				let newDrop: Drop = {
+					id: Math.random(),
+					cy: 0 // Starting y coordinate
+				};
+				return [newDrop, ...currentDrops];
+			});
+
+			return currentTotal + 1; // Increment the total drops
 		});
 	}
 
