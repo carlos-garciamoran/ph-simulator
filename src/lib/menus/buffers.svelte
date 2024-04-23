@@ -16,24 +16,35 @@
 	// Local component state for the selected buffer
 	let selectedBuffer: SelectedBuffer | undefined;
 
+	console.log($totalDrops)
+
 	// Function to update the pH value based on the selected buffer and concentration
 	function updatePHValue() {
 		if (!selectedBuffer) return;
-		let pH = 0;
 		bufferConcentration.subscribe(($bufferConc) => {
-			pH = calculateBufferSystem(
+			const new_pH = calculateBufferSystem(
 				selectedBuffer as SelectedBuffer,
 				$bufferConc.acid,
 				$bufferConc.base,
 				$totalDrops
 			);
+			phValueStore.set(new_pH);
 		});
-		// console.log('>>> pH', pH);
-		phValueStore.set(pH);
+
+		totalDrops.subscribe(($totalDrops) => {
+			const new_pH = calculateBufferSystem(
+				selectedBuffer as SelectedBuffer,
+				$bufferConcentration.acid,
+				$bufferConcentration.base,
+				$totalDrops
+			);
+			phValueStore.set(new_pH);
+		});
 	}
 
 	// Watch for changes in selectedBuffer and update the pH value
 	$: if (selectedBuffer) {
+		console.log(">> selectedBuffer changed")
 		selectedSolutionStore.set(`Buffer: ${selectedBuffer}`);
 		selectedBufferStore.set(selectedBuffer);
 		resetValues();

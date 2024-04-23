@@ -5,6 +5,7 @@
 	import { currentDrop, currentDropType, totalVolume, totalDrops, menu, phValueStore } from './helpers/store';
 	import type { Drop } from './helpers/types';
 	import { get_water_pH } from './helpers/calculations';
+	import { calculateBufferSystem } from './helpers/calculations/buffers';
 
 	const drops: Writable<Drop[]> = writable([]);
 
@@ -46,14 +47,16 @@
 				};
 				return [newDrop, ...currentDrops];
 			});
+
+			const newTotalDrops = currentTotal + 1;
+
 			// WATER
-			const new_total_drops = currentTotal + 1;
 			if ($menu === 'water') {
-				const new_pH = get_water_pH(new_total_drops, $currentDrop);
+				const new_pH = get_water_pH(newTotalDrops, $currentDrop);
 				phValueStore.set(new_pH);
-				console.log(new_pH);
 			}
-			return new_total_drops; // Increment the total drops
+
+			return newTotalDrops; // Increment the total drops
 		});
 		
 	}
