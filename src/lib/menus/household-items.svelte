@@ -6,21 +6,23 @@
 	import { householdItemsToPH } from '@/helpers/constants';
 	import { resetValues } from '@/helpers/reset';
 	import { phValueStore, selectedSolutionStore, totalDrops } from '@/helpers/store';
+	import { onMount } from 'svelte';
 
 	// Local component state for the selected household item
 	let value = '';
 
 	// Calculate the pH value of the selected household item by looking up in the map.
 	const handleRadioChange = (newValue: string) => {
-		selectedSolutionStore.set(`Household Item: ${newValue}`);
+		selectedSolutionStore.set(`Household Item: ${newValue.replaceAll('-', ' ')}`);
 		const pHValue = householdItemsToPH[newValue];
 		phValueStore.set(pHValue);
 	};
 
-	if (value) {
-		resetValues();
-		totalDrops.set(0);
-	}
+	if (value) resetValues();
+
+	onMount(() => {
+		selectedSolutionStore.set('');
+	});
 </script>
 
 <MenuCard className="bg-sky-200" title="🧼 Household Items">

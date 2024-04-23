@@ -37,7 +37,7 @@ export const selectedBufferStore = writable<SelectedBuffer>('HC2H3O2 & NaC2H3O2'
 
 export const totalVolume: Writable<number> = writable(10);
 
-export const selectedSolutionStore = writable(''); // Default to "Water"
+export const selectedSolutionStore = writable('');
 
 // Concentration of the selected buffer
 export const allowedValues = derived(menu, ($menu) => {

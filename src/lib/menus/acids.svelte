@@ -54,13 +54,13 @@
 	// Watch for changes in selectedAcidBase and update the pH value
 	$: if (selectedAcidBase) {
 		resetValues();
-		selectedSolutionStore.set(`Acids / Bases: ${selectedAcidBase}`);
 		updatePHValue();
-		totalDrops.set(0);
+		selectedSolutionStore.set(`Acids / Bases: ${selectedAcidBase}`);
 	}
 
 	onMount(() => {
 		concentration.set(acidValues[0]);
+		selectedSolutionStore.set('');
 	});
 </script>
 

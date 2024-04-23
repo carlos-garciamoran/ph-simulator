@@ -1,6 +1,12 @@
 import { defaultColor } from './constants';
-import { bufferConcentration, checkedStore, probePosition, sliderIndex, totalDrops, totalVolume } from './store';
-
+import {
+	bufferConcentration,
+	checkedStore,
+	probePosition,
+	sliderIndex,
+	totalDrops,
+	totalVolume
+} from './store';
 
 export function resetValues() {
 	totalVolume.set(10); // Reset to the default volume
@@ -9,7 +15,7 @@ export function resetValues() {
 	bufferConcentration.set({ acid: 0.001, base: 0.001 }); // Reset the buffer concentrations
 	probePosition.set(0);
 	checkedStore.set(false);
-	if (typeof document !== 'undefined'){
+	if (typeof document !== 'undefined') {
 		document.documentElement.style.setProperty('--liquid-color', defaultColor);
 	}
 }

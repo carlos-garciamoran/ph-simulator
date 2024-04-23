@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+
 	import MenuCard from '@/components/menu-card.svelte';
 	import RadioItem from '@/components/radio-item.svelte';
 	import * as RadioGroup from '@/components/ui/radio-group';
@@ -16,7 +18,7 @@
 	// Local component state for the selected buffer
 	let selectedBuffer: SelectedBuffer | undefined;
 
-	console.log($totalDrops)
+	console.log($totalDrops);
 
 	// Function to update the pH value based on the selected buffer and concentration
 	function updatePHValue() {
@@ -44,12 +46,15 @@
 
 	// Watch for changes in selectedBuffer and update the pH value
 	$: if (selectedBuffer) {
-		console.log(">> selectedBuffer changed")
 		selectedSolutionStore.set(`Buffer: ${selectedBuffer}`);
 		selectedBufferStore.set(selectedBuffer);
 		resetValues();
 		updatePHValue();
 	}
+
+	onMount(() => {
+		selectedSolutionStore.set('');
+	});
 </script>
 
 <MenuCard className="bg-orange-200" title="🧑🏻‍🔬 Buffers">

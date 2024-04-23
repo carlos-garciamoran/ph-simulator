@@ -2,7 +2,7 @@
 	import * as RadioGroup from '@/components/ui/radio-group';
 	import MenuCard from '@/components/menu-card.svelte';
 	import RadioItem from '@/components/radio-item.svelte';
-	import { currentDropType, totalDrops } from '@/helpers/store';
+	import { currentDropType, totalDrops, totalVolume } from '@/helpers/store';
 	import type { DropType } from '@/helpers/types';
 
 	let selectedDropper: DropType;
@@ -23,6 +23,7 @@
 	function updateDropValue(newValue: string) {
 		currentDropType.set(newValue as DropType);
 		totalDrops.set(0);
+		totalVolume.set(10);
 	}
 </script>
 

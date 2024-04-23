@@ -59,13 +59,13 @@
 	// Watch for changes in selectedSalt and update the pH value
 	$: if (selectedSalt) {
 		resetValues();
-		selectedSolutionStore.set(`Salt: ${selectedSalt}`);
 		updatePHValue();
-		totalDrops.set(0);
+		selectedSolutionStore.set(`Salt: ${selectedSalt}`);
 	}
 
 	onMount(() => {
 		concentration.set(saltValues[0]);
+		selectedSolutionStore.set('');
 	});
 </script>
 
