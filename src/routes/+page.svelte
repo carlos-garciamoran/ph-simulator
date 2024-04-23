@@ -6,7 +6,7 @@
 	import Wire from '$lib/wire.svelte';
 	import Dropper from '$lib/dropper.svelte';
 	import DropperCounter from '@/dropper-counter.svelte';
-	import { menu, probePosition, hasError } from '@/helpers/store';
+	import { menu, probePosition } from '@/helpers/store';
 	import DropperMenu from '@/menus/dropper-menu.svelte';
 	import TotalVolume from '@/total-volume.svelte';
 
@@ -55,10 +55,5 @@
 				{/if}
 			</div>
 		</div>
-		{#if $hasError == true}
-			<div>
-				<p>Error! Buffer capacity exceeded!</p>
-			</div>
-		{/if}
 	</div>
 {/if}

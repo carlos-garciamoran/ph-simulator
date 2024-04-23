@@ -58,7 +58,5 @@ export const concentrationValue = derived(
 	([$index, $allowedValues]) => $allowedValues[$index]
 );
 
-export const hasError = writable(false);
-
 // Initialize the console attachment point with default coordinates
-export const consoleAttachmentPoint = writable({ x: 0});
+export const consoleAttachmentPoint = writable({ x: 0 });

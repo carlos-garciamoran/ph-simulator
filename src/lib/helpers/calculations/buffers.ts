@@ -1,8 +1,20 @@
+import { toast } from '@zerodevx/svelte-toast';
+
 import * as calcs from '@/helpers/calculations';
 import * as consts from '@/helpers/constants';
 
 import { currentDropType } from '../store';
 import type { SelectedBuffer } from '../types';
+
+function showToast() {
+	toast.push('Buffer capacity exceeded!', {
+		theme: {
+			'--toastColor': 'white',
+			'--toastBackground': '#ef4444',
+			'--toastBarBackground': '#b91c1c'
+		}
+	});
+}
 
 export function calculateBufferSystem(
 	buffer: SelectedBuffer,
@@ -14,8 +26,6 @@ export function calculateBufferSystem(
 	let M_NaOH = 0;
 	let pKa_acid = 0;
 	let final = 0;
-
-	// console.log(acidConc, baseConc);
 
 	switch (buffer) {
 		case 'HC2H3O2 & NaC2H3O2':
@@ -36,16 +46,18 @@ export function calculateBufferSystem(
 	}
 
 	currentDropType.subscribe(($drop) => {
+		// if ($menu === 'acids/base') {}
 		if ($drop === '.1M-HCl' || $drop === '.01M-HCl') {
 			M_HCl = $drop === '.1M-HCl' ? 0.1 : 0.01;
 
 			const acid = calcs.get_HCl_acid(acidConc, M_HCl, drops);
 			const base = calcs.get_HCl_base(baseConc, M_HCl, drops);
 
-			// if (base <= 0) {
-			// 	calcs.get_NaC2H3O2_buffer_overload();
-			// 	return NaN;
-			// }
+			console.log({ acid, base }, $drop);
+			if (base <= 0) {
+				showToast();
+				// return NaN;
+			}
 
 			final = calcs.get_buffer_system(pKa_acid, acid, base);
 		} else if ($drop === '.1M-NaOH' || $drop === '.01M-NaOH') {
@@ -54,10 +66,10 @@ export function calculateBufferSystem(
 			const acid = calcs.get_NaOH_acid(acidConc, M_NaOH, drops);
 			const base = calcs.get_NaOH_base(baseConc, M_NaOH, drops);
 
-			// if (acid <= 0) {
-			// 	calcs.get_HC2H3O2_buffer_overload();
-			// 	return NaN;
-			// }
+			if (acid <= 0) {
+				showToast();
+				// return NaN;
+			}
 
 			final = calcs.get_buffer_system(pKa_acid, acid, base);
 		}

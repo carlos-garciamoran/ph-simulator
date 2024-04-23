@@ -1,4 +1,6 @@
 <script>
+	import { SvelteToast } from '@zerodevx/svelte-toast';
+
 	import '../app.css';
 </script>
 
@@ -7,4 +9,5 @@
 	<footer class="text-sm text-center py-2">
 		© 2024 Aleksa Belic, Julian Diaz, Kenan Imamovic, Carlos García Morán, Dr. Ron Ruszczyk
 	</footer>
+	<SvelteToast />
 </div>
