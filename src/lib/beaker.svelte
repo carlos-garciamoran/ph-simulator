@@ -1,16 +1,13 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import {
-		phValueStore,
-		checkedStore,
-		selectedSolutionStore,
-		concentration,
-		menu,
-	
-	} from './helpers/store';
 	import SubscriptLabel from './components/subscript-label.svelte';
 	import { defaultColor } from './helpers/constants';
-
+	import {
+		concentration,
+		checkedStore,
+		menu,
+		phValueStore,
+		selectedSolutionStore
+	} from './helpers/store';
 
 	let beakerHeight = 400;
 
@@ -93,14 +90,11 @@
 	</div>
 </div>
 
-<div class="solution-info">
-	<!--
-		TODO
-		Label under beaker should give full description of contents including whether is it strong, weak, or the Ka, etc..
-		These are in the outline. -->
+<div class=" relative flex justify-center items-center h-8 -top-4">
+	<!-- TODO: label under beaker should give full description of contents including whether is it strong, weak, or the Ka, etc. -->
 	<p>
 		<SubscriptLabel title={$selectedSolutionStore} />
-		{$menu === 'water' ? '' : `${$concentration}M`}
+		{!!$concentration && $selectedSolutionStore && $menu !== 'water' ? `${$concentration}M` : ''}
 	</p>
 </div>
 
@@ -116,10 +110,9 @@
 		height: 60vw; /* Height is twice the width to maintain a 1:2 aspect ratio */
 		max-height: 400px; /* Maximum height can be set to prevent it from getting too tall */
 		position: relative;
-		border: 6px solid #000;
+		border: 6px solid black;
 		border-radius: 0 0 20px 20px;
 		top: -20px;
-		/* margin-bottom: -; */
 	}
 
 	#liquid {
@@ -135,14 +128,14 @@
 	.measurement-line {
 		width: 20%; /* Relative to measurement container width */
 		height: 5px; /* Thickness of the line */
-		background-color: #000; /* Line color */
+		background-color: black; /* Line color */
 		position: absolute;
 		bottom: 0; /* Align to the bottom of measurement container */
 	}
 
 	.measurement-container {
 		position: absolute;
-		width: 100%; /* Full width of beaker */
+		width: 100%;
 		bottom: var(--position); /* Position from bottom, using CSS variable */
 		left: 0;
 	}
@@ -154,17 +147,5 @@
 		bottom: -10px;
 		font-size: 1.25em;
 		color: black;
-	}
-	.solution-info {
-		position: relative;
-		display: flex;
-		justify-content: center; /* Horizontally center the content */
-		align-items: center; /* Vertically center the content */
-		height: 30px; /* Set a fixed height for the container */
-		top: -20px;
-	}
-
-	.solution-info p {
-		margin: 0; /* Remove default margin */
 	}
 </style>
