@@ -9,7 +9,7 @@
 	import { resetValues } from './helpers/reset';
 
 	$: if ($menu) {
-		resetValues();
+		// resetValues();
 		if ($menu === 'water') {
 			$phValueStore = 7;
 			selectedSolutionStore.set('Water');

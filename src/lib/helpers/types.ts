@@ -10,7 +10,7 @@ export type DropStruct = {
 	concentration: number;
 };
 
-export type Menu = 'acids/bases' | 'salts' | 'buffers' | 'household-items' | 'water';
+export type Menu = '' | 'acids/bases' | 'salts' | 'buffers' | 'household-items' | 'water';
 
 export type SelectedBuffer =
 	| 'HC2H3O2 & NaC2H3O2'

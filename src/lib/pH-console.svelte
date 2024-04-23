@@ -73,7 +73,11 @@
 			</Button>
 		</div>
 		<div class="flex flex-col gap-2 w-1/2 2xl:w-1/4">
-			<Button class="gap-2 text-base justify-between w-full" on:click={() => resetValues()}>
+			<Button class="gap-2 text-base justify-between w-full" on:click={() => {
+				resetValues()
+				menu.set('');
+			}
+			}>
 				Reset
 				<HistoryIcon class="text-background size-5 min-w-5" />
 			</Button>

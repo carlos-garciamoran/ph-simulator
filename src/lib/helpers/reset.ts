@@ -2,6 +2,7 @@ import { defaultColor } from './constants';
 import {
 	bufferConcentration,
 	checkedStore,
+	menu,
 	probePosition,
 	sliderIndex,
 	totalDrops,
@@ -18,4 +19,5 @@ export function resetValues() {
 	if (typeof document !== 'undefined') {
 		document.documentElement.style.setProperty('--liquid-color', defaultColor);
 	}
+	
 }
