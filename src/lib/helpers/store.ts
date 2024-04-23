@@ -13,8 +13,7 @@ export const bufferConcentration = writable({
 });
 
 //Default concentration for everything that isn't a buffer
-export const concentration = writable(0.07);
-
+export const concentration = writable(0.0001);
 
 // Global store for the pH value
 export const phValueStore: Writable<number> = writable();

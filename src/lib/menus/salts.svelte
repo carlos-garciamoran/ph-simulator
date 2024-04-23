@@ -19,6 +19,8 @@
 		selectedSolutionStore,
 		totalDrops
 	} from '$lib/helpers/store';
+	import { onMount } from 'svelte';
+	import { saltValues } from '@/helpers/constants';
 
 	type Salt = 'NaCl' | 'NH4Cl' | 'NaC2H3O2' | 'NaHCO3' | 'Na2CO3' | 'NaHSO4';
 
@@ -61,6 +63,10 @@
 		updatePHValue();
 		totalDrops.set(0);
 	}
+
+	onMount(() => {
+		concentration.set(saltValues[0]);
+	});
 </script>
 
 <MenuCard className="bg-yellow-200" title="🧂 Salts">

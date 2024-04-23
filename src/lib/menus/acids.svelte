@@ -7,6 +7,8 @@
 	import MenuCard from '../components/menu-card.svelte';
 	import RadioItem from '../components/radio-item.svelte';
 	import { resetValues } from '@/helpers/reset';
+	import { onMount } from 'svelte';
+	import { acidValues } from '@/helpers/constants';
 
 	type AcidBase = 'Ba(OH)2' | 'Ca(OH)2' | 'NaOH' | 'NH4OH' | 'HCl' | 'HNO3' | 'HC2H3O2' | 'H2CO3';
 
@@ -56,6 +58,10 @@
 		updatePHValue();
 		totalDrops.set(0);
 	}
+
+	onMount(() => {
+		concentration.set(acidValues[0]);
+	});
 </script>
 
 <MenuCard className="bg-lime-200" title="🧪 Acids / Bases">
