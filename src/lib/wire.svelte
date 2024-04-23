@@ -1,7 +1,45 @@
-<!-- wire.svelte -->
-<div class="wire">
-	<div class="wire-extension"></div>
-</div>
+<script lang="ts">
+	import { consoleAttachmentPoint } from './helpers/store';
+	import { onMount } from 'svelte';
+  
+	let wireElement: HTMLElement;
+	let wireExtensionElement: HTMLElement;
+	
+	console.log(consoleAttachmentPoint);
+
+	// Reactive update for wire positioning based on console attachment point
+	$: if ($consoleAttachmentPoint && wireExtensionElement) {
+	  updateWirePosition();
+	}
+  
+	function updateWirePosition() {
+	  if (typeof window !== 'undefined') {
+		const wireRect = wireElement.getBoundingClientRect();
+		const startX = wireRect.right - (wireRect.width / 2); 
+  
+		// Set the left position to start from the middle of the wire and adjust width to reach the console's x position
+		wireExtensionElement.style.left = `${startX}px`;
+		wireExtensionElement.style.width = `${$consoleAttachmentPoint.x}px`;
+  
+		// Ensure the wire extension does not go backwards if the console is to the left of the starting point
+		if ($consoleAttachmentPoint.x < startX) {
+		  wireExtensionElement.style.transform = 'translateX(0%)';
+		} else {
+		  wireExtensionElement.style.transform = 'translateX(0%)';
+		}
+	  }
+	}
+  
+	onMount(() => {
+	  if (wireElement && wireExtensionElement) {
+		updateWirePosition();
+	  }
+	});
+  </script>
+  
+  <!-- Wire structure -->
+  <div bind:this={wireElement} class="wire"></div>
+  <div bind:this={wireExtensionElement} class="wire-extension"></div>
 
 <style>
 	.wire {
@@ -17,9 +55,8 @@
 
 	.wire-extension {
 		position: absolute;
-		top: 0; /* Start at the top of the current wire */
-		left: 100%; /* Start where the current wire ends */
-		width: 215px; /* The length of the extension to the right */
+		top: 85px;
+		right: 0px; /* Start where the current wire ends */
 		height: 7.5px; /* The thickness of the wire, same as the vertical part */
 		background-color: #606060; /* Same color as the wire */
 		z-index: 1; /* Ensure it is at the same level as the wire */

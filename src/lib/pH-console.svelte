@@ -1,17 +1,39 @@
 <script lang="ts">
 	import { HistoryIcon, Play, UndoIcon } from 'lucide-svelte';
-
+	import { onMount } from 'svelte';
+	import { writable } from 'svelte/store';
 	import Button from './components/ui/button/button.svelte';
 	import Checkbox from './components/ui/checkbox/checkbox.svelte';
 	import Label from './components/ui/label/label.svelte';
-
 	import { resetValues } from './helpers/reset';
 	import { checkedStore, menu, phValueStore, probePosition } from './helpers/store';
+	import { consoleAttachmentPoint } from './helpers/store'; 
 
 	const handleRemove = () => {
 		probePosition.set(0);
 		checkedStore.set(false);
 	};
+
+	onMount(() => {
+        const consoleElement = document.getElementById('console');
+        function updateAttachmentPoint() {
+            if (consoleElement) {
+                const rect = consoleElement.getBoundingClientRect();
+                consoleAttachmentPoint.set({ x: rect.right });
+            }
+        }
+
+        // Update attachment point on mount
+        updateAttachmentPoint();
+
+        // Add event listener to update on window resize
+        window.addEventListener('resize', updateAttachmentPoint);
+
+        // Clean up event listener when component is destroyed
+        return () => {
+            window.removeEventListener('resize', updateAttachmentPoint);
+        };
+    });
 </script>
 
 <div

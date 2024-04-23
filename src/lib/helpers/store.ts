@@ -59,3 +59,6 @@ export const concentrationValue = derived(
 );
 
 export const hasError = writable(false);
+
+// Initialize the console attachment point with default coordinates
+export const consoleAttachmentPoint = writable({ x: 0});
