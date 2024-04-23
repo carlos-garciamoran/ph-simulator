@@ -118,6 +118,8 @@
 		position: relative;
 		border: 6px solid #000;
 		border-radius: 0 0 20px 20px;
+		top: -20px;
+		/* margin-bottom: -; */
 	}
 
 	#liquid {
@@ -154,10 +156,12 @@
 		color: black;
 	}
 	.solution-info {
+		position: relative;
 		display: flex;
 		justify-content: center; /* Horizontally center the content */
 		align-items: center; /* Vertically center the content */
 		height: 30px; /* Set a fixed height for the container */
+		top: -20px;
 	}
 
 	.solution-info p {
