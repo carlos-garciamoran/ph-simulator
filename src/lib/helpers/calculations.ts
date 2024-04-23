@@ -2,6 +2,7 @@ import * as constants from '@/helpers/constants';
 import { get_HC2H3O2_Hplus } from './calculations/acids-bases';
 import { get_NaC2H3O2_Hplus } from './calculations/salts';
 import { hasError } from './store';
+import type { DropStruct } from './types';
 // READ ME
 // Calling variables as arguments is likely redundant as they are global variables
 // Keeping them just to be safe tho
@@ -176,4 +177,19 @@ export function get_acid_init_M(acid_conc: number) {
 
 export function get_excess_OH(drops: number, acid_conc: number, M_NaOH: number) {
 	return get_M_NaOH(drops, M_NaOH) - get_acid_init_M(acid_conc);
+}
+
+// water pH calc ONLY
+
+export function get_water_pH(totalDrops: number, dropType: DropStruct) {
+	const total_volume = get_total_volume(totalDrops);
+	const volume_added = get_volume_added (totalDrops);
+	let concentration;
+	if (dropType.type === 'HCl') {
+		concentration = (dropType.concentration * volume_added) / (total_volume) + 1e-7;
+	} else {
+		concentration = constants.Kw / ((dropType.concentration * volume_added) / (total_volume + 1e-7));
+	}
+	const pH = get_pH(concentration);
+	return pH;
 }

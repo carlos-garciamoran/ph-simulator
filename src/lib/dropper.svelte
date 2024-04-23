@@ -2,8 +2,9 @@
 	import { writable, get, type Writable } from 'svelte/store';
 
 	import { dropVolume } from './helpers/constants';
-	import { currentDrop, currentDropType, totalVolume, totalDrops } from './helpers/store';
+	import { currentDrop, currentDropType, totalVolume, totalDrops, menu, phValueStore } from './helpers/store';
 	import type { Drop } from './helpers/types';
+	import { get_water_pH } from './helpers/calculations';
 
 	const drops: Writable<Drop[]> = writable([]);
 
@@ -45,9 +46,16 @@
 				};
 				return [newDrop, ...currentDrops];
 			});
-
-			return currentTotal + 1; // Increment the total drops
+			// WATER
+			const new_total_drops = currentTotal + 1;
+			if ($menu === 'water') {
+				const new_pH = get_water_pH(new_total_drops, $currentDrop);
+				phValueStore.set(new_pH);
+				console.log(new_pH);
+			}
+			return new_total_drops; // Increment the total drops
 		});
+		
 	}
 
 	// Function to handle the animation end of a drop
