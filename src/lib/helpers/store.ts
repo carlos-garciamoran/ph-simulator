@@ -1,4 +1,5 @@
 import { derived, writable, type Writable } from 'svelte/store';
+
 import type { DropStruct, DropType, Menu, SelectedBuffer } from './types';
 import { acidValues, saltValues, bufferValues } from './constants';
 
@@ -13,6 +14,7 @@ export const bufferConcentration = writable({
 
 //Default concentration for everything that isn't a buffer
 export const concentration = writable(0.07);
+
 
 // Global store for the pH value
 export const phValueStore: Writable<number> = writable();
@@ -51,9 +53,7 @@ export const allowedValues = derived(menu, ($menu) => {
 			return []; // For water and household items, no slider values
 	}
 });
-
 export const sliderIndex = writable(0);
-
 export const concentrationValue = derived(
 	[sliderIndex, allowedValues],
 	([$index, $allowedValues]) => $allowedValues[$index]

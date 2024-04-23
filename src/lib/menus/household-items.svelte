@@ -17,7 +17,10 @@
 		phValueStore.set(pHValue);
 	};
 
-	if (value) resetValues();
+	if (value) {
+		resetValues();
+		totalDrops.set(0);
+	}
 </script>
 
 <MenuCard className="bg-sky-200" title="🧼 Household Items">

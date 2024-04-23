@@ -1,14 +1,16 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import {
+		phValueStore,
 		checkedStore,
+		selectedSolutionStore,
 		concentration,
 		menu,
-		phValueStore,
-		probePosition,
-		selectedSolutionStore
+	
 	} from './helpers/store';
 	import SubscriptLabel from './components/subscript-label.svelte';
 	import { defaultColor } from './helpers/constants';
+
 
 	let beakerHeight = 400;
 
@@ -91,15 +93,15 @@
 	</div>
 </div>
 
-<div class="flex flex-col items-center justify-center">
+<div class="solution-info">
 	<!--
 		TODO
 		Label under beaker should give full description of contents including whether is it strong, weak, or the Ka, etc..
 		These are in the outline. -->
-	{#if $probePosition === 1 && !!selectedSolutionStore}
+	<p>
 		<SubscriptLabel title={$selectedSolutionStore} />
 		{$menu === 'water' ? '' : `${$concentration}M`}
-	{/if}
+	</p>
 </div>
 
 <div style="--liquid-color: {color};"></div>
@@ -150,5 +152,15 @@
 		bottom: -10px;
 		font-size: 1.25em;
 		color: black;
+	}
+	.solution-info {
+		display: flex;
+		justify-content: center; /* Horizontally center the content */
+		align-items: center; /* Vertically center the content */
+		height: 30px; /* Set a fixed height for the container */
+	}
+
+	.solution-info p {
+		margin: 0; /* Remove default margin */
 	}
 </style>
