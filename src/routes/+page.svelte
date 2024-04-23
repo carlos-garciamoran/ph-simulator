@@ -51,19 +51,6 @@
 </div>
 
 <style>
-	.console-counter-container {
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between; /* This will push the counter to the bottom */
-		height: 100%; /* Full height to enable justify-content */
-	}
-
-	@media (max-width: 640px) {
-		.console-counter-container {
-			flex-direction: row; /* Or 'column' if that fits better */
-		}
-	}
-
 	/* page.svelte */
 	.grid {
 		display: grid;
@@ -77,9 +64,6 @@
 		.grid {
 			grid-template-columns: repeat(2, 1fr);
 			gap: 2rem;
-		}
-		.console-counter-container {
-			flex-direction: row; /* Or 'column' if that fits better */
 		}
 	}
 
