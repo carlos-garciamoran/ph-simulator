@@ -10,6 +10,11 @@
 	import DropperMenu from '@/menus/dropper-menu.svelte';
 	import TotalVolume from '@/total-volume.svelte';
 
+	let hasHitBreakpoint = false;
+	function handleResize() {
+		hasHitBreakpoint = window.innerWidth < 1024;
+	}
+
 	// Functions to handle probe animation, based on the events from the Console
 	function insertProbe() {
 		probePosition.set(1); // Set the store value to indicate the probe should be down
@@ -20,58 +25,40 @@
 	}
 </script>
 
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8 size-full p-6 lg:p-10">
-	<Menus />
-	<div>
-		<Beaker />
-		<Wire />
-		<Probe />
-		{#if $menu === 'buffers' || $menu === 'water'}
-			<Dropper />
-		{/if}
+<svelte:window on:resize={handleResize} />
+
+{#if hasHitBreakpoint}
+	<div class="flex flex-col items-center justify-center h-full">
+		<p class="text-2xl">Please use a larger screen to view this simulation.</p>
 	</div>
-	<div class="flex flex-col justify-between h-full">
-		<Console on:insertProbe={insertProbe} on:removeProbe={removeProbe} />
-		<div class="flex gap-2 2xl:gap-4 h-fit">
+{:else}
+	<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8 size-full p-6 lg:p-10">
+		<Menus />
+		<div>
+			<Beaker />
+			<Wire />
+			<Probe />
 			{#if $menu === 'buffers' || $menu === 'water'}
-				<DropperMenu />
-				<DropperCounter />
-				<TotalVolume />
-			{:else}
-				<div class="w-full" />
-				<TotalVolume />
+				<Dropper />
 			{/if}
 		</div>
-	</div>
-	{#if $hasError == true}
-		<div>
-			<p>Error! Buffer capacity exceeded!</p>
+		<div class="flex flex-col justify-between h-full">
+			<Console on:insertProbe={insertProbe} on:removeProbe={removeProbe} />
+			<div class="flex gap-2 2xl:gap-4 h-fit">
+				{#if $menu === 'buffers' || $menu === 'water'}
+					<DropperMenu />
+					<DropperCounter />
+					<TotalVolume />
+				{:else}
+					<div class="w-full" />
+					<TotalVolume />
+				{/if}
+			</div>
 		</div>
-	{/if}
-</div>
-
-<style>
-	/* page.svelte */
-	.grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust min size as needed */
-		gap: 1rem;
-		padding: 1rem;
-	}
-
-	@media (min-width: 640px) {
-		/* Tailwind's sm breakpoint */
-		.grid {
-			grid-template-columns: repeat(2, 1fr);
-			gap: 2rem;
-		}
-	}
-
-	@media (min-width: 1024px) {
-		/* Tailwind's lg breakpoint */
-		.grid {
-			grid-template-columns: repeat(3, 1fr);
-			gap: 3rem;
-		}
-	}
-</style>
+		{#if $hasError == true}
+			<div>
+				<p>Error! Buffer capacity exceeded!</p>
+			</div>
+		{/if}
+	</div>
+{/if}
