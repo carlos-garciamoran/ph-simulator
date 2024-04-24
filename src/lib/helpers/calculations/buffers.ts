@@ -44,27 +44,30 @@ export function calculateBufferSystem(
 			pKa_acid = consts.pKa_carbonic_acid;
 			break;
 	}
+	const initAcid = acidConc;
+	const initBase = baseConc;
 
 	currentDropType.subscribe(($drop) => {
 		// if ($menu === 'acids/base') {}
 		if ($drop === '.1M-HCl' || $drop === '.01M-HCl') {
 			M_HCl = $drop === '.1M-HCl' ? 0.1 : 0.01;
 
-			const acid = calcs.get_HCl_acid(acidConc, M_HCl, drops);
+			const acid = calcs.get_HCl_acid(initAcid, M_HCl, drops);
 			const base = calcs.get_HCl_base(baseConc, M_HCl, drops);
 
-			console.log({ acid, base }, $drop);
+			//console.log({ acid, base }, $drop);
 			if (base <= 0) {
 				showToast();
 				// return NaN;
 			}
 
 			final = calcs.get_buffer_system(pKa_acid, acid, base);
+
 		} else if ($drop === '.1M-NaOH' || $drop === '.01M-NaOH') {
 			M_NaOH = $drop === '.1M-NaOH' ? 0.1 : 0.01;
 
-			const acid = calcs.get_NaOH_acid(acidConc, M_NaOH, drops);
-			const base = calcs.get_NaOH_base(baseConc, M_NaOH, drops);
+			const acid = calcs.get_NaOH_acid(initAcid, M_NaOH, drops);
+			const base = calcs.get_NaOH_base(initBase, M_NaOH, drops);
 
 			if (acid <= 0) {
 				showToast();
