@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { HistoryIcon, Play, UndoIcon } from 'lucide-svelte';
+
 	import Button from './components/ui/button/button.svelte';
 	import Checkbox from './components/ui/checkbox/checkbox.svelte';
 	import Label from './components/ui/label/label.svelte';
@@ -50,11 +51,13 @@
 			</Button>
 		</div>
 		<div class="flex flex-col gap-2 w-1/2 2xl:w-1/4">
-			<Button class="gap-2 text-base justify-between w-full" on:click={() => {
-				resetValues()
-				menu.set('');
-			}
-			}>
+			<Button
+				class="gap-2 text-base justify-between w-full"
+				on:click={() => {
+					resetValues();
+					menu.set('');
+				}}
+			>
 				Reset
 				<HistoryIcon class="text-background size-5 min-w-5" />
 			</Button>
@@ -71,11 +74,6 @@
 		box-shadow:
 			0 0 10px rgba(0, 0, 0, 0.05),
 			8px 8px 10px rgba(0, 0, 0, 0.5);
-		/* -webkit-transform: skewY(-1deg); */
-		/* -moz-transform: skewY(-1deg); */
-		/* -ms-transform: skewY(-1deg); */
-		/* -o-transform: skewY(-1deg); */
-		/* transform: skewY(-1deg); */
 	}
 
 	.wire-from-console {

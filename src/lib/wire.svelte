@@ -1,5 +1,5 @@
-  <!-- Wire structure -->
-  <div class="wire"></div>
+<!-- Wire structure -->
+<div class="wire"></div>
 
 <style>
 	.wire {
