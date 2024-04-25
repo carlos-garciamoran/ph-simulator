@@ -52,11 +52,9 @@ export const allowedValues = derived(menu, ($menu) => {
 			return []; // For water and household items, no slider values
 	}
 });
+
 export const sliderIndex = writable(0);
 export const concentrationValue = derived(
 	[sliderIndex, allowedValues],
 	([$index, $allowedValues]) => $allowedValues[$index]
 );
-
-// Initialize the console attachment point with default coordinates
-export const consoleAttachmentPoint = writable({ x: 0 });

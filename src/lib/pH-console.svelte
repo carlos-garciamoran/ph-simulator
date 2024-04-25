@@ -1,41 +1,18 @@
 <script lang="ts">
 	import { HistoryIcon, Play, UndoIcon } from 'lucide-svelte';
-	import { onMount } from 'svelte';
-	import { writable } from 'svelte/store';
 	import Button from './components/ui/button/button.svelte';
 	import Checkbox from './components/ui/checkbox/checkbox.svelte';
 	import Label from './components/ui/label/label.svelte';
 	import { resetValues } from './helpers/reset';
 	import { checkedStore, menu, phValueStore, probePosition } from './helpers/store';
-	import { consoleAttachmentPoint } from './helpers/store'; 
 
 	const handleRemove = () => {
 		probePosition.set(0);
 		checkedStore.set(false);
 	};
-
-	onMount(() => {
-        const consoleElement = document.getElementById('console');
-        function updateAttachmentPoint() {
-            if (consoleElement) {
-                const rect = consoleElement.getBoundingClientRect();
-                consoleAttachmentPoint.set({ x: rect.right });
-            }
-        }
-
-        // Update attachment point on mount
-        updateAttachmentPoint();
-
-        // Add event listener to update on window resize
-        window.addEventListener('resize', updateAttachmentPoint);
-
-        // Clean up event listener when component is destroyed
-        return () => {
-            window.removeEventListener('resize', updateAttachmentPoint);
-        };
-    });
 </script>
 
+<div class="wire-from-console"></div>
 <div
 	id="ph-meter"
 	class="border-2 bg-gray-200 w-full p-6 h-fit flex flex-col gap-5 border-gray-500 shadow-inner"
@@ -99,5 +76,15 @@
 		/* -ms-transform: skewY(-1deg); */
 		/* -o-transform: skewY(-1deg); */
 		/* transform: skewY(-1deg); */
+	}
+
+	.wire-from-console {
+		position: absolute;
+		top: 0px;
+		left: 70%; /* Adjust to align the start point on the pH-console */
+		height: 40px; /* Height from the pH-console to the top of the page */
+		width: 7.5px; /* Thickness of the wire */
+		background-color: #606060; /* Color of the wire */
+		z-index: 3; /* Ensure the wire is behind other elements if necessary */
 	}
 </style>
