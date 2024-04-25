@@ -22,7 +22,7 @@ export const phValueStore: Writable<number> = writable();
 export const probePosition = writable(0);
 
 // Current menu selected
-export const menu: Writable<Menu> = writable('acids/bases');
+export const menu: Writable<Menu> = writable('');
 
 // Currently selected drop option (under buffer menu)
 export const currentDropType = writable<DropType>('.1M-HCl');

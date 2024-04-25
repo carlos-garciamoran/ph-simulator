@@ -1,15 +1,13 @@
 <script lang="ts">
 	import ConcentrationSlider from './concentration-slider.svelte';
-	import { menu, totalDrops, phValueStore, selectedSolutionStore } from './helpers/store';
+	import { menu, phValueStore, selectedSolutionStore } from './helpers/store';
 	import AcidsMenu from './menus/acids.svelte';
 	import BuffersMenu from './menus/buffers.svelte';
 	import HouseholdItemsMenu from './menus/household-items.svelte';
 	import MainMenu from './menus/main.svelte';
 	import SaltsMenu from './menus/salts.svelte';
-	import { resetValues } from './helpers/reset';
 
 	$: if ($menu) {
-		// resetValues();
 		if ($menu === 'water') {
 			$phValueStore = 7;
 			selectedSolutionStore.set('Water');
