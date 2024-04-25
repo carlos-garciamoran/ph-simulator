@@ -39,7 +39,7 @@
 		/>
 		<Label for="indicator-solution" class="text-base">pH Indicator Solution</Label>
 	</div>
-	<div class="flex gap-2">
+	<div class="flex gap-2 items-stretch">
 		<div class="flex flex-col gap-2 w-1/2 2xl:w-3/4">
 			<Button class="gap-2 text-base justify-between w-full" on:click={handleRemove}>
 				Remove probe
@@ -52,7 +52,7 @@
 		</div>
 		<div class="flex flex-col gap-2 w-1/2 2xl:w-1/4">
 			<Button
-				class="gap-2 text-base justify-between w-full"
+				class="gap-2 text-base justify-between w-full h-full"
 				on:click={() => {
 					resetValues();
 					menu.set('');
@@ -61,10 +61,10 @@
 				Reset
 				<HistoryIcon class="text-background size-5 min-w-5" />
 			</Button>
-			<Button class="gap-2 text-base justify-between w-full" on:click={() => undefined}>
+			<!-- <Button class="gap-2 text-base justify-between w-full" on:click={() => undefined}>
 				Undo
 				<UndoIcon class="text-background size-5 min-w-5" />
-			</Button>
+			</Button> -->
 		</div>
 	</div>
 </div>
