@@ -52,8 +52,8 @@ export function calculateBufferSystem(
 		if ($drop === '.1M-HCl' || $drop === '.01M-HCl') {
 			M_HCl = $drop === '.1M-HCl' ? 0.1 : 0.01;
 
-			const acid = calcs.get_HCl_acid(initAcid, M_HCl, drops/10);
-			const base = calcs.get_HCl_base(initBase, M_HCl, drops/10);
+			const acid = calcs.get_HCl_acid(initAcid, M_HCl, drops);
+			const base = calcs.get_HCl_base(initBase, M_HCl, drops);
 
 			//console.log({ acid, base }, $drop);
 			if (base <= 0) {
@@ -66,8 +66,8 @@ export function calculateBufferSystem(
 		} else if ($drop === '.1M-NaOH' || $drop === '.01M-NaOH') {
 			M_NaOH = $drop === '.1M-NaOH' ? 0.1 : 0.01;
 
-			const acid = calcs.get_NaOH_acid(initAcid, M_NaOH, drops/10);
-			const base = calcs.get_NaOH_base(initBase, M_NaOH, drops/10);
+			const acid = calcs.get_NaOH_acid(initAcid, M_NaOH, drops);
+			const base = calcs.get_NaOH_base(initBase, M_NaOH, drops);
 
 			if (acid <= 0) {
 				showToast();
