@@ -11,3 +11,12 @@
 	</footer>
 	<SvelteToast />
 </div>
+
+<style>
+	:root {
+		--toastContainerTop: 125px;
+		--toastContainerRight: 66px;
+		--toastContainerBottom: auto;
+		--toastContainerLeft: auto;
+	}
+</style>

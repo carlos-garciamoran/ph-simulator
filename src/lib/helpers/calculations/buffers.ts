@@ -8,6 +8,7 @@ import type { SelectedBuffer } from '../types';
 
 function showToast() {
 	toast.push('Buffer capacity exceeded!', {
+		initial: 0, // prevent toast from disappearing
 		theme: {
 			'--toastColor': 'white',
 			'--toastBackground': '#ef4444',
@@ -62,7 +63,6 @@ export function calculateBufferSystem(
 			}
 
 			final = calcs.get_buffer_system(pKa_acid, acid, base);
-
 		} else if ($drop === '.1M-NaOH' || $drop === '.01M-NaOH') {
 			M_NaOH = $drop === '.1M-NaOH' ? 0.1 : 0.01;
 
