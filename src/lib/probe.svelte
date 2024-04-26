@@ -7,7 +7,7 @@
 	// Assuming the probe's starting Y position is 0 (fully raised)
 	let startY = 0;
 	// The Y position when the probe is fully lowered - change this to match your UI
-	let endY = 300;
+	let endY = 340;
 
 	// The reactive tweened store for smooth animations
 	const probeY = tweened(startY, {
@@ -60,7 +60,7 @@
 <style>
 	#probe {
 		position: absolute; /* To position it correctly */
-		top: 130px; /* Position above the beaker, adjust as needed */
+		top: 80px; /* Position above the beaker, adjust as needed */
 		left: 55%; /* Start from the center of the container */
 		transform: translateX(-50%); /* Center the probe exactly */
 		z-index: 10; /* Ensure it's above other elements */

@@ -127,14 +127,14 @@
 <style>
 	@keyframes drop {
 		to {
-			transform: translateY(400px);
+			transform: translateY(450px);
 		}
 	}
 
 	.dropper {
 		position: absolute;
 		left: calc(50% - 180px); /* Adjust so it's left of the probe */
-		top: 170px; /* Adjust so it's at the same height as the probe */
+		top: 120px; /* Adjust so it's at the same height as the probe */
 	}
 
 	.drop {
